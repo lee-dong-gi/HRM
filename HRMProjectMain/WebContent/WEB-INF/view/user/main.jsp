@@ -175,9 +175,9 @@ $(function(){
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
       
