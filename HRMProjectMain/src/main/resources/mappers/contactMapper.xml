@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="contact">
+
+<!-- 연락처 등록   -->
+<insert id="insert">
+insert into contact(name, level, compname, email, phonenum, gnum)
+values(#{name}, #{level}, #{compname}, #{email}, #{phonenum}, #{gnum})
+</insert>
+
+<!-- 연락처 삭제  -->
+<delete id="delete">
+delete from contact where num = #{num}
+</delete>
+
+<!-- 연락처 수정 -->
+<update id="update">
+update contact
+set name=#{name},level=#{level}, compname=#{compname},
+email=#{email}, phonenum=#{phonenum}, gnum=#{gnum} 
+where num = #{num}
+</update>
+
+
+<!-- 연락처 자세히보기  -->
+<select id="read"  resultType="contact.domain.ContactDto">
+select name, gname, phonenum, level, email,compname, num, contact.gnum 
+from contact,cgroup 
+where contact.gnum = cgroup.gnum and num = #{num};
+</select>
+
+
+<!-- 연락처 목록 -->
+<select id="list" resultType="contact.domain.ContactDto">
+select num, gnum, gname,name,level,compname,email,phonenum  
+from contact natural join cgroup
+</select>
+
+<!-- 그룹 목록 -->
+<select id="glist" resultType="contact.domain.GroupDto">
+select * from cgroup
+</select>
+
+<!-- 그룹 추가 -->
+<insert id="ginsert">
+insert into cgroup(gname)
+values(#{gname})
+</insert>
+
+<!-- 그룹 수정 -->
+<update id="gupdate">
+update cgroup
+set gname = #{gname}
+where gnum = #{gnum}
+</update>
+
+<!-- 그룹 삭제 -->
+<delete id="gdelete">
+delete from cgroup where gnum = #{gnum}
+</delete>
+
+<!-- 그룹 자세히 보기-->
+<select id="gread" resultType="contact.domain.GroupDto">
+select gname, gnum
+from cgroup 
+where gnum = #{gnum}
+</select>
+
+</mapper>

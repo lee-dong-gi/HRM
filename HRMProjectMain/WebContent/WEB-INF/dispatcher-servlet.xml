@@ -60,8 +60,16 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
 	<bean id="noticeDao" class="user.persistence.NoticeDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
-	<bean id="deptDao" class="user.persistence.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
+	<bean id="deptDao" class="user.persistence.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />	
 	
+	<bean class="contact.persistence.ContactDaoImpl">
+	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
+	<bean class="contact.persistence.GroupDaoImpl">
+	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+
 	<!--bean 객체  -->
 	<bean id="loginInterceptor" class="commons.interceptor.LoginInterceptor"/>
 	<bean id="download" class="commons.view.AppDownloadView"/>
