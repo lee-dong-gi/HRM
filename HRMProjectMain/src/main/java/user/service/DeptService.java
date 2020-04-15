@@ -19,6 +19,9 @@ public class DeptService {
 		public List<DeptDTO> seldeptAll() throws Exception {
 			return deptDao.seldeptall();
 		}
+		public DeptDTO seldeptone(int deptno) throws Exception {
+			return deptDao.seldeptone(deptno);
+		}
 		public int seldeptAllco() throws Exception {
 			return deptDao.seldeptallco();
 		}
@@ -46,6 +49,9 @@ public class DeptService {
 		
 		public int insertdept(DeptDTO dd) throws Exception {
 			return deptDao.insertdept(dd);
+		}
+		public int deptupdate(DeptDTO dd) throws Exception {
+			return deptDao.deptupdate(dd);
 		}
 		
 		public int deletedept(int deptno) throws Exception {

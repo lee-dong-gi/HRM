@@ -23,16 +23,17 @@
 <script type="text/javascript">
 <%String username = (String)session.getAttribute("name");%>
 function checkwrite(){
-    var subject = $('#subject').val();
-    var content = $('#contenta').val();
+    var dname = $('#dname').val();
+    var loc = $('#loc').val();
     
-    if(!subject){
-        alert("제목을 입력해 주세요"); 
-        $('#subject').focus(); 
+    if(!dname){
+        alert("부서명을 입력해 주세요"); 
+        $('#deptno').focus(); 
         return false;
-    }else if(!content){
-        alert("내용을 입력해 주세요"); 
-        $('#contenta').focus(); 
+    }
+    if(!loc){
+        alert("부서지역을 입력해 주세요"); 
+        $('#loc').focus(); 
         return false;
     }
     return true;
@@ -198,27 +199,34 @@ function checkwrite(){
             </div>
             <div class="card-body">
               <div class="table-responsive">
-               <form action="appupdate" method="post" enctype="multipart/form-data" onsubmit='return checkwrite()'>
-                <table class="table" id="writeapp" width="120%" cellspacing="0">
-					<tr>
-					<td bgcolor="gray" style="color:white;">
-					부서명
-					</td>
-					<td>
-					<input type="hidden" name="writer" value="${writer}">${writer}
-					</td>
-					</tr>
+               <form action="deptupdate" method="post" enctype="multipart/form-data" onsubmit='return checkwrite()'>
+                <table class="table" id="deptupdate" width="120%" cellspacing="0">
 					<tr>
 					<td bgcolor="gray" style="color:white;">
 					부서번호
 					</td>
 					<td>
-					<input class="form-control"  type="text" id="subject" name="subject" value="${appdto.subject}"  style="width:90%;">
+					<input type="hidden" id="deptno" name="deptno" value="${deptno}">${deptno}
+					</td>
+					</tr>
+					<tr>
+					<td bgcolor="gray" style="color:white;">
+					부서명
+					</td>
+					<td>
+					<input type="text" class="form-control" id="dname" name="dname" value="${dname}" style="width:90%;">
+					</td>
+					</tr>
+					<tr>
+					<td bgcolor="gray" style="color:white;">
+					부서지역
+					</td>
+					<td>
+					<input type="text" class="form-control" id="loc" name="loc" value="${loc}" style="width:90%;">
 					</td>
 					</tr>
                 </table>
-                	<input type="hidden" name="appnum" value="${appnum}">
-					<a href="appboard?pageNum=1&selectapp=0" class="btn btn-secondary btn-sm">목록</a>
+					<a href="deptlist?pageNum=1" class="btn btn-secondary btn-sm">목록</a>
 					<button type="reset" class="btn btn-secondary btn-sm">다시쓰기</button>
 					<button type="submit" class="btn btn-secondary btn-sm" style="display:inline;float: right;">부서수정</button>
 					</form>               
