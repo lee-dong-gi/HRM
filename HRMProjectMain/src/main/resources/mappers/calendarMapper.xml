@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="cal">
+
+	<insert id="register" parameterType="user.domain.CalendarDto">
+		insert into calendar(empno, title, writer, content, startdate, enddate) values(#{empno}, #{title}, #{writer}, #{content}, #{startDate}, #{endDate})
+	</insert>
+	
+	<select id="check" parameterType="String" resultType="user.domain.CalendarDto">
+		select * from calendar where startdate  <![CDATA[<=]]> #{now} and enddate  <![CDATA[>=]]> #{now}
+	</select>
+	
+	<select id="show" parameterType="int" resultType="user.domain.CalendarDto">
+		select * from calendar where num = #{num}
+	</select>
+	
+	<update id="upd" parameterType="user.domain.CalendarDto">
+		update calendar set content = #{content} where num = #{num}
+	</update>
+	
+	<delete id="del" parameterType="int">
+		delete from calendar where num = #{num}
+	</delete>
+</mapper>

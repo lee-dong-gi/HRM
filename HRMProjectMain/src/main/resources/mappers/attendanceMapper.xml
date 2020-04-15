@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="attd.attdMappers">
+
+	<!--근태 출근 -->
+	<insert id="insertAttd" parameterType="attd.model.AttdDto">
+		insert into
+		attendance(empno, dname, name, attd_time, off_time, emp_late)
+		values(#{empno}, #{dname}, #{name}, #{attd_time}, #{off_time},
+		#{emp_late})
+	</insert>
+
+	<!--근태 조회-->
+	<select id="selAttd" parameterType="String"
+		resultType="attd.model.AttdDto">
+		select * from attendance
+		where name=#{name} order by
+		attd_no desc
+	</select>
+
+	<!--부서명-->
+	<select id="getDname" parameterType="int" resultType="String">
+		select
+		dname from dept where deptno=${deptno}
+	</select>
+
+	<!--근태 퇴근-->
+	<update id="uptOff" parameterType="int">
+		update attendance set
+		off_time=date_sub(sysdate(), interval 9 hour) where attd_no=#{attd_no}
+	</update>
+
+</mapper>

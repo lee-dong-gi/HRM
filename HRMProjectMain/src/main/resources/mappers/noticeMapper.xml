@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="notice">
+	<select id="all" resultType="user.domain.NoticeDto">
+		select * from noticeboard order by num desc;
+	</select>
+	
+	<select id="get" parameterType="int" resultType="user.domain.NoticeDto">
+		select * from noticeboard where num = #{num}
+	</select>
+	
+	<insert id="ins" parameterType="user.domain.NoticeDto">
+		insert into noticeboard(id, writer, subject, content) values(#{id}, #{writer}, #{subject}, #{content})
+	</insert>
+	
+	<delete id="del" parameterType="int">
+		delete from noticeboard where num = #{num}
+	</delete>
+
+	<update id="upd" parameterType="user.domain.NoticeDto">
+		update noticeboard set content = #{content} where num = #{num}
+	</update>
+	
+	<select id="count" resultType="int">
+		select count(*) from noticeboard
+	</select>
+	
+	<select id="search" parameterType="String" resultType="user.domain.NoticeDto">
+		select * from noticeboard where subject like concat('%',#{s},'%') order by num desc
+	</select>
+	
+	<select id="searchCount" parameterType="String" resultType="int">
+		select count(*) from noticeboard where subject like concat('%',#{s},'%') order by num desc
+	</select>
+</mapper>

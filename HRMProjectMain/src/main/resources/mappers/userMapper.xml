@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user.UserMapper">
+	<select id="login" parameterType="user.domain.LoginDTO" resultType="user.domain.UserVO">
+		select * from employee where id=#{userid}
+	</select>
+	
+	<insert id="insertdept" parameterType="user.domain.DeptDTO">
+		insert into dept values(#{deptno},#{dname},#{loc})
+	</insert>
+
+	<insert id="deletedept" parameterType="int">
+		delete from dept where deptno=#{deptno}
+	</insert>
+	
+	<select id="seldeptall" resultType="user.domain.DeptDTO">
+		select * from dept;
+	</select>
+	<select id="seldeptallco" resultType="int">
+		select count(*) from dept;
+	</select>
+	
+	<select id="seldeptno" parameterType="Map" resultType="user.domain.DeptDTO">
+		select * from dept where deptno like #{deptno};
+	</select>
+	<select id="seldeptnoco" parameterType="Map" resultType="int">
+		select count(*) from dept where deptno like #{deptno};
+	</select>
+	
+	<select id="seldeptname" parameterType="Map" resultType="user.domain.DeptDTO">
+		select * from dept where dname like #{dname};
+	</select>
+	<select id="seldeptnameco" parameterType="Map" resultType="int">
+		select count(*) from dept where dname like #{dname};
+	</select>
+	
+	<select id="seldeptloc" parameterType="Map" resultType="user.domain.DeptDTO">
+		select * from dept where loc like #{loc};
+	</select>
+	<select id="seldeptlocco" parameterType="Map" resultType="int">
+		select count(*) from dept where loc like #{loc};
+	</select>
+</mapper>
