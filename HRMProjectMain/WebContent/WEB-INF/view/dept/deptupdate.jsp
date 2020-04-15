@@ -4,7 +4,7 @@
 <html lang="en">
 
 <head>
-
+<!--ggg -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -190,7 +190,7 @@ function checkwrite(){
             <h1 class="h3 mb-0 text-gray-800">결재</h1>
           </div>
 		<hr class="sidebar-divider">
-       	<!-- Content Row -->
+       	<!--Content Row -->
        <div class="row">
           <div class="card shadow mb-4" style="width:100%;">
             <div class="card-header py-3">
