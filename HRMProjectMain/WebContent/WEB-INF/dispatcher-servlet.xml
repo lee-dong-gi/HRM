@@ -43,7 +43,9 @@
 	base-package="user.domain,user.persistence,user.service,user.controller,
 				app.domain,app.persistence,app.service,app.controller,
 				chat.controller,web.socket,chat.domain,chat.persistence,chat.service,
-				attd.controller, attd.service, attd.model"/>
+				attd.controller, attd.service, attd.model, 
+				contact.controller, contact.service
+				"/>
 	
 	<!-- dao sqlSessionFactory 주입 -->
 	<bean id="userdao" class="user.persistence.UserDAOImpl">
