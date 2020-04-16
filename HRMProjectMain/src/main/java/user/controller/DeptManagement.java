@@ -1,8 +1,5 @@
 package user.controller;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +41,23 @@ public class DeptManagement {
 			}
 			return "/HRMProjectMain/jsp/user/mainadmin";
 
+	}
+	
+	@RequestMapping(value = "/deptupdate", method = RequestMethod.GET)
+	public String deptupdate(HttpSession hs,Model m,int deptno) {
+		UserVO uv = (UserVO)hs.getAttribute("login");
+		System.out.println(uv);
+		try {
+			DeptDTO dd = service.seldeptone(deptno);
+			m.addAttribute("deptno", deptno);
+			m.addAttribute("dname", dd.getDname());
+			m.addAttribute("loc", dd.getLoc());
+			return "dept/deptupdate";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "/HRMProjectMain/jsp/user/mainadmin";
 	}
 	
 	//search
@@ -156,6 +170,19 @@ public class DeptManagement {
 		if(uv.getApproval()==2) {
 			try {
 				service.insertdept(dd);
+				return "redirect:/jsp/dept/deptlist?pageNum=1";	
+			} catch (Exception e) {
+			}
+		}
+		return "redirect:/jsp/dept/deptlist?pageNum=1";	
+	}
+	
+	@RequestMapping(value = "/deptupdate", method = RequestMethod.POST)
+	public String deptupdatePOST(HttpSession hs,Model m,DeptDTO dd) {
+		UserVO uv = (UserVO)hs.getAttribute("login");
+		if(uv.getApproval()==2) {
+			try {
+				service.deptupdate(dd);
 				return "redirect:/jsp/dept/deptlist?pageNum=1";	
 			} catch (Exception e) {
 			}

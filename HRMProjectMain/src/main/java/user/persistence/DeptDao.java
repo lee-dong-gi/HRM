@@ -21,6 +21,9 @@ public class DeptDao extends SqlSessionDaoSupport{
 	public List<DeptDTO> seldeptloc(Map map) throws Exception {
 		return getSqlSession().selectList("user.UserMapper.seldeptloc",map);
 	}
+	public DeptDTO seldeptone(int deptno) throws Exception {
+		return getSqlSession().selectOne("user.UserMapper.seldeptone",deptno);
+	}
 	
 	public int seldeptnoco(Map map) throws Exception {
 		return getSqlSession().selectOne("user.UserMapper.seldeptnoco",map);
@@ -37,6 +40,9 @@ public class DeptDao extends SqlSessionDaoSupport{
 	}
 	public int insertdept(DeptDTO dd) throws Exception {
 		return getSqlSession().insert("user.UserMapper.insertdept",dd);
+	}
+	public int deptupdate(DeptDTO dd) throws Exception {
+		return getSqlSession().update("user.UserMapper.deptupdate",dd);
 	}
 	public int deletedept(int deptno) throws Exception {
 		return getSqlSession().insert("user.UserMapper.deletedept",deptno);

@@ -11,10 +11,18 @@
 	<insert id="insertdept" parameterType="user.domain.DeptDTO">
 		insert into dept values(#{deptno},#{dname},#{loc})
 	</insert>
+	
+	<update id="deptupdate" parameterType="user.domain.DeptDTO">
+		update dept set dname=#{dname},loc=#{loc} where deptno=#{deptno}
+	</update>
 
 	<insert id="deletedept" parameterType="int">
 		delete from dept where deptno=#{deptno}
 	</insert>
+	
+	<select id="seldeptone" parameterType="int" resultType="user.domain.DeptDTO">
+		select * from dept where deptno=#{deptno};
+	</select>
 	
 	<select id="seldeptall" resultType="user.domain.DeptDTO">
 		select * from dept;

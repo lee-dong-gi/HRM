@@ -33,6 +33,18 @@ $(function(){
 		$("#ins").prop("type", "button");
 	}
 });
+
+function sub(){
+	if($("#ti")==""){
+		alert("제목을 입력하세요")
+		return false;
+	}
+	if($("#ta")==""){
+		alert("내용을 입력하세요")
+		return false;
+	}
+}
+
 </script>
 </head>
 
@@ -190,12 +202,12 @@ $(function(){
        	<!-- Content Row -->
         <div class="container">
 <h1 class="h1">일정등록</h1>
-<form action="register" method="post">
+<form action="register" method="post" onsubmit="sub()">
 <table class="table">
 <tbody style="border-bottom:#ced4da 1px solid">
 <tr>
 <td>제목</td>
-<td><input class="form-control" type="text" name="title" size="50%"></td>
+<td><input id="ti" class="form-control" type="text" name="title" size="50%"></td>
 </tr>
 <tr>
 <td>작성자</td>
@@ -205,7 +217,7 @@ $(function(){
 <tr>
 <td>내용</td>
 <td>
-<textarea class="form-control" name="content" rows="10" style="width: 100%"></textarea>
+<textarea id="ta" class="form-control" name="content" rows="10" style="width: 100%"></textarea>
 </td>
 </tr>
 <tr>

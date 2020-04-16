@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="emp">
+	<insert id="emp" parameterType="user.domain.EmpDto">
+		insert into employee(name, id, passwd, birth, email, phonenum, deptno, approval, level)
+		values(#{name},#{id},#{passwd},#{birth},#{email},#{phonenum},#{deptno},#{approval},#{level})
+	</insert>
+
+	<select id="idCheck" resultType="String" parameterType="String">
+		select id from employee where id = #{id}
+	</select>
+	
+	<select id="info" resultType="user.domain.EmpDto" parameterType="int">
+		select * from employee natural join dept where empno = #{empno}
+	</select>
+
+	<select id="findId" parameterType="map" resultType="String">
+		select id from employee where name = #{name} and email = #{email}
+	</select>
+		
+	<select id="findPw" parameterType="map" resultType="String">
+		select passwd from employee where id = #{id} and email = #{email}
+	</select>
+	
+	<update id="up" parameterType="map">
+		update employee set passwd = #{passwd} where id = #{id}
+	</update>
+
+</mapper>

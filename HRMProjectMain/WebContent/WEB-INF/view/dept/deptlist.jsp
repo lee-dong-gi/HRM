@@ -110,6 +110,15 @@ function todelpage(){
 		alert("부서를 선택해주세요!");
 	}
 }
+
+function touppage(){
+	var deptno = $('#deptno:checked').val();
+	if(deptno!=null){
+		window.location.href = "/HRMProjectMain/jsp/dept/deptupdate?deptno="+deptno;
+	}else{
+		alert("부서를 선택해주세요!");
+	}
+}
 </script>
 </head>
 
@@ -293,6 +302,9 @@ function todelpage(){
               <a href="deptlist?pageNum=1" class="btn btn-secondary btn-sm">목록</a>
                 <a href="adddept" class="btn btn-secondary btn-sm">
                 	부서추가
+                </a> 
+                <a href="#" onclick="touppage()" class="btn btn-secondary btn-sm">
+                	부서수정
                 </a> 
                 <a class="btn btn-secondary btn-sm" href="#" onclick="todelpage()"  style="display:inline;">
                 	부서삭제
