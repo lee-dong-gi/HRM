@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined; 
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
 
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
@@ -43,14 +43,14 @@ import user.domain.UserVO;
 @RequestMapping("/attd")
 public class AttdController implements ApplicationContextAware {
 	@Autowired
-	private AttdService attdService; 
+	private AttdService attdService;
 
 	// 근태 메인
 	@RequestMapping("attd.do") /* attd.do요청을 받음 */
 	public String list(HttpSession hs, Model m) throws Exception {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		m.addAttribute("empno", uv.getEmpno());
-		m.addAttribute("name", uv.getName()); 
+		m.addAttribute("name", uv.getName());
 		return "attd/main"; /* attd/main.jsp 실행 */
 	}
 
@@ -64,72 +64,103 @@ public class AttdController implements ApplicationContextAware {
 		Gson json = new Gson();
 		return json.toJson(list);
 	}
-	
+
 	// 근태 조회
 	@RequestMapping("/list")
 	public String listAll(HttpSession hs, Model m) throws Exception {
 		return "attd/list";
 	}
-	
+
 	// 기간 조회
-	@RequestMapping(value= "/searchDate", method=RequestMethod.POST)
+	@RequestMapping(value = "/searchDate", method = RequestMethod.POST)
 	@ResponseBody
 	public String searchDate(HttpSession hs, String startDate, String endDate, Model m) throws Exception {
 		UserVO uv = (UserVO) hs.getAttribute("login");
-		String name = uv.getName();		
+		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
 		//
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");  
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		// 대시(-)로 문자열 잘라서 배열에 넣기
-		String[] array = startDate.split("-");				    
+		String[] array = startDate.split("-");
 		String[] array2 = endDate.split("-");
 		// 문자열 합치기
 		String s1 = array[0].concat(array[1]).concat(array[2]);
-		String s2 = array2[0].concat(array2[1]).concat(array2[2]); 
+		String s2 = array2[0].concat(array2[1]).concat(array2[2]);
 		// 기간 계산
 		int i1 = Integer.parseInt(s1);
 		int i2 = Integer.parseInt(s2);
 		List<AttdDto> searchList = new ArrayList<AttdDto>();
-		for(int i = 0; i < list.size(); i++){
+		for (int i = 0; i < list.size(); i++) {
 			String s3 = sdf.format(list.get(i).getAttd_time());
 			int i3 = Integer.parseInt(s3);
-			if(i1 <= i3 && i3 <=i2 ) {
+			if (i1 <= i3 && i3 <= i2) {
 				searchList.add(list.get(i));
-			}			
-		}		
+			}
+		}
 		Gson json = new Gson();
 		return json.toJson(searchList);
 	}
-	
+
 	// 근태 출근 & 지각
 	@RequestMapping(value = "/insert", method = RequestMethod.POST) /* insert요청을 받음 */
 	public String insert(HttpSession hs, Model m) throws Exception {
+		
 		UserVO uv = (UserVO) hs.getAttribute("login");
-		AttdDto attdDto = new AttdDto();
-		attdDto.setEmpno(uv.getEmpno());
-		attdDto.setDname(attdService.getDname(uv.getDeptno()));
-		attdDto.setName(uv.getName());
-		attdDto.setAttd_time(new Date());
-		attdDto.setOff_time(new Date());
+		String name = uv.getName();
+		List<AttdDto> list = attdService.selAttd(name);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Date date = new Date();
+		String today = sdf.format(date); // 오늘 날짜 스트링으로
+		
+		for (int i = 0; i < list.size(); i++) {
+			Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
+			String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-		long time1 = attdDto.getAttd_time().getTime();
-		long time2 = 0;
-		String str = "09:00:00";
-		try {
-			time2 = dateFormat.parse(str).getTime();
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (today.equals(attdDate)) {	// 오늘 날짜와 같은 값이 출근 날짜에 있으면 msg.jsp로				
+				return "attd/msg";
+			} else {	//아니면 출근 입력
+				AttdDto attdDto = new AttdDto();
+				attdDto.setEmpno(uv.getEmpno());
+				attdDto.setDname(attdService.getDname(uv.getDeptno()));
+				attdDto.setName(uv.getName());
+				attdDto.setAttd_time(new Date());
+				attdDto.setOff_time(new Date());
+
+				SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+				long time1 = attdDto.getAttd_time().getTime();
+				long time2 = 0;
+				String str = "09:00:00";
+				try {
+					time2 = dateFormat.parse(str).getTime();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				String rs = "";
+				if (time1 > time2) {
+					rs = "지각";
+				} else {
+					rs = "";
+				}
+				attdDto.setEmp_late(rs);
+				attdService.insertAttd(attdDto); /* 여기서 디비저장 */
+				return "attd/insert"; /* attd/insert.jsp를 실행 */					
+			}
 		}
-		String rs = "";
-		if (time1 > time2) {
-			rs = "지각";
-		} else {
-			rs = "";
-		}
-		attdDto.setEmp_late(rs);
-		attdService.insertAttd(attdDto); /* 여기서 디비저장 */
-		return "attd/insert"; /* attd/insert.jsp를 실행 */
+		return "attd/main";
+	}
+
+	// 지각률
+	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+	@ResponseBody
+	public String lateRate(HttpSession hs, Model m) throws Exception {
+		UserVO uv = (UserVO) hs.getAttribute("login");
+		String name = uv.getName();
+		List<AttdDto> list = attdService.selAttd(name);
+		double lateRate = ((double) attdService.countLate(name) / list.size())*100;
+		m.addAttribute("lateRate", lateRate);
+		Gson json = new Gson();
+		return json.toJson(lateRate);
 	}
 	
 	// 근태 퇴근
@@ -152,10 +183,10 @@ public class AttdController implements ApplicationContextAware {
 			}
 		}
 		int offTime_attdNo = todayList.get(0).getAttd_no();
-		attdService.uptOff(offTime_attdNo); // 가장 마지막 출근 시간이 찍힌 레코드의 퇴근 시간 입력		
+		attdService.uptOff(offTime_attdNo); // 가장 마지막 출근 시간이 찍힌 레코드의 퇴근 시간 입력
 		return "attd/off"; /* attd/off.jsp를 실행 */
 	}
-	
+
 	// 엑셀 다운
 	@RequestMapping("/excelDown")
 	public void excelDown(HttpServletResponse response, HttpSession hs) throws Exception {
@@ -239,7 +270,7 @@ public class AttdController implements ApplicationContextAware {
 
 			cell = row.createCell(5);
 			cell.setCellStyle(bodyStyle);
-			if(sdf.format(attdDto.getAttd_time()).equals(sdf.format(attdDto.getOff_time()))){
+			if (sdf.format(attdDto.getAttd_time()).equals(sdf.format(attdDto.getOff_time()))) {
 				cell.setCellValue(" - ");
 			} else {
 				cell.setCellValue(sdf.format(attdDto.getOff_time()));

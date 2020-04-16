@@ -19,6 +19,12 @@ public class AttdServiceImpl implements AttdService {
 	public void insertAttd(AttdDto attdDto) throws Exception {
 		attdDao.insertAttd(attdDto);
 	}
+	
+	// 지각률
+	@Override
+	public int countLate(String name) throws Exception {
+		return attdDao.countLate(name);
+	}
 
 	// 근태 조회
 	@Override

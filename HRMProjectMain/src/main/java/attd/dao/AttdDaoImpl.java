@@ -16,6 +16,12 @@ public class AttdDaoImpl extends SqlSessionDaoSupport implements AttdDao {
 		getSqlSession().insert(mapperName + ".insertAttd", attdDto);
 	}
 
+	// 지각률
+	@Override
+	public int countLate(String name) throws Exception {
+		return getSqlSession().selectOne(mapperName + ".countLate", name);
+	}
+	
 	// 근태 조회
 	@Override
 	public List<AttdDto> selAttd(String name) throws Exception {

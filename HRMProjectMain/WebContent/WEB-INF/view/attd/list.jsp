@@ -55,7 +55,7 @@
 		})
 	});
 
-	function searchDate() {   //123123
+	function searchDate() {
 		$("#attdTable tr").each(function() {
 			$("#attdTable tr:eq(1)").remove();
 		});

@@ -11,6 +11,9 @@ public interface AttdService {
 
 	// 근태 출근
 	void insertAttd(AttdDto attdDto) throws Exception;
+	
+	// 지각률
+	int countLate(String name) throws Exception;
 
 	// 근태 조회
 	List<AttdDto> selAttd(String name) throws Exception;

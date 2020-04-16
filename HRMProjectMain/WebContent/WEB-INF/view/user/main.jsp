@@ -99,6 +99,23 @@ $(function(){
 	    .fail(function(e) {
 	    	alert(e.responseText);
 	    })
+
+
+	// 근태 지각률    
+	var url = "/HRMProjectMain/jsp/attd/loginPost";
+	$.ajax({
+		type:"post"		
+		,url:url		
+		,dataType:"json" }) 
+		.done(function(args){
+				$("#attd").append(args+"%");
+				$("#attd2").append("<div class='progress-bar bg-info' style='width: "+args+"' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100'></div>");
+		})
+	    .fail(function(e) {
+	    	alert(e.responseText);
+	    })
+	//----------------------------------
+	    
 });//ready()
 </script>
 <body id="page-top">
@@ -308,11 +325,12 @@ $(function(){
                       <div class="text-xs font-weight-bold text-info text-uppercase mb-1">지각률</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">72%</div>
+                          <div id="attd" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div id="attd2"></div>
+                            <!-- <div class="progress-bar bg-info" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> -->
                           </div>
                         </div>
                       </div>

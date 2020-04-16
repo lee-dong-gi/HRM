@@ -13,18 +13,20 @@
 		#{emp_late})
 	</insert>
 
+	<!--지각률-->
+	<select id="countLate" resultType="int">
+		select count(*) from attendance where name='test3' and emp_late in('지각')	
+	</select>
+
 	<!--근태 조회-->
-	<select id="selAttd" parameterType="String"
-		resultType="attd.model.AttdDto">
+	<select id="selAttd" parameterType="String" resultType="attd.model.AttdDto">
 		select * from attendance
-		where name=#{name} order by
-		attd_no desc
+		where name=#{name} order by	attd_no desc
 	</select>
 
 	<!--부서명-->
 	<select id="getDname" parameterType="int" resultType="String">
-		select
-		dname from dept where deptno=${deptno}
+		select dname from dept where deptno=${deptno}
 	</select>
 
 	<!--근태 퇴근-->
