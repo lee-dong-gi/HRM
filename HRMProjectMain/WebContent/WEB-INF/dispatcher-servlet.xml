@@ -71,6 +71,8 @@
 	<bean class="contact.persistence.GroupDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	
+	<bean id="empDao" class="user.persistence.EmpDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory" />
 
 	<!--bean 객체  -->
 	<bean id="loginInterceptor" class="commons.interceptor.LoginInterceptor"/>
