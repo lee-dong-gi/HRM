@@ -171,7 +171,7 @@ $(function(){
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>

@@ -45,8 +45,9 @@ public class AttdController implements ApplicationContextAware {
 	@Autowired
 	private AttdService attdService;
 
+	// 엑셀 다운용 리스트
 	private List<AttdDto> excelList;
-	
+
 	// 근태 메인
 	// 메인에서 attd.do요청을 받음
 	@RequestMapping("attd.do")
@@ -109,47 +110,76 @@ public class AttdController implements ApplicationContextAware {
 	// 근태 출근 & 지각
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpSession hs, Model m) throws Exception {
-
+		List<AttdDto> list=null;
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
-		List<AttdDto> list = attdService.selAttd(name);
-
+		list = attdService.selAttd(name);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String today = sdf.format(date); // 오늘 날짜 스트링으로
 
-		for (int i = 0; i < list.size(); i++) {
-			Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
-			String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
+		if (list.isEmpty()) {
+			AttdDto attdDto = new AttdDto();
+			attdDto.setEmpno(uv.getEmpno());
+			attdDto.setDname(attdService.getDname(uv.getDeptno()));
+			attdDto.setName(uv.getName());
+			attdDto.setAttd_time(new Date());
+			attdDto.setOff_time(new Date());
 
-			if (today.equals(attdDate)) { // 오늘 날짜와 같은 값이 출근 날짜에 있으면 msg.jsp로
-				return "attd/msg";
-			} else { // 아니면 출근 입력
-				AttdDto attdDto = new AttdDto();
-				attdDto.setEmpno(uv.getEmpno());
-				attdDto.setDname(attdService.getDname(uv.getDeptno()));
-				attdDto.setName(uv.getName());
-				attdDto.setAttd_time(new Date());
-				attdDto.setOff_time(new Date());
+			SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+			long time1 = attdDto.getAttd_time().getTime();
+			long time2 = 0;
+			String str = "09:00:00";
+			try {
+				time2 = dateFormat.parse(str).getTime();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			String rs = "";
+			if (time1 > time2) {
+				rs = "지각";
+			} else {
+				rs = "";
+			}
+			attdDto.setEmp_late(rs);
+			attdService.insertAttd(attdDto); // 디비 저장
+			return "attd/insert";
 
-				SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-				long time1 = attdDto.getAttd_time().getTime();
-				long time2 = 0;
-				String str = "09:00:00";
-				try {
-					time2 = dateFormat.parse(str).getTime();
-				} catch (Exception e) {
-					e.printStackTrace();
+		} else {
+
+			for (int i = 0; i < list.size(); i++) {
+				Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
+				String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
+
+				if (today.equals(attdDate)) { // 오늘 날짜와 같은 값이 출근 날짜에 있으면 msg.jsp로
+					return "attd/msg";
+				} else { // 아니면 출근 입력
+					AttdDto attdDto = new AttdDto();
+					attdDto.setEmpno(uv.getEmpno());
+					attdDto.setDname(attdService.getDname(uv.getDeptno()));
+					attdDto.setName(uv.getName());
+					attdDto.setAttd_time(new Date());
+					attdDto.setOff_time(new Date());
+
+					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+					long time1 = attdDto.getAttd_time().getTime();
+					long time2 = 0;
+					String str = "09:00:00";
+					try {
+						time2 = dateFormat.parse(str).getTime();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					String rs = "";
+					if (time1 > time2) {
+						rs = "지각";
+					} else {
+						rs = "";
+					}
+					attdDto.setEmp_late(rs);
+					attdService.insertAttd(attdDto); // 디비 저장
+					return "attd/insert";
 				}
-				String rs = "";
-				if (time1 > time2) {
-					rs = "지각";
-				} else {
-					rs = "";
-				}
-				attdDto.setEmp_late(rs);
-				attdService.insertAttd(attdDto); // 디비 저장
-				return "attd/insert";
 			}
 		}
 		return "attd/main";
@@ -162,10 +192,14 @@ public class AttdController implements ApplicationContextAware {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
-		double lateRate = ((double) attdService.countLate(name) / list.size()) * 100;
-		m.addAttribute("lateRate", lateRate);
 		Gson json = new Gson();
-		return json.toJson(lateRate);
+		if (list.isEmpty()) {
+			return json.toJson(0);
+		} else {
+			double lateRate = ((double) attdService.countLate(name) / list.size()) * 100;
+			m.addAttribute("lateRate", lateRate);
+			return json.toJson(lateRate);
+		}
 	}
 
 	// 근태 퇴근
@@ -291,12 +325,12 @@ public class AttdController implements ApplicationContextAware {
 			cell = row.createCell(6);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(attdDto.getEmp_late());
-		}
-
-		// 셀 너비 자동 조절
-		for (int i = 0; i < list.size(); i++) {
-			sheet.autoSizeColumn(i);
-			sheet.setColumnWidth(i, (sheet.getColumnWidth(i)) + 1000);
+			
+			// 셀 너비 자동 조절
+			for (int i = 0; i < 7; i++) {
+				sheet.autoSizeColumn(i);
+				sheet.setColumnWidth(i, (sheet.getColumnWidth(i)) + 1000);
+			}			
 		}
 
 		// 셀 자동 줄바꿈
