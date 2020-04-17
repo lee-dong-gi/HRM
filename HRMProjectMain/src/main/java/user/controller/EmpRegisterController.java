@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import com.mysql.cj.xdevapi.UpdateParams;
 
 import user.domain.EmpDto;
+import user.service.DeptService;
 import user.service.EmpService;
 
 @Controller
@@ -22,8 +23,12 @@ public class EmpRegisterController {
 	@Autowired
 	private EmpService service;
 
+	@Autowired
+	private DeptService deptService;
+	
 	@RequestMapping(value = "/emp", method = RequestMethod.GET)
-	public String registerForm() throws Exception {
+	public String registerForm(Model model) throws Exception {
+		model.addAttribute("dept", deptService.seldeptAll());
 		return "emp/join";
 	}
 

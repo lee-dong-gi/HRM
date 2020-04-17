@@ -370,9 +370,9 @@
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<select id="deptno" name="deptno">
 									<option value="">선택</option>
-									<option value="10">개발 1팀</option>
-									<option value="20">개발2팀</option>
-									<option value="30">운영팀</option>
+								<c:forEach var="item" items="${dept}">
+									<option value="${item.deptno}">${item.dname}</option>
+								</c:forEach>
 								</select>
 							</div>
 							<br>
