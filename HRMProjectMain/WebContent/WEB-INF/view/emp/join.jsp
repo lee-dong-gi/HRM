@@ -43,6 +43,39 @@
 	left: 115px;
 	top: -33px;
 }
+#authbutton {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 80px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
+#eauth {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 130px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
+#authcomple {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 130px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
 </style>
 <script type="text/javascript">
 	
@@ -142,6 +175,13 @@
 			alert("비밀번호 일치확인을 해주세요")
 			return false;
 		}
+		
+		var authcomple = $('#authcompleval').val();
+		alert(authcomple);
+		if (authcomple==""|authcomple!="ok") {
+			alert("이메일 인증을 진행해주세요!")
+			return false;
+		}
 
 		else{
 			alert("회원가입 되었습니다.")
@@ -149,6 +189,57 @@
 		}
 
 	}
+	
+function emailauth(){
+	var num = $("#emailauthcheck").val();
+	var url = "/HRMProjectMain/jsp/checkmail";
+	var params = "checkNum="+num;
+	$.ajax({
+		type : "post",
+		url : url,
+		data : params,
+		dataType : "json"
+	}).done(function(args) {
+		alert(args);
+		if(args=="인증되었습니다!"){
+			$("#emailauthcheck:eq(0)").remove();
+			$("#authbutton:eq(0)").remove();
+			$("#eauth:eq(0)").remove();
+			$("#fonta:eq(0)").remove();
+			$("#emailall").append("<span id='authcomple'>인증완료</span>");	
+			$("#emailall").append("<input type='hidden' id='authcompleval' value='ok'/>");	
+		}
+	}).fail(function(e) {
+		alert(e.responseTexst);
+	})
+}
+
+function sendmail(){
+	var email = $("#email").val();
+	$("#authNum input").each(function() {
+		$("#authNum input:eq(0)").remove();
+	});
+		$("#authbutton:eq(0)").remove();
+	var url = "send";
+	var params = "inputReceiver="+email;
+	$.ajax({
+		type : "post",
+		url : url,
+		data : params,
+		dataType : "json"
+	}).done(function(args) { 
+				if(args=="메일이 발송되었습니다 확인해주세요!"){
+					$("#fonta").show();
+					$("#authNum").append("<input style='font-size: 10pt;' class='form-control'id='emailauthcheck' type='text' name='emailauthcheck' pattern='[0-9]{4}'placeholder='인증번호 4자리입력'>");
+					$("#authNum").append("<button class='btn btn-secondary' type='button' id='authbutton' onclick='emailauth()'>인증확인</button>");	
+				}
+					alert(args);
+	}).fail(function(e) {
+		alert(e.responseTexst);
+	})
+	
+}
+
 </script>
 </head>
 
@@ -352,12 +443,16 @@
 
 
 							<div id=font>이메일</div>
-							<div style="padding-top: 10px;" class="col-sm-2">
-								<input style="font-size: 10pt;" class="form-control" id="email"
+							<div style="padding-top: 10px;" class="col-sm-2" id="emailall" style="display:inline;">
+								<input style="font-size: 10pt; display: inline;" class="form-control" id="email"
 									name="email" type="email" placeholder="ex)abc@naver.com"><br>
+								<button type="button" class='btn btn-secondary' id="eauth" name="eauth" onclick="sendmail()">인증번호 발송</button>
 							</div>
 
-
+							<div id=fonta style="display: none">이메일 인증</div>
+							<div style="padding-top: 10px;" class="col-sm-2" id="authNum">
+							</div>
+ 
 							<div id=font>전화번호</div>
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<input style="font-size: 10pt;" class="form-control"
@@ -375,7 +470,7 @@
 								</c:forEach>
 								</select>
 							</div>
-							<br>
+							
 
 
 							<div id=font>직급</div>
@@ -390,6 +485,11 @@
 									<option value="팀장">팀장</option>
 								</select>
 							</div>
+<<<<<<< HEAD
+							
+
+=======
+>>>>>>> branch 'master' of https://github.com/lee-dong-gi/HRM.git
 
 							<input type="hidden" id="app" value="0" name="approval">
 							
