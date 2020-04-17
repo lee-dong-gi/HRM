@@ -50,7 +50,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-user btn-block">
                       	로그인
-                    </button>
+                    </button> 
                   </form>
                   <hr>
                    <div class="text-center">
