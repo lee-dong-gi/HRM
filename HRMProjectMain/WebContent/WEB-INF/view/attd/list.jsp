@@ -24,6 +24,15 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
+<!--Font Awesome-->
+<script src="https://kit.fontawesome.com/2a30f5ceb7.js" crossorigin="anonymous"></script>
+<style>
+input[type="submit"] {
+	font-family: FontAwesome;
+	font-size: 1rem;
+}
+</style>
+
 <script type="text/javascript">
 	$(function() {
 		var url = "attdlist";
@@ -225,12 +234,12 @@
 							<input id="startDate" name="startDate" type="date" class="btn btn-outline-secondary btn-sm" /> ~ <span><input id="endDate" name="endDate" type="date" class="btn btn-outline-secondary btn-sm" /></span>
 						</div>
 						<div style="display: inline">
-							<button id="searchBtn" type="button" class="btn btn-outline-secondary btn-sm" onclick="searchDate()">조회</button>
+							<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf002;" onclick="searchDate()"/>
 						</div>
 
 						<div style="display: inline">
 							<form id="excelDown" action="excelDown" method="post" style="display: inline">
-								<button id="excelDown" type="submit" class="btn btn-outline-secondary btn-sm">엑셀 다운</button>
+								<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf381;" />
 							</form>
 						</div>
 
