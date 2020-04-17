@@ -40,12 +40,11 @@
 	<!-- component-scan  -->
 	<context:annotation-config />
 	<context:component-scan 
-	base-package="user.domain,user.persistence,user.service,user.controller,
+	base-package="user.domain,user.persistence,user.service,user.controller, 
 				app.domain,app.persistence,app.service,app.controller,
 				chat.controller,web.socket,chat.domain,chat.persistence,chat.service,
 				attd.controller, attd.service, attd.model, 
-				contact.controller, contact.service,
-				mail.controller,mail.domain,mail.service"/> 
+				contact.controller, contact.service"/>
 	
 	<!-- dao sqlSessionFactory 주입 -->
 	<bean id="userdao" class="user.persistence.UserDAOImpl">
@@ -82,22 +81,6 @@
 	<bean id="download" class="commons.view.AppDownloadView"/>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"><!-- 파일 업로드 설정 -->
     <property name="maxUploadSize" value="10000000000"/>
-	</bean>
-	<bean id="mailSender"
-		class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <property name="host" value="smtp.naver.com" />
-    <property name="port" value="587" /><!-- 465 or 25 -->
-    <property name="username" value="oksk327" />
-    <property name="password" value="DLehdrl12@" />
-    <property name="defaultEncoding" value="utf-8" />
-    <property name="javaMailProperties">
-        <props>
-            <prop key="mail.transport.protocol">smtp</prop>
-            <prop key="mail.smtp.auth">true</prop>
-            <prop key="mail.smtp.starttls.enable">true</prop>
-            <prop key="mail.debug">true</prop>
-        </props>
-    </property>
 	</bean>
 	
 	

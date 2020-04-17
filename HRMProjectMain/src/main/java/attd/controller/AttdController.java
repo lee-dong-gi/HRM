@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined;
-
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -19,6 +18,7 @@ import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import org.springframework.beans.BeansException;
@@ -45,29 +45,33 @@ public class AttdController implements ApplicationContextAware {
 	@Autowired
 	private AttdService attdService;
 
+	private List<AttdDto> excelList;
+	
 	// 근태 메인
-	@RequestMapping("attd.do") /* attd.do요청을 받음 */
+	// 메인에서 attd.do요청을 받음
+	@RequestMapping("attd.do")
 	public String list(HttpSession hs, Model m) throws Exception {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		m.addAttribute("empno", uv.getEmpno());
 		m.addAttribute("name", uv.getName());
-		return "attd/main"; /* attd/main.jsp 실행 */
+		return "attd/main";
 	}
 
 	// 근태 목록
-	@RequestMapping(value = "/attdlist", method = RequestMethod.POST) /* attdlist요청을 받음 */
+	@RequestMapping(value = "/attdlist", method = RequestMethod.POST)
 	@ResponseBody
 	public String attdlist(HttpSession hs) throws Exception {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
+		excelList = list;
 		Gson json = new Gson();
 		return json.toJson(list);
 	}
 
 	// 근태 조회
 	@RequestMapping("/list")
-	public String listAll(HttpSession hs, Model m) throws Exception {
+	public String listAll() throws Exception {
 		return "attd/list";
 	}
 
@@ -78,7 +82,7 @@ public class AttdController implements ApplicationContextAware {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
-		//
+		// 기간값 설정
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		// 대시(-)로 문자열 잘라서 배열에 넣기
 		String[] array = startDate.split("-");
@@ -86,7 +90,7 @@ public class AttdController implements ApplicationContextAware {
 		// 문자열 합치기
 		String s1 = array[0].concat(array[1]).concat(array[2]);
 		String s2 = array2[0].concat(array2[1]).concat(array2[2]);
-		// 기간 계산
+		// 기간 조건 설정
 		int i1 = Integer.parseInt(s1);
 		int i2 = Integer.parseInt(s2);
 		List<AttdDto> searchList = new ArrayList<AttdDto>();
@@ -97,29 +101,30 @@ public class AttdController implements ApplicationContextAware {
 				searchList.add(list.get(i));
 			}
 		}
+		excelList = searchList;
 		Gson json = new Gson();
 		return json.toJson(searchList);
 	}
 
 	// 근태 출근 & 지각
-	@RequestMapping(value = "/insert", method = RequestMethod.POST) /* insert요청을 받음 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpSession hs, Model m) throws Exception {
-		
+
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String today = sdf.format(date); // 오늘 날짜 스트링으로
-		
+
 		for (int i = 0; i < list.size(); i++) {
 			Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
 			String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
 
-			if (today.equals(attdDate)) {	// 오늘 날짜와 같은 값이 출근 날짜에 있으면 msg.jsp로				
+			if (today.equals(attdDate)) { // 오늘 날짜와 같은 값이 출근 날짜에 있으면 msg.jsp로
 				return "attd/msg";
-			} else {	//아니면 출근 입력
+			} else { // 아니면 출근 입력
 				AttdDto attdDto = new AttdDto();
 				attdDto.setEmpno(uv.getEmpno());
 				attdDto.setDname(attdService.getDname(uv.getDeptno()));
@@ -143,8 +148,8 @@ public class AttdController implements ApplicationContextAware {
 					rs = "";
 				}
 				attdDto.setEmp_late(rs);
-				attdService.insertAttd(attdDto); /* 여기서 디비저장 */
-				return "attd/insert"; /* attd/insert.jsp를 실행 */					
+				attdService.insertAttd(attdDto); // 디비 저장
+				return "attd/insert";
 			}
 		}
 		return "attd/main";
@@ -157,12 +162,12 @@ public class AttdController implements ApplicationContextAware {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
-		double lateRate = ((double) attdService.countLate(name) / list.size())*100;
+		double lateRate = ((double) attdService.countLate(name) / list.size()) * 100;
 		m.addAttribute("lateRate", lateRate);
 		Gson json = new Gson();
 		return json.toJson(lateRate);
 	}
-	
+
 	// 근태 퇴근
 	@RequestMapping("/off") /* off요청을 받음 */
 	public String off(HttpSession hs, ModelAndView mav) throws Exception {
@@ -172,7 +177,7 @@ public class AttdController implements ApplicationContextAware {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
 		String today = sdf.format(date); // 오늘 날짜 스트링으로
-		List<AttdDto> todayList = new ArrayList<AttdDto>(); // 오늘 날짜인 레코드들 저장할 리스트
+		List<AttdDto> todayList = new ArrayList<AttdDto>(); // 출근 날짜가 오늘 날짜인 레코드들 저장할 리스트
 		for (int i = 0; i < list.size(); i++) {
 			Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
 			String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
@@ -194,7 +199,7 @@ public class AttdController implements ApplicationContextAware {
 		// 목록조회
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
-		List<AttdDto> list = attdService.selAttd(name);
+		List<AttdDto> list = excelList;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		// 워크북 생성
@@ -207,23 +212,30 @@ public class AttdController implements ApplicationContextAware {
 
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
-		// 가는 경계선
+		// 경계선
 		headStyle.setBorderTop(BorderStyle.THIN);
 		headStyle.setBorderBottom(BorderStyle.THIN);
 		headStyle.setBorderLeft(BorderStyle.THIN);
 		headStyle.setBorderRight(BorderStyle.THIN);
-		// 배경색은 노란색
-		headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+		// 헤더 배경색
+		headStyle.setFillForegroundColor(HSSFColorPredefined.LAVENDER.getIndex());
 		headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-		// 데이터 가운데 정렬
+		// 라인 정렬
 		headStyle.setAlignment(HorizontalAlignment.CENTER);
+		headStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 		cell.setCellStyle(headStyle);
-		// 데이터용 경계 스타일 테두리만 지정
+
+		// 테이블 데이터용 스타일
 		CellStyle bodyStyle = wb.createCellStyle();
+		// 라인 정렬
+		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
+		bodyStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+		// 데이터용 경계 스타일 테두리
 		bodyStyle.setBorderTop(BorderStyle.THIN);
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
+
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
@@ -271,7 +283,7 @@ public class AttdController implements ApplicationContextAware {
 			cell = row.createCell(5);
 			cell.setCellStyle(bodyStyle);
 			if (sdf.format(attdDto.getAttd_time()).equals(sdf.format(attdDto.getOff_time()))) {
-				cell.setCellValue(" - ");
+				cell.setCellValue("");
 			} else {
 				cell.setCellValue(sdf.format(attdDto.getOff_time()));
 			}
@@ -280,6 +292,16 @@ public class AttdController implements ApplicationContextAware {
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(attdDto.getEmp_late());
 		}
+
+		// 셀 너비 자동 조절
+		for (int i = 0; i < list.size(); i++) {
+			sheet.autoSizeColumn(i);
+			sheet.setColumnWidth(i, (sheet.getColumnWidth(i)) + 1000);
+		}
+
+		// 셀 자동 줄바꿈
+		headStyle.setWrapText(true);
+		bodyStyle.setWrapText(true);
 
 		// 컨텐츠 타입과 파일명 지정
 		response.setContentType("application/vnd.ms-excel"); // response.setContentType("application/vnd.ms-excel");

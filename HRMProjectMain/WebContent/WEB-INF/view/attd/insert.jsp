@@ -24,19 +24,18 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
 <script type="text/javascript">
-	$(function() { //바디가 로딩 다 되면 자동으로 실행하는 함수
+	$(function() {
 		var url = "attdlist";
 		$.ajax({
 			method : "post",
 			url : url,
 			dataType : "json"
-		}) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아옴
-		.done(
-				function(args) { //응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+		}).done(
+				function(args) { //가져온 데이터를 첫번째 매개변수args(배열)에 넣어줌
 					var rs;
 					for (var i = 0; i < args.length; i++) {
 						if ((args[i].attd_time) == (args[i].off_time)) {
-							rs = " - ";
+							rs = "";
 						} else {
 							rs = args[i].off_time;
 						}
@@ -70,10 +69,14 @@
         	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
       </a>
 
+<<<<<<< HEAD
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
 	<br/>
+=======
+			<br>
+>>>>>>> branch 'master' of https://github.com/lee-dong-gi/HRM.git
 
 				<!-- Heading -->
       <div class="sidebar-heading">
@@ -145,7 +148,35 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
 
+<<<<<<< HEAD
     </ul>
+=======
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom"> <i class="fas fa-fw"></i> <span>채팅</span>
+			</a></li>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>캘린더</span>
+			</a></li>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>투표</span>
+			</a></li>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do"> <i class="fas fa-fw"></i> <span>근태관리</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>게시판</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>조직도</span>
+			</a></li>
+
+			<!-- Divider -->
+			<hr class="sidebar-divider d-none d-md-block">
+
+			<!-- Sidebar Toggler (Sidebar) -->
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+		</ul>
+>>>>>>> branch 'master' of https://github.com/lee-dong-gi/HRM.git
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -191,7 +222,6 @@
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> 로그아웃
 								</a>
 							</div></li>
-
 					</ul>
 
 				</nav>
@@ -200,9 +230,10 @@
 				<!-- Begin Page Content -->
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h3><a class="d-flex" href="/HRMProjectMain/jsp/attd/attd.do">
-								<strong>출 근 AttendanceManagement</strong>
-						</a></h3>
+						<h3>
+							<a class="d-flex" href="/HRMProjectMain/jsp/attd/attd.do"> <strong>출 근 AttendanceManagement</strong>
+							</a>
+						</h3>
 					</div>
 
 					<div class="card-body">
@@ -210,9 +241,9 @@
 						<form id="excelDown" action="excelDown" method="post">
 							<button type="submit" class="btn btn-outline-secondary btn-sm">엑셀 다운</button>
 						</form>
-						
+
 						<hr>
-						
+
 						<table id="attdTable" class="table table-bordered" style="padding-top: 50px; margin-left: auto; margin-right: auto; text-align: center">
 							<thead bgcolor="gray" style="color: white;">
 								<tr>
@@ -228,57 +259,51 @@
 						</table>
 					</div>
 				</div>
-
-				<div class="row">
-					<!-- /.container-fluid -->
-
-				</div>
-
-				<!-- End of Main Content -->
-
-				<!-- Footer -->
-				<footer class="sticky-footer bg-white">
-					<div class="container my-auto">
-						<div class="copyright text-center my-auto">
-							<span>Copyright &copy; HRM Project Website2020</span>
-						</div>
-					</div>
-				</footer>
-				<!-- End of Footer -->
-
 			</div>
-			<!-- End of Content Wrapper -->
+			<!--End of Main Content-->
+
+			<!-- Footer -->
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; HRM Project Website2020</span>
+					</div>
+				</div>
+			</footer>
+			<!-- End of Footer -->
 
 		</div>
-		<!-- End of Page Wrapper -->
+		<!-- End of Content Wrapper -->
 
-		<!-- Scroll to Top Button-->
-		<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
-		</a>
+	</div>
+	<!-- End of Page Wrapper -->
 
-		<!-- Logout Modal-->
-		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">정말 로그아웃 하시겠습니까?</h5>
-					</div>
-					<div class="modal-body">로그아웃을 하고싶으면 현재 창의 로그아웃 버튼을 클릭해주세요</div>
-					<div class="modal-footer">
-						<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-						<a class="btn btn-primary" href="/HRMProjectMain/jsp/user/logout">로그아웃</a>
-					</div>
+	<!-- Scroll to Top Button-->
+	<a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i>
+	</a>
+
+	<!-- Logout Modal-->
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">정말 로그아웃 하시겠습니까?</h5>
+				</div>
+				<div class="modal-body">로그아웃을 하고싶으면 현재 창의 로그아웃 버튼을 클릭해주세요</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+					<a class="btn btn-primary" href="/HRMProjectMain/jsp/user/logout">로그아웃</a>
 				</div>
 			</div>
 		</div>
-
-
-		<!-- Bootstrap core JavaScript-->
-		<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-		<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-		<!-- Core plugin JavaScript-->
-		<script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-		<!-- Custom scripts for all pages-->
-		<script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
+	</div>
+	
+	<!-- Bootstrap core JavaScript-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- Core plugin JavaScript-->
+	<script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Custom scripts for all pages-->
+	<script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
 </body>
 </html>

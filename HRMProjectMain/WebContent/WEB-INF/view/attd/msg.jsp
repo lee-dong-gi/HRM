@@ -8,8 +8,8 @@
 	alert("이미 출석체크 하셨습니다.");
 	history.back();
 	/* window.location.href = "/HRMProjectMain/jsp/attd/attd.do"; */
-
 </script>
+
 </head>
 <body>
 </body>
