@@ -23,6 +23,15 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
+<!--Font Awesome-->
+<script src="https://kit.fontawesome.com/2a30f5ceb7.js" crossorigin="anonymous"></script>
+<style>
+input[type="submit"] {
+	font-family: FontAwesome;
+	font-size: 1rem;
+}
+</style>
+
 <script type="text/javascript">
 	$(function() {
 		var url = "attdlist";
@@ -208,7 +217,7 @@
 
 					<div class="card-body">
 						<form id="excelDown" action="excelDown" method="post">
-							<button type="submit" class="btn btn-outline-secondary btn-sm">엑셀 다운</button>
+							<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf381;" />
 						</form>
 
 						<hr>
