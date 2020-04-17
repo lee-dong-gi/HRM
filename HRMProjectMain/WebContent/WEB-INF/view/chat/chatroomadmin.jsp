@@ -68,16 +68,16 @@ $(function(){
 
 	<br/>
 
-      <!-- Heading -->
+				<!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
 	 <hr class="sidebar-divider">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appadmin?pageNum=1">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
-          <span>결재관리</span>
+          <span>결재</span>
         </a>
       </li>
 
@@ -85,21 +85,21 @@ $(function(){
       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
           <i class="fas fa-fw"></i>
-          <span>채팅관리</span>
+          <span>채팅</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
 		<li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="fas fa-fw"></i>
-          <span>캘린더관리</span>
+          <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="fas fa-fw"></i>
-          <span>투표관리</span>
+          <span>투표</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
@@ -109,16 +109,18 @@ $(function(){
           <span>근태관리</span>
         </a>
       </li>
-      <li class="nav-item">
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+					class="fas fa-fw"></i> <span>공지사항</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+					<span>자유게시판</span>
+			</a></li>
+			<li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="fas fa-fw"></i>
-          <span>게시판관리</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>조직도관리</span>
+          <span>조직도</span>
         </a>
       </li>
       <li class="nav-item">
@@ -130,8 +132,8 @@ $(function(){
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
+				
+	<!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>

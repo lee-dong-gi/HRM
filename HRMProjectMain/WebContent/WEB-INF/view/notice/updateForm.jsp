@@ -25,7 +25,12 @@
 String username = (String)session.getAttribute("name");
 String userid = (String)session.getAttribute("id");
 %>
+
 function upd(){
+	if($("#contenttext").val() == ""){
+		alert("내용을 입력하세요")
+		return false;
+	}
 	var param = "num="+"${notice.num}"+"&content="+$("#contenttext").val();
 	$.ajax({
 		type:"post",
@@ -43,6 +48,7 @@ function upd(){
 	    .fail(function(){
 			alert("실패")
 		})
+
 }
 </script>
 <body id="page-top">
@@ -53,26 +59,25 @@ function upd(){
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
+      <br/>
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-        <div class="sidebar-brand-icon rotate-n-15">
-        </div>
-        <div class="sidebar-brand-text mx-3">HRM<sup>Project</sup></div>
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/mainadmin">
+        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
       </a>
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
-	<br>
+	<br/>
 
-      <!-- Heading -->
+				<!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
 	 <hr class="sidebar-divider">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
         </a>
@@ -106,23 +111,31 @@ function upd(){
           <span>근태관리</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>게시판</span>
-        </a>
-      </li>
-      <li class="nav-item">
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+					class="fas fa-fw"></i> <span>공지사항</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+					<span>자유게시판</span>
+			</a></li>
+			<li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="fas fa-fw"></i>
           <span>조직도</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-
-      <!-- Sidebar Toggler (Sidebar) -->
+				
+	<!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -204,7 +217,7 @@ function upd(){
             </div>
             <div class="card-body">
               <div class="table-responsive">
-              <form method="post">
+              <form method="post" onsubmit="return upd()">
                 <table class="table table-bordered" id="writeapp" width="120%" cellspacing="0">
 					<tr>
 					<td>
@@ -227,14 +240,14 @@ function upd(){
 					내용
 					</td>
 					<td>
-					<textarea id="contenttext" rows="10" cols="30" style="width: 60%;"></textarea><br> 
+					<textarea id="contenttext" rows="10" cols="30" style="width: 60%;" name="content"></textarea><br> 
 					</td>
 					</tr>
                 </table>
               </div>      
               <div class="row justify-content-between" style="margin:0"><div><a href="list" class="btn btn-secondary btn-icon-split">목록</a></div>
               <div><input type="button" value="취소" class="btn btn-secondary btn-icon-split">
-					<input type="button" value="수정하기" onclick="upd()" class="btn btn-secondary btn-icon-split"></div>      
+					<input type="submit" value="완료" onclick="upd()" class="btn btn-secondary btn-icon-split"></div>      
 					
 					
 					</form>               

@@ -9,8 +9,8 @@ import user.domain.NoticeDto;
 public class NoticeDao extends SqlSessionDaoSupport {
 
 	// 공지사항 목록
-	public List<NoticeDto> getAll() throws Exception {
-		return getSqlSession().selectList("notice.all");
+	public List<NoticeDto> getAll(int offset) throws Exception {
+		return getSqlSession().selectList("notice.all",offset);
 	}
 	
 	// 공지사항 내용

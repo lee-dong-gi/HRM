@@ -21,13 +21,59 @@ public class NoticeController {
 	NoticeService service;
 	
 	// 공지사항 목록
+	/*
+	 * now : 현재 페이지 / count : 전체 글의 갯수 / pageCount : 전체 페이지 갯수 /
+	 * offset : 몇번째 글번호부터 출력될지(0부터) / maxNum : 최상위 글번호
+	 */
 	@RequestMapping("notice/list")
-	public String getAll(Model model) throws Exception {
-		List<NoticeDto> list = service.getAll();
+	public String getAll(Model model, int now) throws Exception {
+		// 총 페이지 갯수
 		int count = service.count();
+		int pageCount;
+		if(count % 10 == 0) {
+			pageCount = count/10;
+		}else {
+			pageCount = count / 10 +1;
+		}
+		model.addAttribute("alll",pageCount);
+		
+		int offset = (now - 1) * 10;
+		int maxNum = service.count() - (now - 1)*10;
+		
+		List<NoticeDto> list = service.getAll(offset);
+		
 		model.addAttribute("all", list);
-		model.addAttribute("count", count);
+		model.addAttribute("count", maxNum);
+		
+		int startPage;
+		int endPage;
+		if (now < 3) {
+			startPage = 1;
+			endPage = 5;
+		}else {
+			startPage = now - 2;
+			endPage = now + 2;
+		}
+		if(pageCount == now) {
+			endPage = now;
+		}
+		if ((pageCount-1) == (now)) {
+			endPage = now + 1;
+		}
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		
 		return "notice/list";
+	}
+	
+	// 검색
+	@RequestMapping("notice/search")
+	public String searchForm(Model model, String s) throws Exception {
+		List<NoticeDto> search = service.search(s);
+		int scount = service.searchCount(s);
+		model.addAttribute("ser",search);
+		model.addAttribute("scount",scount);
+		return "notice/search";
 	}
 	
 	// 공지사항 내용
@@ -71,7 +117,7 @@ public class NoticeController {
 		return gson.toJson(s);
 	}
 	
-	// 삭제하기
+	// 댓글 삭제하기
 	@RequestMapping("notice/delete")
 	@ResponseBody
 	public String delete(int num) throws Exception {
