@@ -177,7 +177,7 @@
 		}
 		
 		var authcomple = $('#authcompleval').val();
-		alert(authcomple);
+		
 		if (authcomple==""|authcomple!="ok") {
 			alert("이메일 인증을 진행해주세요!")
 			return false;
@@ -491,9 +491,9 @@ function sendmail(){
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<select id="deptno" name="deptno">
 									<option value="">선택</option>
-									<option value="10">개발 1팀</option>
-									<option value="20">개발2팀</option>
-									<option value="30">운영팀</option>
+								<c:forEach var="item" items="${dept}">
+									<option value="${item.deptno}">${item.dname}</option>
+								</c:forEach>
 								</select>
 							</div>
 							
@@ -511,11 +511,7 @@ function sendmail(){
 									<option value="팀장">팀장</option>
 								</select>
 							</div>
-<<<<<<< HEAD
-							
 
-=======
->>>>>>> branch 'master' of https://github.com/lee-dong-gi/HRM.git
 
 							<input type="hidden" id="app" value="0" name="approval">
 							
