@@ -48,4 +48,14 @@ public class EmpDaoImpl extends SqlSessionDaoSupport implements EmpDao {
 		return getSqlSession().update(namespace + ".up", map);
 	}
 	
+	@Override
+	public int signup() {
+		return getSqlSession().insert(namespace + ".signup");
+	}
+	
+	@Override
+	public int signupCount() {
+		return getSqlSession().selectOne(namespace + ".signupCount");
+	}
+	
 }

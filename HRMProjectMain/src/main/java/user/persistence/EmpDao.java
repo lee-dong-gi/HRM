@@ -16,4 +16,8 @@ public interface EmpDao {
 	
 	int up(String passwd, String id) throws Exception;
 
+	int signup();
+
+	int signupCount();
+
 }

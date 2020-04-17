@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -80,10 +80,9 @@
 <script type="text/javascript">
 	
 <%String username = (String) session.getAttribute("name");%>
-
-/* 아이디 중복확인 */
+	/* 아이디 중복확인 */
 	var i = 0;
-
+	
 	function idCheck() {
 		if ($("#id").val() == "") {
 			alert("아이디를 입력하세요")
@@ -110,7 +109,7 @@
 
 	}
 
-/* 비밀번호 확인 */
+	/* 비밀번호 확인 */
 	function pwCheck() {
 		if ($("#pw1").val() == "") {
 			alert("비밀번호를 입력하세요")
@@ -125,59 +124,54 @@
 		}
 	}
 
-/* 공백 입력시 알림 */
+	/* 공백 입력시 알림 */
 	function check() {
 		if ($("#name").val() == "") {
 			alert("이름을 입력하세요")
 			return false;
 		}
 
-		if ($("#id").val() == "") {
+		else if ($("#id").val() == "") {
 			alert("아이디를 입력하세요")
 			return false;
 		}
 
-		if ($("#pw1").val() == "") {
+		else if ($("#pw1").val() == "") {
 			alert("비밀번호를 입력하세요")
 			return false;
 		}
 
-		if ($("#birth").val() == "") {
+		else if ($("#birth").val() == "") {
 			alert("생년월일을 입력하세요")
 			return false;
 		}
 
-		if ($("#email").val() == "") {
+		else if ($("#email").val() == "") {
 			alert("이메일을 입력하세요")
 			return false;
 		}
 
-		if ($("#phonenum").val() == "") {
+		else if ($("#phonenum").val() == "") {
 			alert("전화번호를 입력하세요")
 			return false;
 		}
 
-		if ($("#approval").val() == "") {
-			alert("권한을 선택하세요")
-			return false;
-		}
-
-		if ($("#deptno").val() == "") {
+		else if ($("#deptno").val() == "") {
 			alert("부서를 선택하세요")
 			return false;
 		}
 
-		if ($("#level").val() == "") {
+		else if ($("#level").val() == "") {
 			alert("직급을 선택하세요")
 			return false;
 		}
 
-		if ($("#hid").val() == "") {
+		else if ($("#hid").val() == "") {
 			alert("아이디 중복검사를 하세요")
 			return false;
 		}
 
-		if (i == 0) {
+		else if (i == 0) {
 			alert("비밀번호 일치확인을 해주세요")
 			return false;
 		}
@@ -187,6 +181,11 @@
 		if (authcomple==""|authcomple!="ok") {
 			alert("이메일 인증을 진행해주세요!")
 			return false;
+		}
+
+		else{
+			alert("회원가입 되었습니다.")
+			return true;
 		}
 
 	}
@@ -401,7 +400,7 @@ function sendmail(){
 							align="center">회원가입</h3>
 						<div class="form-group form-group-lg"
 							style="padding-top: 50px; font-size: 13pt;" align="center">
-
+							
 							<div id=font>이름</div>
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<input style="font-size: 10pt;" class="form-control" type="text"
@@ -486,9 +485,14 @@ function sendmail(){
 									<option value="팀장">팀장</option>
 								</select>
 							</div>
+<<<<<<< HEAD
 							
 
+=======
+>>>>>>> branch 'master' of https://github.com/lee-dong-gi/HRM.git
 
+							<input type="hidden" id="app" value="0" name="approval">
+							
 							<br> <br> <input style="width: 80px;" type="button"
 								value="취소" class="btn btn-primary btn-sm"
 								onclick="location.href='/HRMProjectMain/jsp/user/login'">
