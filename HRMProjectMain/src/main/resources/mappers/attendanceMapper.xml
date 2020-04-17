@@ -9,30 +9,33 @@
 	<insert id="insertAttd" parameterType="attd.model.AttdDto">
 		insert into
 		attendance(empno, dname, name, attd_time, off_time, emp_late)
-		values(#{empno}, #{dname}, #{name}, #{attd_time}, #{off_time},
-		#{emp_late})
+		values(#{empno}, #{dname}, #{name}, #{attd_time}, #{off_time}, #{emp_late})
 	</insert>
 
-	<!--지각률-->
+	<!--지각률 -->
 	<select id="countLate" resultType="int">
-		select count(*) from attendance where name='test3' and emp_late in('지각')	
+		select count(*) from attendance 
+		where name=#{name} and emp_late in('지각')
 	</select>
 
-	<!--근태 조회-->
-	<select id="selAttd" parameterType="String" resultType="attd.model.AttdDto">
+	<!--근태 조회 -->
+	<select id="selAttd" parameterType="String"
+		resultType="attd.model.AttdDto">
 		select * from attendance
-		where name=#{name} order by	attd_no desc
+		where name=#{name} 
+		order by attd_no desc
 	</select>
 
-	<!--부서명-->
+	<!--부서명 -->
 	<select id="getDname" parameterType="int" resultType="String">
 		select dname from dept where deptno=${deptno}
 	</select>
 
-	<!--근태 퇴근-->
+	<!--근태 퇴근 -->
 	<update id="uptOff" parameterType="int">
-		update attendance set
-		off_time=date_sub(sysdate(), interval 9 hour) where attd_no=#{attd_no}
+		update attendance 
+		set off_time=date_sub(sysdate(), interval 9 hour) 
+		where attd_no=#{attd_no}
 	</update>
 
 </mapper>

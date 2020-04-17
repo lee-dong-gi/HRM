@@ -172,10 +172,6 @@
 						</div>
 					</div>
 
-					<div class="row">
-						<!-- /.container-fluid -->
-
-					</div>
 					<!-- End of Main Content -->
 
 					<!-- Footer -->
