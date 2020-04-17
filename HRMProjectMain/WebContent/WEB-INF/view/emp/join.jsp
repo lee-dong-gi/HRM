@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
@@ -43,14 +43,46 @@
 	left: 115px;
 	top: -33px;
 }
+#authbutton {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 80px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
+#eauth {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 130px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
+#authcomple {
+	margin-left: 121px;
+	margin-top: 1px;
+	width: 130px;
+	height: 33px;
+	border: thin;
+	font-size: 14px;
+	position: relative;
+	left: 115px;
+	top: -33px;
+}
 </style>
 <script type="text/javascript">
 	
 <%String username = (String) session.getAttribute("name");%>
-
-/* 아이디 중복확인 */
+	/* 아이디 중복확인 */
 	var i = 0;
-
+	
 	function idCheck() {
 		if ($("#id").val() == "") {
 			alert("아이디를 입력하세요")
@@ -77,7 +109,7 @@
 
 	}
 
-/* 비밀번호 확인 */
+	/* 비밀번호 확인 */
 	function pwCheck() {
 		if ($("#pw1").val() == "") {
 			alert("비밀번호를 입력하세요")
@@ -92,64 +124,122 @@
 		}
 	}
 
-/* 공백 입력시 알림 */
+	/* 공백 입력시 알림 */
 	function check() {
 		if ($("#name").val() == "") {
 			alert("이름을 입력하세요")
 			return false;
 		}
 
-		if ($("#id").val() == "") {
+		else if ($("#id").val() == "") {
 			alert("아이디를 입력하세요")
 			return false;
 		}
 
-		if ($("#pw1").val() == "") {
+		else if ($("#pw1").val() == "") {
 			alert("비밀번호를 입력하세요")
 			return false;
 		}
 
-		if ($("#birth").val() == "") {
+		else if ($("#birth").val() == "") {
 			alert("생년월일을 입력하세요")
 			return false;
 		}
 
-		if ($("#email").val() == "") {
+		else if ($("#email").val() == "") {
 			alert("이메일을 입력하세요")
 			return false;
 		}
 
-		if ($("#phonenum").val() == "") {
+		else if ($("#phonenum").val() == "") {
 			alert("전화번호를 입력하세요")
 			return false;
 		}
 
-		if ($("#approval").val() == "") {
-			alert("권한을 선택하세요")
-			return false;
-		}
-
-		if ($("#deptno").val() == "") {
+		else if ($("#deptno").val() == "") {
 			alert("부서를 선택하세요")
 			return false;
 		}
 
-		if ($("#level").val() == "") {
+		else if ($("#level").val() == "") {
 			alert("직급을 선택하세요")
 			return false;
 		}
 
-		if ($("#hid").val() == "") {
+		else if ($("#hid").val() == "") {
 			alert("아이디 중복검사를 하세요")
 			return false;
 		}
 
-		if (i == 0) {
+		else if (i == 0) {
 			alert("비밀번호 일치확인을 해주세요")
 			return false;
 		}
+		
+		var authcomple = $('#authcompleval').val();
+		
+		if (authcomple==""|authcomple!="ok") {
+			alert("이메일 인증을 진행해주세요!")
+			return false;
+		}
+
+		else{
+			alert("회원가입 되었습니다.")
+			return true;
+		}
 
 	}
+	
+function emailauth(){
+	var num = $("#emailauthcheck").val();
+	var url = "/HRMProjectMain/jsp/checkmail";
+	var params = "checkNum="+num;
+	$.ajax({
+		type : "post",
+		url : url,
+		data : params,
+		dataType : "json"
+	}).done(function(args) {
+		alert(args);
+		if(args=="인증되었습니다!"){
+			$("#emailauthcheck:eq(0)").remove();
+			$("#authbutton:eq(0)").remove();
+			$("#eauth:eq(0)").remove();
+			$("#fonta:eq(0)").remove();
+			$("#emailall").append("<span id='authcomple'>인증완료</span>");	
+			$("#emailall").append("<input type='hidden' id='authcompleval' value='ok'/>");	
+		}
+	}).fail(function(e) {
+		alert(e.responseTexst);
+	})
+}
+
+function sendmail(){
+	var email = $("#email").val();
+	$("#authNum input").each(function() {
+		$("#authNum input:eq(0)").remove();
+	});
+		$("#authbutton:eq(0)").remove();
+	var url = "send";
+	var params = "inputReceiver="+email;
+	$.ajax({
+		type : "post",
+		url : url,
+		data : params,
+		dataType : "json"
+	}).done(function(args) { 
+				if(args=="메일이 발송되었습니다 확인해주세요!"){
+					$("#fonta").show();
+					$("#authNum").append("<input style='font-size: 10pt;' class='form-control'id='emailauthcheck' type='text' name='emailauthcheck' pattern='[0-9]{4}'placeholder='인증번호 4자리입력'>");
+					$("#authNum").append("<button class='btn btn-secondary' type='button' id='authbutton' onclick='emailauth()'>인증확인</button>");	
+				}
+					alert(args);
+	}).fail(function(e) {
+		alert(e.responseTexst);
+	})
+	
+}
+
 </script>
 </head>
 
@@ -310,7 +400,7 @@
 							align="center">회원가입</h3>
 						<div class="form-group form-group-lg"
 							style="padding-top: 50px; font-size: 13pt;" align="center">
-
+							
 							<div id=font>이름</div>
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<input style="font-size: 10pt;" class="form-control" type="text"
@@ -353,12 +443,16 @@
 
 
 							<div id=font>이메일</div>
-							<div style="padding-top: 10px;" class="col-sm-2">
-								<input style="font-size: 10pt;" class="form-control" id="email"
+							<div style="padding-top: 10px;" class="col-sm-2" id="emailall" style="display:inline;">
+								<input style="font-size: 10pt; display: inline;" class="form-control" id="email"
 									name="email" type="email" placeholder="ex)abc@naver.com"><br>
+								<button type="button" class='btn btn-secondary' id="eauth" name="eauth" onclick="sendmail()">인증번호 발송</button>
 							</div>
 
-
+							<div id=fonta style="display: none">이메일 인증</div>
+							<div style="padding-top: 10px;" class="col-sm-2" id="authNum">
+							</div>
+ 
 							<div id=font>전화번호</div>
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<input style="font-size: 10pt;" class="form-control"
@@ -371,12 +465,12 @@
 							<div style="padding-top: 10px;" class="col-sm-2">
 								<select id="deptno" name="deptno">
 									<option value="">선택</option>
-									<option value="10">개발 1팀</option>
-									<option value="20">개발2팀</option>
-									<option value="30">운영팀</option>
+								<c:forEach var="item" items="${dept}">
+									<option value="${item.deptno}">${item.dname}</option>
+								</c:forEach>
 								</select>
 							</div>
-							<br>
+							
 
 
 							<div id=font>직급</div>
@@ -391,9 +485,10 @@
 									<option value="팀장">팀장</option>
 								</select>
 							</div>
-							
-							<input type="hidden" id="app" value="0" name="approval">
 
+
+							<input type="hidden" id="app" value="0" name="approval">
+							
 							<br> <br> <input style="width: 80px;" type="button"
 								value="취소" class="btn btn-primary btn-sm"
 								onclick="location.href='/HRMProjectMain/jsp/user/login'">

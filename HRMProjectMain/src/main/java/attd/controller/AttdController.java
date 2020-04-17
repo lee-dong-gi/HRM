@@ -45,6 +45,8 @@ public class AttdController implements ApplicationContextAware {
 	@Autowired
 	private AttdService attdService;
 
+	private List<AttdDto> excelList;
+	
 	// 근태 메인
 	// 메인에서 attd.do요청을 받음
 	@RequestMapping("attd.do")
@@ -62,6 +64,7 @@ public class AttdController implements ApplicationContextAware {
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		List<AttdDto> list = attdService.selAttd(name);
+		excelList = list;
 		Gson json = new Gson();
 		return json.toJson(list);
 	}
@@ -98,6 +101,7 @@ public class AttdController implements ApplicationContextAware {
 				searchList.add(list.get(i));
 			}
 		}
+		excelList = searchList;
 		Gson json = new Gson();
 		return json.toJson(searchList);
 	}
@@ -195,7 +199,7 @@ public class AttdController implements ApplicationContextAware {
 		// 목록조회
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
-		List<AttdDto> list = attdService.selAttd(name);
+		List<AttdDto> list = excelList;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		// 워크북 생성

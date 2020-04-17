@@ -86,5 +86,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/commons-net/commons-net
 	compile group: 'commons-net', name: 'commons-net', version: '3.6'
 	
+	// https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+	compile group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+	// https://mvnrepository.com/artifact/org.springframework/spring-context-support
+compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.26.RELEASE'
+	
 	
 }

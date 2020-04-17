@@ -12,15 +12,13 @@ HttpSession httpSession = request.getSession();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Compiled and minified CSS --> 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/materialize.min.css">
+  <!-- Custom styles for this template-->
+  <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
   <title>HRM Project Net</title>
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 
@@ -281,16 +279,15 @@ $(function(){
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" style="margin-bottom: 0px; padding-bottom: 0px;">
-              <div class="card border-left-primary shadow h-10 py-2" style="height:80%; margin-bottom: 0px; padding-bottom: 0px">
-                <div class="card-body" style="height:100%;margin-bottom: 0px; padding-bottom: 0px;">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
                   <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
+                    <div  class="col mr-2">
                       <div id="apptop" class="text-xs font-weight-bold text-primary text-uppercase mb-1"></div>
                       <div id="approve" class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                      <br>
                     </div>
-                    <div class="col-auto" >
+                    <div class="col-auto">
                     <a href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0"> <i class="fas fa-calendar fa-2x text-gray-300"></i></a>
                     </div>
                   </div>
@@ -299,14 +296,13 @@ $(function(){
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" style="margin-bottom: 0px; padding-bottom: 0px">
-              <div class="card border-left-success shadow h-10 py-2" style="height:80%; margin-bottom: 0px; padding-bottom: 0px" >
-                <div class="card-body" style="height:100%;margin-bottom: 0px; padding-bottom: 0px;">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-success text-uppercase mb-1">대표 공지사항</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">코로나19 조심</div><!--게시판에서 공지사항 받아오기 -->
-                      <br>
                     </div>
                     <div class="col-auto">
                       <i class="fa fa-eye fa-2x text-gray-300"></i>
@@ -317,50 +313,49 @@ $(function(){
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" style="margin-bottom: 0px; padding-bottom: 0px">
-              <div class="card border-left-info shadow h-10 py-2" style="height:80%;margin-bottom: 0px; padding-bottom: 0px;">
-                <div class="card-body" style="height:100%;margin-bottom: 0px; padding-bottom: 0px;">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">지각률</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">사내 전체 프로젝트 진행도</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div id="attd" class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">72%</div><!-- 세부프로젝트 진행도 가지고 계산값 넣기 -->
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                          <div id="attd2"></div>
-                            <!-- <div class="progress-bar bg-info" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div> -->
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
                     </div>
-<!--                     <div class="col-auto">
+                    <div class="col-auto">
                       <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                    </div> -->
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4" style="margin-bottom: 0px; padding-bottom: 0px">
-              <div class="card border-left-warning shadow h-10 py-2" style="height:80%;margin-bottom: 0px; padding-bottom: 0px;">
-                <div class="card-body" style="height:100%;margin-bottom: 0px; padding-bottom: 0px;">
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                       <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">NEW 채팅방</div>
-                      <div id="chat" class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                      <br> 
+                      <div id="chat"  class="h5 mb-0 font-weight-bold text-gray-800"></div><!-- 채팅수가 가장 많은 채팅방 올리기 -->
                     </div>
                     <div id="chat-room" class="col-auto">
-                      <!-- <i class="fas fa-comments fa-2x text-gray-300"></i> -->
+                  
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
 <hr>
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
