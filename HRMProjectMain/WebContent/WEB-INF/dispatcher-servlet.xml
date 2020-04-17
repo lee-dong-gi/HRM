@@ -61,8 +61,9 @@
 	<bean id="attddao" class="attd.dao.AttdDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-	<bean id="noticeDao" class="user.persistence.NoticeDao" p:sqlSessionFactory-ref="sqlSessionFactory" />
 	<bean id="deptDao" class="user.persistence.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />	
+	<bean id="noticeDao" class="user.persistence.NoticeDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
+	<bean id="freeDao" class="user.persistence.FreeDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	
 	<bean class="contact.persistence.ContactDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
@@ -71,6 +72,8 @@
 	<bean class="contact.persistence.GroupDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	
+	
 	
 	<bean id="empDao" class="user.persistence.EmpDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory" />
 

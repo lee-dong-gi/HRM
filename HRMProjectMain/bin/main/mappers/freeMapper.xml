@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="free">
+
+	<select id="list" resultType="user.domain.FreeBoardDto">
+		select * from freeboard order by num desc
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from freeboard
+	</select>
+
+	<select id="num" resultType="user.domain.FreeBoardDto"
+		parameterType="int">
+		select * from freeboard where num = #{num}
+	</select>
+
+	<insert id="ins" parameterType="user.domain.FreeBoardDto">
+		insert into freeboard (id,writer,subject,content) values
+		(#{id},#{writer},#{subject},#{content})
+	</insert>
+
+	<update id="up" parameterType="user.domain.FreeBoardDto">
+		update freeboard set content = #{content} where num = #{num}
+	</update>
+
+	<delete id="del" parameterType="int">
+		delete from freeboard where num = #{num}
+	</delete>
+	
+	<select id="search" resultType="user.domain.FreeBoardDto" parameterType="String">
+	select * from freeboard where subject like concat('%',#{s},'%') order by num desc
+	</select>
+	
+	<select id="searchCount" resultType="int" parameterType="String">
+	select count(*) from freeboard where subject like concat('%',#{s},'%') order by num desc
+	</select>
+	
+	<select id="all" resultType="user.domain.FreeBoardDto" parameterType="int">
+	select *, (select count(*) from comment where comment.num = freeboard.num) as ccount from freeboard order by num desc limit 10 offset #{offset}
+	</select>
+	
+	<select id="commentCount" resultType="user.domain.FreeBoardDto" parameterType="int">
+	select count(*) from comment where num = #{num}
+	</select>
+	
+</mapper>

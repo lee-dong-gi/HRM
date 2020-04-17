@@ -15,8 +15,8 @@ public class NoticeService {
 	NoticeDao dao;
 
 	// 공지사항 목록
-	public List<NoticeDto> getAll() throws Exception {
-		return dao.getAll();
+	public List<NoticeDto> getAll(int offset) throws Exception {
+		return dao.getAll(offset);
 	}
 
 	// 공지사항 내용

@@ -58,58 +58,94 @@
 </head>
 <body id="page-top">
 
-	<!-- Page Wrapper -->
-	<div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-		<!-- Sidebar -->
-		<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-				<div class="sidebar-brand-icon rotate-n-15"></div>
-				<div class="sidebar-brand-text mx-3">
-					HRM<sup>Project</sup>
-				</div>
-			</a>
+      <br/>
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/mainadmin">
+        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
+      </a>
 
-			<!-- Divider -->
-			<!-- <hr class="sidebar-divider my-0"> -->
+      <!-- Divider -->
+      <!-- <hr class="sidebar-divider my-0"> -->
 
-			<br>
+	<br/>
 
-			<!-- Heading -->
-			<div class="sidebar-heading">메뉴</div>
-			<hr class="sidebar-divider">
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1"> <i class="fas fa-fw"></i> <span>결재</span>
+				<!-- Heading -->
+      <div class="sidebar-heading">
+       	 메뉴
+      </div>
+	 <hr class="sidebar-divider">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
+          <i class="fas fa-fw"></i>
+          <span>결재</span>
+        </a>
+      </li>
+
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
+          <i class="fas fa-fw"></i>
+          <span>채팅</span>
+        </a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+		<li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="fas fa-fw"></i>
+          <span>캘린더</span>
+        </a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="fas fa-fw"></i>
+          <span>투표</span>
+        </a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="fas fa-fw"></i>
+          <span>근태관리</span>
+        </a>
+      </li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+					class="fas fa-fw"></i> <span>공지사항</span>
 			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+					<span>자유게시판</span>
+			</a></li>
+			<li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+          <i class="fas fa-fw"></i>
+          <span>조직도</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
+      
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+				
+	<!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
 
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom"> <i class="fas fa-fw"></i> <span>채팅</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>캘린더</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>투표</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do"> <i class="fas fa-fw"></i> <span>근태관리</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>게시판</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>조직도</span>
-			</a></li>
-
-			<!-- Divider -->
-			<hr class="sidebar-divider d-none d-md-block">
-
-			<!-- Sidebar Toggler (Sidebar) -->
-			<div class="text-center d-none d-md-inline">
-				<button class="rounded-circle border-0" id="sidebarToggle"></button>
-			</div>
-
-		</ul>
+    </ul>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
