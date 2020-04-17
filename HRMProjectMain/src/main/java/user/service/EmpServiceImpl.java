@@ -42,5 +42,14 @@ public class EmpServiceImpl implements EmpService {
 		return dao.up(passwd, id);
 	}
 	
+	@Override
+	public int signup() {
+		return dao.signup();
+	}
+	
+	@Override
+	public int signupCount() {
+		return dao.signupCount();
+	}
 	
 }
