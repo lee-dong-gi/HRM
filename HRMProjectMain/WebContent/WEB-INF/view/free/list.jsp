@@ -263,15 +263,12 @@ function search() {
 								</table>
 								<input class="btn btn-secondary btn-icon-split" type="button"
 									onclick="location.href='ins'" value="글쓰기">
-									<div id="pageCount" style="display: inline">
-								<span id="pageCo" style="display: inline"></span>
-							</div>
-							<div id="pageCount"
+									<div id="pageCount"
 								style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
-								
-								<span id="pageCo" style="display: inline"></span>
+							</div>
+							<br>
 								<form action="search"
-									style="display: inline">
+									style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
 									<select>
 									<option>제목</option>
 									</select>

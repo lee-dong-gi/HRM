@@ -32,22 +32,42 @@
 <%String userid = (String) session.getAttribute("id");
 			String username = (String) session.getAttribute("name");
 			int userapproval = (int) session.getAttribute("approval");%>
+<%
+	int startPage = 1;
+	int pageCount = (int)request.getAttribute("alll");
+	int now = (int)request.getAttribute("now");
+	if (now % 5 != 0) {
+		startPage = (int)(now/5)*5+1;
+	}else {
+		startPage = ((int)(now/5)-1)*5+1;
+	}
+	int pageBlock = 5;
+	int endPage = startPage + pageBlock -1;
+	if (endPage > pageCount) {
+		endPage = pageCount;
+	}
+%>
 $(function(){
 	if(${approval} == 2){
 		$("#ins").prop("type", "button");
 	}
 
-	for(i=${startPage}; i<=${endPage}; i++){
-		$("#pageCount").append("<input type='button' value="+i+" onclick='a("+i+")'>")
+	if(<%=startPage-1%> > 0){
+		$("#pageCo").append("<a href='list?now="+<%=startPage-1%>+"'>[이전]</a>");
+	}
+	
+	for(i=<%=startPage%>; i<=<%=endPage%>; i++){
+		$("#pageCo").append("<a href='list?now="+i+"'>["+i+"]</a>");
+		}
+	
+	if(<%=endPage+1%><=<%=pageCount%>){
+		$("#pageCo").append("<a href='list?now="+<%=endPage+1%>+"'>[다음]</a>");
 		}
 });
 
-function a(i){
-	window.location.href="list?now="+i;
-}
 
 function search(){
-	var s = ${"#search"}.val();
+	var s = $("#search").val();
 	window.location.href = "search?s=" + s;
 }
 
@@ -235,10 +255,10 @@ function search(){
 									style="padding-top: 50px; margin-left: auto; margin-right: auto;">
 									<thead>
 										<tr>
-											<td style="font-weight: bold;" align="center">번호</td>
-											<td style="font-weight: bold;" align="center">제목</td>
-											<td style="font-weight: bold;" align="center">작성자</td>
-											<td style="font-weight: bold;" align="center">작성일</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">번호</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">제목</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성자</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성일</td>
 										</tr>
 									</thead>
 									<tbody>
@@ -258,21 +278,15 @@ function search(){
 							<input type="hidden" id="ins"
 								class="btn btn-secondary btn-icon-split" value="등록"
 								onclick="location.href='insert'">
-							<div id="pageCount" style="display: inline">
-								<span id="pageCo" style="display: inline"></span>
-							</div>
-							<div id="pageCount"
-								style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
-								
-								<span id="pageCo" style="display: inline"></span>
+							<div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
+				<span id="pageCo" style="display:inline"></span>
 								<form action="search"
-									style="display: inline">
+									style="display: inline; float: right;">
 									<select>
 									<option>제목</option>
 									</select>
 										<input type="text" name="s" placeholder="내용을 입력해주세요.">
-									<input type="submit" class="btn btn-secondary btn-icon-split" value="검색">
-										<i class="fa fa-search" aria-hidden="true"></i>
+									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>
 						</div>

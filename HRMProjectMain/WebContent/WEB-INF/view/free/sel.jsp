@@ -105,7 +105,7 @@
 		        }
 	            
 	         }
-	           
+	         $("#comment").val("");
 	      })
 	       .fail(function(){
 	         alert("실패")
@@ -345,7 +345,7 @@
 					</div>
 					<div class="row justify-content-between" style="margin: 0">
 								<div>
-									<a href="list" class="btn btn-secondary btn-icon-split">목록</a>
+									<a href="list?now=1" class="btn btn-secondary btn-icon-split">목록</a>
 								</div>
 								<div>
 									<input type="hidden" id="upp" class="btn btn-secondary btn-icon-split" value="수정" onclick="location.href='up?num=${one.num}'">

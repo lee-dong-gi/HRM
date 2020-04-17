@@ -244,22 +244,15 @@ $(function(){
 							<input type="hidden" id="ins"
 								class="btn btn-secondary btn-icon-split" value="등록"
 								onclick="location.href='insert'">
-							<div id="pageCount" style="display: inline">
-								<span id="pageCo" style="display: inline"></span>
-							</div>
-							<div id="pageCount"
-								style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
-								<span id="pageCo" style="display: inline"></span>
-								<form action="selectArticle" method="post"
-									style="display: inline">
+							<div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
+				<span id="pageCo" style="display:inline"></span>
+								<form action="search"
+									style="display: inline; float: right;">
 									<select>
 									<option>제목</option>
 									</select>
-									<input type="hidden" id="subject2" name="subject" value="${selectapp}"> 
-										<input type="text" name="subject" id="subject" placeholder="내용을 입력해주세요.">
-									<button type="submit" class="btn btn-secondary btn-icon-split" value="검색" onclick="">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</button>
+										<input type="text" name="s" placeholder="내용을 입력해주세요.">
+									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>
 						</div>

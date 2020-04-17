@@ -249,7 +249,7 @@ function check(){
 									</table>
 									<div class="row justify-content-between" style="margin: 0">
 										<div>
-											<a href="list" class="btn btn-secondary btn-icon-split"
+											<a href="list?now=1" class="btn btn-secondary btn-icon-split"
 												type="button">취소</a>
 										</div>
 										<div>

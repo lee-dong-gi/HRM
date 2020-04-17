@@ -241,9 +241,11 @@ $(function(){
 									</tbody>
 								</table>
 							</div>
-							<input type="hidden" id="ins"
-								class="btn btn-secondary btn-icon-split" value="등록"
-								onclick="location.href='insert'">
+							<div>
+								<a href="list?now=1" class="btn btn-secondary btn-icon-split"
+												type="button">취소</a>
+							</div>
+							
 							<div id="pageCount" style="display: inline">
 								<span id="pageCo" style="display: inline"></span>
 							</div>
