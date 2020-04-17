@@ -45,6 +45,7 @@ public class AttdController implements ApplicationContextAware {
 	@Autowired
 	private AttdService attdService;
 
+	// 엑셀 다운용 리스트
 	private List<AttdDto> excelList;
 	
 	// 근태 메인
