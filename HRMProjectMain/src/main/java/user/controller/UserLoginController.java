@@ -26,16 +26,6 @@ public class UserLoginController {
 		return "user/login";
 	}
 	
-	@RequestMapping(value = "/mainadmin", method = RequestMethod.GET)
-	public String adminPage(HttpSession hs){
-		UserVO userVO = (UserVO) hs.getAttribute("login");
-		if(userVO.getApproval()==2) {
-			return "user/mainadmin";
-		}else {
-			return "user/main";
-		}
-	}
-	
 	//로그인 페이지 리턴
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainPage(){

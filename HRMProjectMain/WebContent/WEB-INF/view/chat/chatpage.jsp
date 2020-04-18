@@ -40,14 +40,14 @@ String chattingname = (String)session.getAttribute("chatname");
 	}
 	#btn-submit{
 		background: #F7E600;
-		width:10%;
+		width:15%;
 		height:30px; 
 		color:#607080;
 		border:none;
 	}
 	
 	#main-container{
-		width:80%;
+		width:60%;
 		height:100%;
 		/* border:1px solid black; */
 		margin:10px;
@@ -55,15 +55,29 @@ String chattingname = (String)session.getAttribute("chatname");
 		
 	}
 	#chat-container{
-		vertical-align: bottom;
-		/* border: 1px solid black; */
-		margin:10px;
+		vertical-align: left;
+		border: 1px solid black;
+		margin:0px;
 		min-height: 600px;
 		max-height: 600px;
 		overflow: scroll;
+		overflow-x:hidden; 
+		background: #ffffff;
+		/* background: #9bbbd4; */
+/* 		background: #F6F6F6; */
+	}
+	#user-container{
+		float: right;
+		/* border: 1px solid black; */
+		margin:0px;
+		margin-top:10px;
+		width: 37%;
+		min-height: 600px;
+		max-height: 600px;
+		/* overflow: scroll; */
 		overflow-x:hidden;
 		/* background: #9bbbd4; */
-		background: #F6F6F6;
+  		background: #F6F6F6;
 	}
 	
 	.chat{
@@ -76,7 +90,7 @@ String chattingname = (String)session.getAttribute("chatname");
 		text-align: left;
         height:auto;
         word-break : break-all;
-        background: #ffffff;
+        background: #E7E7E7;
         width:auto;
         display:inline-block;
         border-radius: 10px 10px 10px 10px;
@@ -87,8 +101,28 @@ String chattingname = (String)session.getAttribute("chatname");
 		font-weight: bold;
 		border : none;
 		text-align: center;
+		background-color: #ffffff;
 		/* background-color: #9bbbd4; */
-		background-color: #F6F6F6;
+/* 		background-color: #F6F6F6; */
+		display: block;
+	}
+	.usernotice{
+		color:#607080;
+		border : none;
+		font-size: 17px; 
+		text-align: center;
+		background-color: #ffffff;
+		/* border: 1px solid black; */
+/* 		background-color: #F6F6F6; */
+		display: block;
+	}
+	.userhead{
+		color:#ffffff;
+		font-weight: bold;
+		border : none;
+		text-align: center;
+		background-color: gray;
+/* 		background-color: #F6F6F6; */
 		display: block;
 	}
 
@@ -119,172 +153,19 @@ String chattingname = (String)session.getAttribute("chatname");
 	}
 	
 </style>
-<body id="page-top">
-
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-      <br/>
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/mainadmin">
-        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
-      </a>
-
-      <!-- Divider -->
-      <!-- <hr class="sidebar-divider my-0"> -->
-
-	<br/>
-
-				<!-- Heading -->
-      <div class="sidebar-heading">
-       	 메뉴
-      </div>
-	 <hr class="sidebar-divider">
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
-          <i class="fas fa-fw"></i>
-          <span>결재</span>
-        </a>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
-          <i class="fas fa-fw"></i>
-          <span>채팅</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>캘린더</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>근태관리</span>
-        </a>
-      </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>조직도</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
-          <i class="fas fa-fw"></i>
-          <span>부서관리</span>
-        </a>
-      </li>
-      
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
-				
-	<!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div>
-
-    </ul>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-
-        <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-          <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-            <i class="fa fa-bars"></i>
-          </button>
-
-          <!-- Topbar Navbar -->
-          <ul class="navbar-nav ml-auto">
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </li>
-
-            <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=username%></span>
-                <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/profile.png">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  	프로필
-                </a>
-
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-              	   로그아웃
-                </a>
-              </div>
-            </li>
-
-          </ul>
-
-        </nav>
-        <!-- End of Topbar -->
-
+<body id="page-top" onresize="parent.resizeTo(800,900)" onload="parent.resizeTo(800,900)">
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-           	<h1 class="h3 mb-0 text-gray-800"> 채팅 </h1>
-          </div>
-		<hr class="sidebar-divider">
        	<!-- Content Row -->
           <div class="card shadow mb-3">
             <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary"><%=chattingname%></h6>
+          <h6 class="m-0 font-weight-bold" style="color:gray;"><%=chattingname%></h6>
             </div>
             	<div class="card-body">
-              		<div class="table-responsive">
-                               
+              		<div class="table-responsive">    
+							<div id="user-container">
+								<h6 class="chat userhead">참여자</h6>
+							</div>
 						<div id="main-container">
 							<div id="chat-container">
 							</div>
@@ -294,55 +175,12 @@ String chattingname = (String)session.getAttribute("chatname");
 							<input id="btn-submit" type="submit" value="전송" >
 						</div>
 						</div>
-				
-						<br/>
-                		<hr>
-						<a href="/HRMProjectMain/jsp/chat/chatroom" class="btn btn-secondary btn-sm">목록</a>&nbsp                  	                    
+						<br/>              	                    
 					</div>
 				</div>
 			</div>
         </div>
         <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; ERP Project Website2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">정말 로그아웃 하시겠습니까?</h5>
-        </div>
-        <div class="modal-body">로그아웃을 하고싶으면 현재 창의 로그아웃 버튼을 클릭해주세요</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-          <a class="btn btn-primary" href="/HRMProjectMain/jsp/user/logout">로그아웃</a>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
   <!-- Bootstrap core JavaScript-->
   <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
@@ -356,7 +194,7 @@ String chattingname = (String)session.getAttribute("chatname");
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 	var textarea = document.getElementById("messageWindow");
-	var webSocket = new WebSocket('ws://192.168.0.43:8083/HRMProjectMain/broadsocket');
+	var webSocket = new WebSocket('ws://192.168.219.100:8083/HRMProjectMain/broadsocket');
 	
 	var inputMessage = document.getElementById('inputMessage');
 	
@@ -379,15 +217,26 @@ String chattingname = (String)session.getAttribute("chatname");
 		var chatMsg = event.data;
 		var date = new Date();
 		var dateInfo = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-		if(chatMsg.substring(0,6) == 'server'){
 			var $chat = $("<div class='chat notice'>" + chatMsg.substring(8,chatMsg.length) + "</div>");
+		if(chatMsg.substring(0,6) == 'server'){
 			$('#chat-container').append($chat);
+		}else if(chatMsg.substring(0,6) == "userin"){
+			$("#user-container span").each(function() {				
+				$("#user-container span:eq(0)").remove();
+			}); 
+			var msgg = chatMsg.substring(8,chatMsg.length)
+			var msggSplit = msgg.split(',');
+			for ( var i in msggSplit ) {
+				if(i==msggSplit.length-1){
+				}else{
+					$('#user-container').append("<span class='chat usernotice'>"+msggSplit[i]+"</span>");
+				}
+		      }
+			/* $('#user-container').append("<span class='chat notice'>"+chatMsg.substring(8,chatMsg.length)+"</span>"); */
 		}else{
 			var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
 			$('#chat-container').append($chat);
 		}
-		
-		
 		$('#chat-container').scrollTop($('#chat-container')[0].scrollHeight+20);
 	}
 	

@@ -127,7 +127,7 @@
 
       <br/>
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/mainadmin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
         	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
       </a>
 
@@ -142,6 +142,7 @@
       </div>
 	 <hr class="sidebar-divider">
       <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
@@ -158,43 +159,30 @@
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
 		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
-          <i class="fas fa-fw"></i>
-          <span>부서관리</span>
+          <span>연락처</span>
         </a>
       </li>
       

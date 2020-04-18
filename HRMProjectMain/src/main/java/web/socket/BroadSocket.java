@@ -45,6 +45,7 @@ public BroadSocket() {
 public void start(Session userSession, EndpointConfig config) {
 	StringTokenizer st;
 	String [] array;
+	String participants = "";
 	HttpSession SESSION = ChatController.getSESSION();
 	sessionUsers.add(userSession);
 	hs = (HttpSession)config.getUserProperties().get(SESSION.getId());
@@ -52,7 +53,16 @@ public void start(Session userSession, EndpointConfig config) {
 	UserVO userVO = (UserVO)hs.getAttribute("login");
 	UserChatRoom=(String)hs.getAttribute("chatname");
 	ChatRoom.add(UserChatRoom+"/"+userSession.getId());
+	userIn(userVO);
 	
+	// 콘솔에 접속 로그를 출력한다.
+	System.out.println("클라이언트 접속됨 "+userVO.getName());
+}
+private void userIn(UserVO userVO) {
+	StringTokenizer st;
+	String [] array;
+	String participants = "";
+	HttpSession SESSION = ChatController.getSESSION();
 	for(int i = 0; i < HttpsessionUsers.size(); i++) {
 		System.out.println(HttpsessionUsers.size());
 		st=new StringTokenizer(ChatRoom.get(i), "/");
@@ -65,13 +75,67 @@ public void start(Session userSession, EndpointConfig config) {
 		if(UserChatRoom.equals(array[0])) {
 			System.out.println("UserChatRoom :: " + UserChatRoom + "|||ChatRoom :: " + array[0]);
 				sessionUsers.get(i).getBasicRemote().sendText("server : "+userVO.getName()+"님이 접속하였습니다!");
+				for(int z = 0; z < sessionUsers.size(); z++) {
+					SESSION = HttpsessionUsers.get(z);
+					System.out.println(UserChatRoom + ChatRoom.get(z));
+					st=new StringTokenizer(ChatRoom.get(z), "/");
+					array= new String[st.countTokens()];
+					int a = 0;
+					while(st.hasMoreElements()){
+						array[a++] = st.nextToken();
+					}
+					if(UserChatRoom.equals(array[0])){
+						userVO = (UserVO) SESSION.getAttribute("login");
+						participants = participants+userVO.getName()+",";
+					}
+				}
+				System.out.println("participants :: "+participants);
+				sessionUsers.get(i).getBasicRemote().sendText("userin : "+participants);
+				participants="";
 		}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}			
 	}
-	// 콘솔에 접속 로그를 출력한다.
-	System.out.println("클라이언트 접속됨 "+userVO.getName());
+}
+
+private void userOut() {
+	StringTokenizer st;
+	String [] array;
+	String participants = "";
+	HttpSession SESSION;
+	for(int i = 0; i < HttpsessionUsers.size(); i++) {
+		System.out.println(HttpsessionUsers.size());
+		st=new StringTokenizer(ChatRoom.get(i), "/");
+		array= new String[st.countTokens()];
+		int j = 0;
+		while(st.hasMoreElements()){
+			array[j++] = st.nextToken();
+		}
+		try {
+		if(UserChatRoom.equals(array[0])) {
+				for(int z = 0; z < sessionUsers.size(); z++) {
+					SESSION = HttpsessionUsers.get(z);
+					System.out.println(UserChatRoom + ChatRoom.get(z));
+					st=new StringTokenizer(ChatRoom.get(z), "/");
+					array= new String[st.countTokens()];
+					int a = 0;
+					while(st.hasMoreElements()){
+						array[a++] = st.nextToken();
+					}
+					if(UserChatRoom.equals(array[0])){
+						UserVO userVO = (UserVO) SESSION.getAttribute("login");
+						participants = participants+userVO.getName()+",";
+					}
+				}
+				System.out.println("participants :: "+participants);
+				sessionUsers.get(i).getBasicRemote().sendText("userin : "+participants);
+				participants="";
+		}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}			
+	}
 }
 
 private synchronized void endUser(Session userSession) {
@@ -166,7 +230,7 @@ public void handleClose(Session userSession) {
 	HttpsessionUsers.remove(hs);
 	ChatRoom.remove(UserChatRoom+"/"+userSession.getId());
 	System.out.println(hs.getAttribute("login"));
-	try {endUser(userSession);}catch (Exception e) {e.printStackTrace();}
+	try {endUser(userSession); userOut();}catch (Exception e) {e.printStackTrace();}
 // session 리스트로 접속 끊은 세션을 제거한다.
 //	endUser(userSession);
 // 콘솔에 접속 끊김 로그를 출력한다.

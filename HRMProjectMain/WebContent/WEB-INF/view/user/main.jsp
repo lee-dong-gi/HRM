@@ -77,7 +77,6 @@ $(function(){
 				 $("#chat-room").append("<a href='/HRMProjectMain/jsp/chat/chatbroad?chatname="+args[0].chatroomname+"' style='color:gray;'><i class='fas fa-comments fa-2x text-gray-300'></i></a>");
 			})
 	    .fail(function(e) {
-	    	alert(e.responseText);
 	    })
 	    
 	    url = "/HRMProjectMain/jsp/approve/mainapp?approval=<%=approval%>";
@@ -95,24 +94,21 @@ $(function(){
 			}
 		})
 	    .fail(function(e) {
-	    	alert(e.responseText);
 	    })
 
 
-	// 근태 지각률    
-	var url = "/HRMProjectMain/jsp/attd/loginPost";
-	$.ajax({
-		type:"post"		
-		,url:url		
-		,dataType:"json" }) 
-		.done(function(args){
-				$("#attd").append(args+"%");
-				$("#attd2").append("<div class='progress-bar bg-info' style='width: "+args+"' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100'></div>");
-		})
-	    .fail(function(e) {
-	    	alert(e.responseText);
-	    })
-	//----------------------------------
+		// 근태 지각률
+		var url = "/HRMProjectMain/jsp/attd/loginPost";
+		$.ajax({
+			type:"post"		
+			,url:url		
+			,dataType:"json" }) 
+			.done(function(args){
+					$("#attd").append(args + "%");
+					$("#attd2").append("<div class='progress-bar bg-info' role='progressbar' style='width: "+args+"%' aria-valuenow='50' aria-valuemin='0' aria-valuemax='100'></div>");
+			})
+		    .fail(function(e) {
+		    }) 
 	    
 });//ready()
 </script>
@@ -126,7 +122,7 @@ $(function(){
 
       <br/>
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/mainadmin">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
         	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
       </a>
 
@@ -157,16 +153,9 @@ $(function(){
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
 		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
@@ -176,27 +165,28 @@ $(function(){
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+      <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
-      
+      <%}%>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 				
@@ -319,20 +309,19 @@ $(function(){
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">사내 전체 프로젝트 진행도</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">지각률</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">72%</div><!-- 세부프로젝트 진행도 가지고 계산값 넣기 -->
+                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><span id="attd"></span></div>
                         </div>
                         <div class="col">
-                          <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 72%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress progress-sm mr-2" id="attd2">
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <a href="/HRMProjectMain/jsp/attd/attd.do"><i class="fas fa-clipboard-list fa-2x text-gray-300"></i></a>
                     </div>
                   </div>
                 </div>
@@ -367,45 +356,6 @@ $(function(){
 					<iframe allow="autoplay" style="display: inline; margin-left: 3%;" width="880" height="480" src="https://ak7.picdn.net/shutterstock/videos/1033263017/preview/stock-footage-close-up-business-people-shaking-hands-successful-corporate-partnership-deal-welcoming-opportunity.webm" frameborder="0" allowfullscreen=""></iframe>
 					<iframe allow="autoplay" style="display: inline;" width="880" height="480" src="https://ak1.picdn.net/shutterstock/videos/1039968611/preview/stock-footage-asia-businessmen-and-businesswomen-meeting-brainstorm-ideas-about-new-paperwork-project-colleague.webm" frameborder="0" allowfullscreen=""></iframe>
                 </div> 
-              </div> 
-              <div class="card shadow mb-4">
-                <div class="card-header py-3" style="display: block; text-align: center; color:black; align-content: center;">
-                  <h6 class="m-0 font-weight-bold">HRM 소개 슬라이드</h6>
-                </div> 
-	<br>
-	<div class="slider">
-        <ul class="slides">
-          <li>
-            <img src="${pageContext.request.contextPath}/resources/img/building.jpg"> <!-- random image -->
-            <div class="caption center-align">
-              <h3>상장기념일! 2020년 4월 15일</h3>
-              <h5 class="light grey-text text-lighten-3">더 높은 곳으로</h5>
-            </div>
-          </li>
-          <li>
-            <img src="${pageContext.request.contextPath}/resources/img/park.jpg"> <!-- random image -->
-            <div class="caption left-align">
-              <h3>차원이 다른 휴식공간</h3>
-              <h5 class="light grey-text text-lighten-3">근무만족도 UP! UP!</h5>
-            </div>
-          </li>
-          <li>
-            <img src="${pageContext.request.contextPath}/resources/img/dormitory.jpg"> <!-- random image -->
-            <div class="caption right-align">
-              <h3>기숙사 제공</h3>
-              <h5 class="light grey-text text-lighten-3">월세 전세 걱정없이 출근하자~</h5>
-            </div>
-          </li>
-          <li>
-        <img src="${pageContext.request.contextPath}/resources/img/univ.jpg"> <!-- random image -->
-        <div class="caption center-align">
-          <h3>서울대 취업연계</h3>
-          <h5 class="light grey-text text-lighten-3">우수한 사원들과 함께하는 근무!</h5>
-        </div>
-      </li>
-    </ul>
-  </div>		
-  <br>									
               </div> 
 				
             </div>
