@@ -34,7 +34,7 @@
 			int userapproval = (int) session.getAttribute("approval");%>
 <%
 	int startPage = 1;
-	int pageCount = (int)request.getAttribute("alll");
+	int pageCount = (int)request.getAttribute("pageCount");
 	int now = (int)request.getAttribute("now");
 	if (now % 5 != 0) {
 		startPage = (int)(now/5)*5+1;
@@ -64,12 +64,6 @@ $(function(){
 		$("#pageCo").append("<a href='list?now="+<%=endPage+1%>+"'>[다음]</a>");
 		}
 });
-
-
-function search(){
-	var s = $("#search").val();
-	window.location.href = "search?s=" + s;
-}
 
 </script>
 </head>
@@ -262,10 +256,10 @@ function search(){
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="item" items="${all}">
+										<c:forEach var="item" items="${list}">
 											<tr height="30">
-												<td align="center" width="50">${count}</td>
-												<c:set var="count" value="${count-1}" />
+												<td align="center" width="50">${maxNum}</td>
+												<c:set var="maxNum" value="${maxNum-1}" />
 												<td align="center" width="250"><a
 													href="notice?num=${item.num}">${item.subject}</a></td>
 												<td align="center" width="100">${item.writer}</td>
@@ -286,6 +280,7 @@ function search(){
 									<option>제목</option>
 									</select>
 										<input type="text" name="s" placeholder="내용을 입력해주세요.">
+										<input type="hidden" name="sNow" value="1">
 									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>

@@ -42,6 +42,7 @@
 		}
 	});
 	function del() {
+		if(confirm("정말 삭제하시겠습니까?")){
 		var param = "num=" + "${notice.num}";
 		$.ajax({
 			type : "get",
@@ -58,6 +59,8 @@
 		}).fail(function() {
 			alert("실패")
 		})
+		}else{
+			}
 	}
 </script>
 <body id="page-top">
@@ -257,7 +260,7 @@
 							</div>
 							<div class="row justify-content-between" style="margin: 0">
 								<div>
-									<a href="list" class="btn btn-secondary btn-icon-split">목록</a>
+									<a href="list?now=1" class="btn btn-secondary btn-icon-split">목록</a>
 								</div>
 								<div>
 									<input type="hidden" id="upd"

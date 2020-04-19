@@ -31,8 +31,6 @@ public class FreeController {
 		}else {
 			pageCount = count/10 +1;
 		}
-		model.addAttribute("pageCount",pageCount);
-		
 		int offset = (now - 1) * 10;
 		int maxNum = service.count() - (now - 1) * 10;
 		
@@ -40,27 +38,21 @@ public class FreeController {
 
 		model.addAttribute("all", list);
 		model.addAttribute("maxNum",maxNum);
-		
-		int startPage;
-		int endPage;
-		if(now < 3) {
-			startPage = 1;
-			endPage = 5;
-		}else {
-			startPage = now - 2;
-			endPage = now + 2;
-		}
-		if(pageCount == now) {
-			endPage = now;
-		}
-		if((pageCount-1) == (now)) {
-			endPage = now + 1;
-		}
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("endPage",endPage);
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("now", now);
 
 		return "free/list";
 	}
+	
+	// 검색
+		@RequestMapping("free/search")
+		public String search(Model model, String s) throws Exception {
+			List<FreeBoardDto> search = service.search(s);
+			model.addAttribute("ser", search);
+			int scount = service.searchCount(s);
+			model.addAttribute("scount",scount);
+			return "free/search";
+			}
 
 	// 글보기
 	@RequestMapping("free/sel")
@@ -140,15 +132,5 @@ public class FreeController {
 		System.out.println(gson.toJson(list));
 		return gson.toJson(list);
 	}
-
-	// 검색
-	@RequestMapping("free/search")
-	public String search(Model model, String s) throws Exception {
-		List<FreeBoardDto> search = service.search(s);
-		model.addAttribute("ser", search);
-		int scount = service.searchCount(s);
-		model.addAttribute("scount",scount);
-		return "free/search";
-		}
 	
 }

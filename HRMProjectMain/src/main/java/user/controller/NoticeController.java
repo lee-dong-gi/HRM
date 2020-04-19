@@ -35,26 +35,38 @@ public class NoticeController {
 		} else {
 			pageCount = count / 10 + 1;
 		}
-		model.addAttribute("alll", pageCount);
+		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("now", now);
 		int offset = (now - 1) * 10;
 		int maxNum = service.count() - (now - 1) * 10;
 
 		List<NoticeDto> list = service.getAll(offset);
 
-		model.addAttribute("all", list);
-		model.addAttribute("count", maxNum);
+		model.addAttribute("list", list);
+		model.addAttribute("maxNum", maxNum);
 
 		return "notice/list";
 	}
 
 	// 검색
 	@RequestMapping("notice/search")
-	public String searchForm(Model model, String s) throws Exception {
-		List<NoticeDto> search = service.search(s);
-		int scount = service.searchCount(s);
+	public String searchForm(Model model, String s, int sNow) throws Exception {
+		int sCount = service.searchCount(s);
+		int pageCount;
+		if (sCount % 10 == 0) {
+			pageCount = sCount / 10;
+		} else {
+			pageCount = sCount / 10 + 1;
+		}
+		int offset = (sNow - 1) * 10;
+		int maxNum = service.searchCount(s) - (sNow - 1) * 10;
+		List<NoticeDto> search = service.search(s, offset);
+		model.addAttribute("s", s);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("sNow", sNow);
 		model.addAttribute("ser", search);
-		model.addAttribute("scount", scount);
+		model.addAttribute("sCount", sCount);
+		model.addAttribute("maxNum", maxNum);
 		return "notice/search";
 	}
 
@@ -76,7 +88,7 @@ public class NoticeController {
 	@RequestMapping(value = "notice/insert", method = RequestMethod.POST)
 	public String insert(Model model, NoticeDto dto) throws Exception {
 		service.insertBoard(dto);
-		return "redirect:list";
+		return "redirect:list?now=1";
 	}
 
 	// 수정 폼 부르기
@@ -109,7 +121,6 @@ public class NoticeController {
 			s = "yes";
 		}
 		Gson gson = new Gson();
-		System.out.println(gson.toJson(s));
 		return gson.toJson(s);
 	}
 

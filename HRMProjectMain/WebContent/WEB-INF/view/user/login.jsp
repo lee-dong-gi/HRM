@@ -41,7 +41,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">HRM-NET</h1>
                   </div>
-                  <form class="user" action="loginPost" method="post">
+                  <form class="user" action="/HRMProjectMain/jsp/user/loginPost" method="post">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="userid" id="userid" aria-describedby="idHelp" placeholder="아이디">
                     </div>

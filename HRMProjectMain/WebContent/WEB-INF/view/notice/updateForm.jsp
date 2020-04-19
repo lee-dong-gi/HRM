@@ -40,7 +40,7 @@ function upd(){
 	    .done(function(json){
 	        if(json == "yes"){
 	        	alert("수정되었습니다");
-	        	window.location.href = "list"
+	        	window.location.href = "list?now=1"
 	        }else{
 	        	alert("실패하였습니다")
 	        }
@@ -245,8 +245,8 @@ function upd(){
 					</tr>
                 </table>
               </div>      
-              <div class="row justify-content-between" style="margin:0"><div><a href="list" class="btn btn-secondary btn-icon-split">목록</a></div>
-              <div><input type="button" value="취소" class="btn btn-secondary btn-icon-split">
+              <div class="row justify-content-between" style="margin:0"><div><a href="list?now=1" class="btn btn-secondary btn-icon-split">목록</a></div>
+              <div>
 					<input type="submit" value="완료" onclick="upd()" class="btn btn-secondary btn-icon-split"></div>      
 					
 					

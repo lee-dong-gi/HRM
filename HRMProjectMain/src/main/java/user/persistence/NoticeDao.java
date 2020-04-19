@@ -1,6 +1,8 @@
 package user.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -23,7 +25,6 @@ public class NoticeDao extends SqlSessionDaoSupport {
 		return getSqlSession().insert("notice.ins", dto);
 	}
 	
-	
 	// 공지사항 수정
 	public int updateBoard(NoticeDto dto) throws Exception {
 		return getSqlSession().update("notice.upd", dto);
@@ -40,8 +41,11 @@ public class NoticeDao extends SqlSessionDaoSupport {
 	}
 	
 	// 검색한 공지사항 목록
-	public List<NoticeDto> search(String s) throws Exception {
-		return getSqlSession().selectList("notice.search", s);
+	public List<NoticeDto> search(String s, int offset) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("s", s);
+		map.put("offset", offset);
+		return getSqlSession().selectList("notice.search", map);
 	}
 	
 	// 검색한 공지사항 카운트

@@ -242,7 +242,7 @@
 							</div>
 							<div class="row justify-content-between" style="margin: 0">
 								<div>
-									<a href="list" class="btn btn-secondary btn-icon-split">목록</a>
+									<a href="list?now=1" class="btn btn-secondary btn-icon-split">목록</a>
 								</div>
 								<div>
 									<button class="btn btn-secondary btn-icon-split" type="submit">등록</button>

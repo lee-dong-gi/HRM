@@ -32,11 +32,37 @@
 <%String userid = (String) session.getAttribute("id");
 			String username = (String) session.getAttribute("name");
 			int userapproval = (int) session.getAttribute("approval");%>
-$(function(){
-	if(${approval} == 2){
-		$("#ins").prop("type", "button");
+<%
+	String ss = "'"+(String)request.getAttribute("s")+"'";
+	int startPage = 1;
+	int pageCount = (int)request.getAttribute("pageCount");
+	int now = (int)request.getAttribute("sNow");
+	if (now % 5 != 0) {
+		startPage = (int)(now/5)*5+1;
+	}else {
+		startPage = ((int)(now/5)-1)*5+1;
 	}
+	int pageBlock = 5;
+	int endPage = startPage + pageBlock -1;
+	if (endPage > pageCount) {
+		endPage = pageCount;
+	}
+%>
+$(function(){
+
+	if(<%=startPage-1%> > 0){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+<%=startPage-1%>+"'>[이전]</a>");
+	}
+	
+	for(i=<%=startPage%>; i<=<%=endPage%>; i++){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+i+"'>["+i+"]</a>");
+		}
+	
+	if(<%=endPage+1%><=<%=pageCount%>){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+<%=endPage+1%>+"'>[다음]</a>");
+		}
 });
+
 </script>
 </head>
 
@@ -221,29 +247,29 @@ $(function(){
 									style="padding-top: 50px; margin-left: auto; margin-right: auto;">
 									<thead>
 										<tr>
-											<td style="font-weight: bold;" align="center">번호</td>
-											<td style="font-weight: bold;" align="center">제목</td>
-											<td style="font-weight: bold;" align="center">작성자</td>
-											<td style="font-weight: bold;" align="center">작성일</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">번호</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">제목</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성자</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성일</td>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="search" items="${ser}">
+										<c:forEach var="item" items="${ser}">
 											<tr height="30">
-												<td align="center" width="50">${scount}</td>
-												<c:set var="scount" value="${scount-1}" />
+												<td align="center" width="50">${maxNum}</td>
+												<c:set var="maxNum" value="${maxNum-1}" />
 												<td align="center" width="250"><a
-													href="notice?num=${search.num}">${search.subject}</a></td>
-												<td align="center" width="100">${search.writer}</td>
-												<td align="center" width="100">${search.time}</td>
+													href="notice?num=${item.num}">${item.subject}</a></td>
+												<td align="center" width="100">${item.writer}</td>
+												<td align="center" width="100">${item.time}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
 							</div>
-							<input type="hidden" id="ins"
-								class="btn btn-secondary btn-icon-split" value="등록"
-								onclick="location.href='insert'">
+							<input type="button"
+								class="btn btn-secondary btn-icon-split" value="목록"
+								onclick="location.href='list?now=1'">
 							<div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
 				<span id="pageCo" style="display:inline"></span>
 								<form action="search"
@@ -252,6 +278,7 @@ $(function(){
 									<option>제목</option>
 									</select>
 										<input type="text" name="s" placeholder="내용을 입력해주세요.">
+										<input type="hidden" name="sNow" value="1">
 									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>

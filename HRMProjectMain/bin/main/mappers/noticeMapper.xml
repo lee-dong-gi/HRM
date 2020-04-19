@@ -28,8 +28,8 @@
 		select count(*) from noticeboard
 	</select>
 	
-	<select id="search" parameterType="String" resultType="user.domain.NoticeDto">
-		select * from noticeboard where subject like concat('%',#{s},'%') order by num desc
+	<select id="search" parameterType="map" resultType="user.domain.NoticeDto">
+		select * from noticeboard where subject like concat('%',#{s},'%') order by num desc limit 10 offset #{offset}
 	</select>
 	
 	<select id="searchCount" parameterType="String" resultType="int">

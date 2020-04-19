@@ -45,8 +45,8 @@ public class NoticeService {
 	}
 
 	// 검색한 공지사항 목록
-	public List<NoticeDto> search(String s) throws Exception {
-		return dao.search(s);
+	public List<NoticeDto> search(String s, int offset) throws Exception {
+		return dao.search(s, offset);
 	}
 
 	// 검색한 공지사항 카운트

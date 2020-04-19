@@ -38,23 +38,35 @@
 String username = (String) session.getAttribute("name");
 int userapproval = (int) session.getAttribute("approval");%>
 
-$(function(){
-	for(i=${startPage}; i<=${endPage}; i++){
-		$("#pageCount").append("<input type='button' value="+i+" onclick='a("+i+")'>")}
-});
-
-function a(i){
-	window.location.href="list?now="+i;
+<%
+int startPage = 1;
+int pageCount = (int)request.getAttribute("pageCount");
+int now = (int)request.getAttribute("now");
+if (now % 5 != 0) {
+	startPage = (int)(now/5)*5+1;
+}else {
+	startPage = ((int)(now/5)-1)*5+1;
 }
-
-function search() {
-		var s = $("#search").val();
-		window.location.href = "search?s=" + s;
+int pageBlock = 5;
+int endPage = startPage + pageBlock -1;
+if (endPage > pageCount) {
+	endPage = pageCount;
+}
+%>
+$(function(){
+	
+	if(<%=startPage-1%> > 0){
+		$("#pageCo").append("<a href='list?now="+<%=startPage-1%>+"'>[이전]</a>");
 	}
-
 	
-
+	for(i=<%=startPage%>; i<=<%=endPage%>; i++){
+		$("#pageCo").append("<a href='list?now="+i+"'>["+i+"]</a>");
+		}
 	
+	if(<%=endPage+1%><=<%=pageCount%>){
+		$("#pageCo").append("<a href='list?now="+<%=endPage+1%>+"'>[다음]</a>");
+		}
+});
 </script>
 </head>
 
@@ -239,10 +251,10 @@ function search() {
 									style="padding-top: 50px; margin-left: auto; margin-right: auto;">
 									<thead>
 										<tr>
-											<td style="font-weight: bold;" align="center">번호</td>
-											<td style="font-weight: bold;" align="center">제목</td>
-											<td style="font-weight: bold;" align="center">작성자</td>
-											<td style="font-weight: bold;" align="center">작성일</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">번호</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">제목</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성자</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성일</td>
 										</tr>
 										<c:forEach var="list" items="${all}">
 											<tr height="30">
@@ -263,18 +275,16 @@ function search() {
 								</table>
 								<input class="btn btn-secondary btn-icon-split" type="button"
 									onclick="location.href='ins'" value="글쓰기">
-									<div id="pageCount"
-								style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
-							</div>
-							<br>
+									<div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
+				<span id="pageCo" style="display:inline"></span>
 								<form action="search"
-									style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
+									style="display: inline; float: right;">
 									<select>
 									<option>제목</option>
 									</select>
 										<input type="text" name="s" placeholder="내용을 입력해주세요.">
-									<input type="submit" class="btn btn-secondary btn-icon-split" value="검색">
-										<i class="fa fa-search" aria-hidden="true"></i>
+										<input type="hidden" name="sNow" value="1">
+									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>
 								<!-- 여기까지 -->
