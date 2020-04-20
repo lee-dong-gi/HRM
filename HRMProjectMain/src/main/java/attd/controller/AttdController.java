@@ -110,7 +110,7 @@ public class AttdController implements ApplicationContextAware {
 	// 근태 출근 & 지각
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpSession hs, Model m) throws Exception {
-		List<AttdDto> list=null;
+		List<AttdDto> list = null;
 		UserVO uv = (UserVO) hs.getAttribute("login");
 		String name = uv.getName();
 		list = attdService.selAttd(name);
@@ -212,18 +212,22 @@ public class AttdController implements ApplicationContextAware {
 		Date date = new Date();
 		String today = sdf.format(date); // 오늘 날짜 스트링으로
 		List<AttdDto> todayList = new ArrayList<AttdDto>(); // 출근 날짜가 오늘 날짜인 레코드들 저장할 리스트
-		for (int i = 0; i < list.size(); i++) {
-			Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
-			String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
-			int attdDateNum = Integer.parseInt(attdDate); // 그 값을 int로
-			int todayDateNum = Integer.parseInt(today); // 오늘 날짜도 int로
-			if (attdDateNum == todayDateNum) {
-				todayList.add(list.get(i)); // 출근날짜가 오늘 날짜와 같은 레코드들만 todayList에 저장
+		if (list.isEmpty()) {
+			return "attd/offError";
+		} else {
+			for (int i = 0; i < list.size(); i++) {
+				Date attdTime = list.get(i).getAttd_time(); // 리스트에서 출근 시간들을 뽑아서
+				String attdDate = sdf.format(attdTime); // 그 출근 시간들에서 출근날짜만 저장
+				int attdDateNum = Integer.parseInt(attdDate); // 그 값을 int로
+				int todayDateNum = Integer.parseInt(today); // 오늘 날짜도 int로
+				if (attdDateNum == todayDateNum) {
+					todayList.add(list.get(i)); // 출근날짜가 오늘 날짜와 같은 레코드들만 todayList에 저장
+				}
 			}
+			int offTime_attdNo = todayList.get(0).getAttd_no();
+			attdService.uptOff(offTime_attdNo); // 가장 마지막 출근 시간이 찍힌 레코드의 퇴근 시간 입력
+			return "attd/off"; /* attd/off.jsp를 실행 */
 		}
-		int offTime_attdNo = todayList.get(0).getAttd_no();
-		attdService.uptOff(offTime_attdNo); // 가장 마지막 출근 시간이 찍힌 레코드의 퇴근 시간 입력
-		return "attd/off"; /* attd/off.jsp를 실행 */
 	}
 
 	// 엑셀 다운
@@ -325,12 +329,12 @@ public class AttdController implements ApplicationContextAware {
 			cell = row.createCell(6);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(attdDto.getEmp_late());
-			
+
 			// 셀 너비 자동 조절
 			for (int i = 0; i < 7; i++) {
 				sheet.autoSizeColumn(i);
 				sheet.setColumnWidth(i, (sheet.getColumnWidth(i)) + 1000);
-			}			
+			}
 		}
 
 		// 셀 자동 줄바꿈
