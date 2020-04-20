@@ -13,6 +13,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,12 @@ import com.google.gson.Gson;
 
 import app.service.AppService;
 import app.domain.AppDTO;
+import app.domain.KategorieDTO;
+import user.domain.DeptDTO;
 import user.domain.UserVO;
 import user.domain.UserVOD;
+import user.service.DeptService;
+import user.service.UserService;
 
 @Controller
 @RequestMapping("/approve")
@@ -42,6 +47,10 @@ public class ApproveController implements ApplicationContextAware{
 	
 	@Autowired
 	private AppService appService; 
+	
+	@Autowired
+	private DeptService deptService;
+
 	private WebApplicationContext context = null;
 	
 	@RequestMapping(value = "/appboard", method = RequestMethod.GET)
@@ -158,6 +167,7 @@ public class ApproveController implements ApplicationContextAware{
 	@RequestMapping(value = "/appwrite", method = RequestMethod.POST)
 	public String appwrite(AppDTO appdto, HttpSession hs,@Nullable MultipartFile appfiles, Model m) throws Exception {
 		UserVO userVO = (UserVO)hs.getAttribute("login");
+		System.out.println(appdto.getApprovedBy() + appdto.getKategorie());
 		appdto.setUserid(userVO.getId());
 
 		if(appfiles.getSize()!=0) {
@@ -191,14 +201,17 @@ public class ApproveController implements ApplicationContextAware{
 	@ResponseBody
 	public String mainapp(HttpSession hs,Model m,int approval) throws Exception {
 		UserVO userVO = (UserVO)hs.getAttribute("login");
+		Map<String, Object> map = new HashMap<String, Object>();
 		int count;
 		List<Integer> list= new ArrayList<Integer>();
 		if(approval==0) {
 			count = appService.progressapp(userVO.getId());
 			list.add(count);
 		}else {
+			map.put("userid", userVO.getId());
+			map.put("empno", userVO.getEmpno());
 			count = appService.progressapp(userVO.getId());			
-			int othercount = appService.progressappcoall(userVO.getId());		
+			int othercount = appService.progressappcoall(map);		
 			list.add(count);
 			list.add(othercount);
 		}
@@ -229,9 +242,12 @@ public class ApproveController implements ApplicationContextAware{
 	@ResponseBody
 	public String selectother(HttpSession hs) throws Exception {
 		UserVO userVO = (UserVO)hs.getAttribute("login");
+		Map<String,Object> map = new HashMap<String, Object>();
 		List<AppDTO> list;
+		map.put("empno", userVO.getEmpno());
+		map.put("userid", userVO.getId());
 		if((int)userVO.getApproval()!=0) {
-			list = appService.appboardall(userVO.getId());
+			list = appService.appboardall(map);
 		}else {
 			list = appService.selapp(userVO.getId());
 		}
@@ -366,6 +382,9 @@ public class ApproveController implements ApplicationContextAware{
 			cal.add(Calendar.HOUR_OF_DAY , -9);
 			appdto.setFormatdate(getTime(cal)); 
 			
+			UserVO uv= appService.seluserone(appdto.getApprovedBy());
+			
+			m.addAttribute("approvedByName", uv.getName());
 			m.addAttribute("appdto",appdto);
 			m.addAttribute("appresult",appdto.getAppresult());
 			m.addAttribute("approval", userVO.getApproval());
@@ -577,7 +596,46 @@ public class ApproveController implements ApplicationContextAware{
     	return rsVal;
     	
     }
-	
-	
+    //카테고리 가져오기
+    @RequestMapping(value="/getkategorie", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getkategorie() {
+    	List<KategorieDTO> list = new ArrayList<KategorieDTO>();
+		try {
+			list = appService.getkategorie();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	Gson json = new Gson(); 		
+		return json.toJson(list);
+    }
+    
+    //부서 가져오기
+    @RequestMapping(value="/getdept", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getdept() {
+    	List<DeptDTO> list = new ArrayList<DeptDTO>();
+    	try {
+    		list = deptService.seldeptAll();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	Gson json = new Gson(); 		
+    	return json.toJson(list);
+    }
+    
+    //부서->유저 가져오기
+    @RequestMapping(value="/getuserinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getuserinfo(int deptno) {
+    	List<UserVO> list = new ArrayList<UserVO>();
+    	try {
+			list = appService.getuserinfo(deptno);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	Gson json = new Gson(); 		
+    	return json.toJson(list);
+    }
 	
 }

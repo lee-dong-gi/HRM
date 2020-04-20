@@ -6,6 +6,7 @@ import java.util.Map;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import app.domain.AppDTO;
+import app.domain.KategorieDTO;
 import user.domain.UserVO;
 import user.domain.UserVOD;
 
@@ -82,8 +83,8 @@ public class AppDAOImpl extends SqlSessionDaoSupport implements AppDAO {
 		}
 
 		@Override
-		public List<AppDTO> appBoardAll(String userid) throws Exception {
-			return getSqlSession().selectList(NAMESPACEAPP+".appBoardAll", userid);
+		public List<AppDTO> appBoardAll(Map map) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".appBoardAll", map);
 		}
 
 		@Override
@@ -203,8 +204,23 @@ public class AppDAOImpl extends SqlSessionDaoSupport implements AppDAO {
 		}
 		
 		@Override
-		public int progressappcoAll(String userid) throws Exception {
-			return getSqlSession().selectOne(NAMESPACEAPP+".progressappcoAll", userid);
+		public int progressappcoAll(Map map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".progressappcoAll", map);
+		}
+
+		@Override
+		public List<KategorieDTO> getkategorie() throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".getkategorie");
+		}
+
+		@Override
+		public List<UserVO> getuserinfo(int deptno) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".getuserinfo",deptno);
+		}
+
+		@Override
+		public UserVO seluserone(int empno) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".seluserone",empno);
 		}	
 
 }

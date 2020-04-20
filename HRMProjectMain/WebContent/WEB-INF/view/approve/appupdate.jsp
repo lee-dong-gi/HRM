@@ -29,6 +29,36 @@ if(approval==2){
 }else{
    flagg=false;
 }%>
+$(function(){
+	var	url="getkategorie";
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			for(var i=0; i < args.length; i++) { 
+				$("#kategories").append(
+					"<option value="+args[i].kategoriename+">"+args[i].kategoriename+"</option>");
+			 }
+ 			})
+	    .fail(function(e) {
+	    })
+	var	url="getdept";    
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			$("#deptall").append("<option>부서 선택</option>");
+			for(var i=0; i < args.length; i++) { 
+				$("#deptall").append(
+					"<option value="+args[i].deptno+">"+args[i].dname+"</option>");
+			 }
+ 			})
+	    .fail(function(e) {
+	    })
+});
+
 function checkwrite(){
     var subject = $('#subject').val();
     var content = $('#contenta').val();
@@ -43,6 +73,47 @@ function checkwrite(){
         return false;
     }
     return true;
+}
+
+function txtMaxlength(){
+	var subject = document.getElementById("subject");
+	var contenta = document.getElementById("contenta");
+	if((subject.value.length) >= 30){
+		alert("제목은 30자 제한입니다.");
+		subject.value = subject.value.substring(0,20);
+		$("subject").focus();
+	}
+	if((contenta.value.length) >= 500){
+		alert("해당글은 500자 제한입니다.");
+		contenta.value = contenta.value.substring(0,500);
+		$("contenta").focus();
+	}
+}
+function addselect(){
+	var dept = $("#deptall option:selected").val();
+	var	url="getuserinfo";   
+	var params="deptno="+dept;
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,data:params
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			$("#approvedBy").remove();
+					$("#approvedby").append("<select id='approvedBy' name='approvedBy'>");
+					$("#approvedBy").append("<option>결재자 선택</option>");
+					for(var i=0; i < args.length; i++) { 
+						if("${writer}"!=args[i].name){
+						$("#approvedBy").append("<option value="+args[i].empno+">"+args[i].name+"</option>");
+						}
+				 	}
+			$("#approvedby").append("</select>");
+				
+ 			})
+	    .fail(function(e) {
+	    	$("#approvedBy").remove();
+	    })
+	
 }
 </script>
 
@@ -208,7 +279,7 @@ function checkwrite(){
             <div class="card-body">
               <div class="table-responsive">
                <form action="appupdate" method="post" enctype="multipart/form-data" onsubmit='return checkwrite()'>
-                <table class="table" id="writeapp" width="120%" cellspacing="0">
+                <table class="table" id="writeapp">
 					<tr>
 					<td bgcolor="gray" style="color:white;">
 					상신자
@@ -222,7 +293,23 @@ function checkwrite(){
 					제목
 					</td>
 					<td>
-					<input class="form-control"  type="text" id="subject" name="subject" value="${appdto.subject}"  style="width:90%;">
+					<input class="form-control" type="text" id="subject" name="subject" onkeypress="txtMaxlength()" style="width:90%;" value="${appdto.subject}"> 
+					</td>
+					</tr>
+					<tr>
+					<td bgcolor="gray" style="color:white;">
+					카테고리
+					</td>
+					<td>
+						<select id="kategories" name="kategorie"></select>
+					</td>
+					</tr>
+					<tr> 
+					<td bgcolor="gray" style="color:white;">
+					결재자 선택
+					</td>
+					<td id="approvedby">
+						<select id="deptall" name="deptall" onchange="addselect()"></select>
 					</td>
 					</tr>
 					<tr>
@@ -238,7 +325,7 @@ function checkwrite(){
 					내용
 					</td>
 					<td>
-					<textarea class="form-control"  id="contenta" rows="10" cols="40"  name="content"  style="width:90%;">${appdto.subject}</textarea><br> 
+					<textarea class="form-control" id="contenta" rows="10" cols="40"  name="content" onkeypress="txtMaxlength()" style="width:90%;">${appdto.content}</textarea><br> 
 					</td>
 					</tr>
                 </table>
