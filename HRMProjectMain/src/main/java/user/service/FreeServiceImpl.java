@@ -70,13 +70,23 @@ public class FreeServiceImpl implements FreeService {
 	}
 	
 	@Override
-	public List<FreeBoardDto> search(String s) throws Exception {
-		return dao.search(s);
+	public List<FreeBoardDto> search(String s, int offset) throws Exception {
+		return dao.search(s, offset);
 	}
 	
 	@Override
 	public int searchCount(String s) throws Exception {
 		return dao.searchCount(s);
+	}
+	
+	@Override
+	public List<FreeBoardDto> search2(String s, int offset) throws Exception {
+		return dao.search2(s, offset);
+	}
+	
+	@Override
+	public int searchCount2(String s) throws Exception {
+		return dao.searchCount2(s);
 	}
 	
 	@Override

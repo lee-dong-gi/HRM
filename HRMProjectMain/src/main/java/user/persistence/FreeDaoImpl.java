@@ -1,6 +1,8 @@
 package user.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
@@ -56,7 +58,7 @@ public class FreeDaoImpl extends SqlSessionDaoSupport implements FreeDao {
 	public int commentDel(int cno) throws Exception {
 		return getSqlSession().delete("co.del", cno);
 	}
-	
+
 	@Override
 	public int commentDel2(int num) throws Exception {
 		return getSqlSession().delete("co.del2", num);
@@ -66,24 +68,40 @@ public class FreeDaoImpl extends SqlSessionDaoSupport implements FreeDao {
 	public int count() {
 		return getSqlSession().selectOne("free.count");
 	}
-	
+
 	@Override
-	public List<FreeBoardDto> search(String s) throws Exception {
-		return getSqlSession().selectList("free.search",s);
+	public List<FreeBoardDto> search(String s, int offset) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("s", s);
+		map.put("offset", offset);
+		return getSqlSession().selectList("free.search", map);
 	}
-	
+
 	@Override
 	public int searchCount(String s) throws Exception {
-		return getSqlSession().selectOne("free.searchCount",s);
+		return getSqlSession().selectOne("free.searchCount", s);
 	}
 	
+	@Override
+	public List<FreeBoardDto> search2(String s, int offset) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("s", s);
+		map.put("offset", offset);
+		return getSqlSession().selectList("free.search2", map);
+	}
+
+	@Override
+	public int searchCount2(String s) throws Exception {
+		return getSqlSession().selectOne("free.searchCount2", s);
+	}
+
 	@Override
 	public List<FreeBoardDto> all(int offset) throws Exception {
-		return getSqlSession().selectList("free.all",offset);
+		return getSqlSession().selectList("free.all", offset);
 	}
-	
+
 	@Override
 	public FreeBoardDto commentCount2(int num) throws Exception {
-		return getSqlSession().selectOne("free.commentCount",num);
+		return getSqlSession().selectOne("free.commentCount", num);
 	}
 }
