@@ -11,7 +11,22 @@ public class NoticeDto {
 	private String subject;
 	private String content;
 	private Date time;
+	private String realfilename;
+	private String pathname;
 	
+	
+	public String getRealfilename() {
+		return realfilename;
+	}
+	public void setRealfilename(String realfilename) {
+		this.realfilename = realfilename;
+	}
+	public String getPathname() {
+		return pathname;
+	}
+	public void setPathname(String pathname) {
+		this.pathname = pathname;
+	}
 	public int getNum() {
 		return num;
 	}

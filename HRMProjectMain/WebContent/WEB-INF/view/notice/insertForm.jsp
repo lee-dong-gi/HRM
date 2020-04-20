@@ -221,7 +221,7 @@ if(approval==2){
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<form method="post" onsubmit="return check()">
+								<form method="post" enctype="multipart/form-data" onsubmit="return check()">
 									<table class="table table-bordered" id="writeapp" width="120%"
 										cellspacing="0">
 										<tr>
@@ -240,6 +240,12 @@ if(approval==2){
 													rows="10" cols="30" name="content" style="width: 60%;"></textarea><br>
 											</td>
 										</tr>
+										<tr>
+											<td>파일첨부</td>
+											<td><input type="file" name="nFile"><br>
+											</td>
+										</tr>
+										
 									</table>
 							</div>
 							<div class="row justify-content-between" style="margin: 0">
@@ -249,8 +255,6 @@ if(approval==2){
 								<div>
 									<button class="btn btn-secondary btn-icon-split" type="submit">등록</button>
 								</div>
-
-
 								</form>
 							</div>
 						</div>
