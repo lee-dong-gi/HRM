@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.domain.AppDTO;
+import app.domain.KategorieDTO;
 import user.domain.UserVO;
 import user.domain.UserVOD;
 
@@ -20,11 +21,17 @@ public interface AppDAO {
 		void noapp(int appnum) throws Exception;
 		
 		//결재 게시판 내용 불러오기
+		List<KategorieDTO> getkategorie() throws Exception;
+		
 		List<AppDTO> selApp(String userid) throws Exception;
+		
+		List<UserVO> getuserinfo(int deptno) throws Exception;
+		
+		UserVO seluserone(int empno) throws Exception;
 		
 		int progressApp(String userid) throws Exception;
 		
-		int progressappcoAll(String userid) throws Exception;
+		int progressappcoAll(Map map) throws Exception;
 		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		List<AppDTO> appSearchw(Map<String,String> map) throws Exception;
 		
@@ -58,7 +65,7 @@ public interface AppDAO {
 		
 		AppDTO appContentm(int appnum) throws Exception;
 		
-		List<AppDTO> appBoardAll(String userid) throws Exception;
+		List<AppDTO> appBoardAll(Map map) throws Exception;
 		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		List<UserVOD> seluserall(String userid) throws Exception;
 		

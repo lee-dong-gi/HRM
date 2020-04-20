@@ -62,11 +62,11 @@ a:hover {
 	text-decoration: none;
 }
 
-tr td:not (:last-child ), tr td:not (:last-child ) a {
+tr td:not(:last-child ), tr td:not (:last-child ) a {
 	color: #858796
 }
 
-tr td:not (:last-child ) .cal_date_content {
+tr td:not(:last-child ) .cal_date_content {
 	background-color: #858796;
 	border-color: #858796;
 }

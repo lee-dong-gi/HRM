@@ -15,6 +15,8 @@ public class AppDTO {
 	private String subject;
 	private int appresult;
 	private String realfilename;
+	private String kategorie;
+	private int approvedBy;	
 	private String pathname;
 	private String writer;
 	private String content;
@@ -83,6 +85,18 @@ public class AppDTO {
 	}
 	public void setFormatdate(String formatdate) {
 		this.formatdate = formatdate;
+	}
+	public String getKategorie() {
+		return kategorie;
+	}
+	public void setKategorie(String kategorie) {
+		this.kategorie = kategorie;
+	}
+	public int getApprovedBy() {
+		return approvedBy;
+	}
+	public void setApprovedBy(int approvedBy) {
+		this.approvedBy = approvedBy;
 	}
 	@Override
 	public String toString() {

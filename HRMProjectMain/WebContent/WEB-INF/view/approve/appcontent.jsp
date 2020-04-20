@@ -32,13 +32,13 @@ if(approval==2){
 }
 %>
 $(function(){
-	if((<%=approval%>==1|<%=approval%>==2)){
-	$("#appbtn").append("<form action='okapp?appnum=${appdto.appnum}' method='post' style='display:inline;margin:0px 0px 0px 10px;float: right;'>"+
+		if(((<%=approval%>==1|<%=approval%>==2)&"${appdto.writer}"!="<%=username%>")){
+		$("#appbtn").append("<form action='okapp?appnum=${appdto.appnum}' method='post' style='display:inline;margin:0px 0px 0px 10px;float: right;'>"+
 			"<input type='submit' value='승인' class='btn btn-secondary btn-sm'></form>&nbsp&nbsp"+
 			"<form action='noapp?appnum=${appdto.appnum}' method='post' style='display:inline;float: right;'>"+
 			"<input type='submit' value='반려' class='btn btn-secondary btn-sm';></form>&nbsp&nbsp"
-			);	
-	}
+				);	
+		}
 	
 	$("#file").append("<td colspan='3'><a href='file?appnum="+${appdto.appnum}+"'>${appdto.realfilename}"+"</a></td>");	
 });
@@ -225,6 +225,15 @@ else{appResult="반려";}
 					</tr>
 					<tr id="file">
 					<td width="150" bgcolor="gray" style="color:white;text-align: center;">첨부된 파일</td>
+					</tr>
+					<tr>
+					<td width="150" bgcolor="gray" style="color:white;text-align: center;">카테고리</td>
+					<td colspan="3">${appdto.kategorie}</td>
+					</tr>
+					<tr>
+					<td width="150" bgcolor="gray" style="color:white;text-align: center;">결재자</td>
+					<td colspan="3">${approvedByName}</td>
+					</tr>
 					<tr>
 					<td width="150" bgcolor="gray" style="color:white;text-align: center;">내용</td>
 					<td colspan="3">${appdto.content}</td>
@@ -238,9 +247,10 @@ else{appResult="반려";}
 				<a href="appboard?pageNum=1&selectapp=0" style="display:inline" class="btn btn-secondary btn-sm">목록</a>&nbsp
 				<div id="appbtn" style="display:inline"></div>                     	                    
 				</div>
+				<%if(appresult==1|appresult==2){}else{%>
 				<a href="appupdate?appnum=${appdto.appnum}" class="btn btn-secondary btn-sm" style="display:inline;float: right; margin:0px 10px 0% 0%;">수정</a>&nbsp
                 <a href="#" onclick="window.open('appdel?appnum=${appdto.appnum}','win2','scrollbars=yes width=380, height=150');return false" class="btn btn-secondary btn-sm" style="display:inline; float: right; margin:0px 10px 0% 20%;">삭제 </a>
-
+				<%}%>
 				</div>
 			</div>
         </div>

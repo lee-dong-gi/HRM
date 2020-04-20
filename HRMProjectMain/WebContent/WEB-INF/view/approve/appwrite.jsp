@@ -29,9 +29,42 @@ if(approval==2){
 }else{
    flagg=false;
 }%>
+
+$(function(){
+	var	url="getkategorie";
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			for(var i=0; i < args.length; i++) { 
+				$("#kategories").append(
+					"<option value="+args[i].kategoriename+">"+args[i].kategoriename+"</option>");
+			 }
+ 			})
+	    .fail(function(e) {
+	    })
+	var	url="getdept";    
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			$("#deptall").append("<option>부서 선택</option>");
+			for(var i=0; i < args.length; i++) { 
+				$("#deptall").append(
+					"<option value="+args[i].deptno+">"+args[i].dname+"</option>");
+			 }
+ 			})
+	    .fail(function(e) {
+	    })
+});
+
 function checkwrite(){
     var subject = $('#subject').val();
     var content = $('#contenta').val();
+    var approvedBy = $('#approvedBy option:selected').val();
+    var kategories = $('#kategories option:selected').val();
     
     if(!subject){
         alert("제목을 입력해 주세요"); 
@@ -41,7 +74,13 @@ function checkwrite(){
         alert("내용을 입력해 주세요"); 
         $('#contenta').focus(); 
         return false;
-    }
+    }else if(!approvedBy){
+        alert("결재자를 지정해 주세요"); 
+        return false;
+    }else if(!kategories){
+        alert("카테고리를 지정해 주세요"); 
+        return false;
+	}
     return true;
 }
 
@@ -58,6 +97,33 @@ function txtMaxlength(){
 		contenta.value = contenta.value.substring(0,500);
 		$("contenta").focus();
 	}
+}
+function addselect(){
+	var dept = $("#deptall option:selected").val();
+	var	url="getuserinfo";   
+	var params="deptno="+dept;
+	$.ajax({
+		type:"post"		//응답 방식
+		,url:url		//요청url = 기존경로 +
+		,data:params
+		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
+		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
+			$("#approvedBy").remove();
+					$("#approvedby").append("<select id='approvedBy' name='approvedBy'>");
+					$("#approvedBy").append("<option>결재자 선택</option>");
+					for(var i=0; i < args.length; i++) {
+						if("${writer}"!=args[i].name){
+						$("#approvedBy").append("<option value="+args[i].empno+">"+args[i].name+"</option>");
+							}
+						} 
+			 		
+			$("#approvedby").append("</select>");
+				
+ 			})
+	    .fail(function(e) {
+	    	$("#approvedBy").remove();
+	    })
+	
 }
 </script>
 
@@ -239,6 +305,22 @@ function txtMaxlength(){
 					</td>
 					<td>
 					<input class="form-control" type="text" id="subject" name="subject" onkeypress="txtMaxlength()" style="width:90%;"> 
+					</td>
+					</tr>
+					<tr>
+					<td bgcolor="gray" style="color:white;">
+					카테고리
+					</td>
+					<td>
+						<select id="kategories" name="kategorie"></select>
+					</td>
+					</tr>
+					<tr> 
+					<td bgcolor="gray" style="color:white;">
+					결재자 선택
+					</td>
+					<td id="approvedby">
+						<select id="deptall" name="deptall" onchange="addselect()"></select>
 					</td>
 					</tr>
 					<tr>

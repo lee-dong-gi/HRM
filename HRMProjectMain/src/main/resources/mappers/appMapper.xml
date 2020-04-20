@@ -5,13 +5,25 @@
 
 <mapper namespace="app.AppMappers">
 	<!--공통ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<select id="seluserone" parameterType="int" resultType="user.domain.UserVO">
+		select * from employee where empno=#{empno}
+	</select>
+	
+	<select id="getkategorie" resultType="app.domain.KategorieDTO">
+		select * from kategorie
+	</select>
+	
+	<select id="getuserinfo" parameterType="int" resultType="user.domain.UserVO">
+		select * from employee where deptno=#{deptno} and approval=1;
+	</select>
+	
 	<select id="progressapp" parameterType="String" resultType="int">
 		select count(*) from approve where userid=#{userid} and appresult=0;
 	</select>
 	
 	<insert id="insertApp" parameterType="app.domain.AppDTO">
-		insert into approve(appnum,userid,writer,content,subject,realfilename,pathname)
-		values(#{appnum},#{userid},#{writer},#{content},#{subject},#{realfilename},#{pathname})
+		insert into approve(appnum,userid,writer,content,subject,kategorie,approvedBy,realfilename,pathname)
+		values(#{appnum},#{userid},#{writer},#{content},#{subject},#{kategorie},#{approvedBy},#{realfilename},#{pathname})
 	</insert>
 	
 	<delete id="appdelete" parameterType="int">
@@ -22,23 +34,23 @@
 		select * from approve where userid=#{userid} order by appnum desc
 	</select>
 	
-	<select id="appBoardAll" parameterType="String" resultType="app.domain.AppDTO">
-		select * from approve where userid not in(#{userid}) order by appnum desc
+	<select id="appBoardAll" parameterType="Map" resultType="app.domain.AppDTO">
+		select * from approve where userid not in(#{userid}) and approvedBy=#{empno} order by appnum desc
 	</select>
 	
 	<select id="appcountAll" parameterType="String" resultType="int">
 		select count(*) from approve where userid not in(#{userid})
 	</select>
 	
-	<select id="progressappcoAll" parameterType="String" resultType="int">
-		select count(*) from approve where userid not in(#{userid}) and appresult=0
+	<select id="progressappcoAll" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) and appresult=0 and approvedBy=#{empno}
 	</select>
 	
 	<select id="appcount" parameterType="String" resultType="int">
 		select count(*) from approve where userid=#{userid};
 	</select>
 	<update id="appupdate" parameterType="app.domain.AppDTO">
-		update approve set content=#{content},subject=#{subject},realfilename=#{realfilename},pathname=#{pathname}
+		update approve set approvedBy=#{approvedBy},kategorie=#{kategorie},content=#{content},subject=#{subject},realfilename=#{realfilename},pathname=#{pathname}
 		where appnum=#{appnum}
 	</update>
 	<!--일반 사용자ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
@@ -106,7 +118,6 @@
 		update approve set appresult=2 where appnum=#{appnum}
 	</update>
 	<!--관리자ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
-	
 	<select id="seluserall" parameterType="String" resultType="user.domain.UserVOD">
 		select e.*,dname from employee e natural join dept d where id not in (#{userid}) order by empno desc
 	</select>

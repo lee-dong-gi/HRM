@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.domain.AppDTO;
+import app.domain.KategorieDTO;
 import user.domain.UserVO;
 import user.domain.UserVOD;
 
@@ -20,9 +21,15 @@ public interface AppService {
 	
 	List<AppDTO> selapp(String userid) throws Exception;
 	
+	List<UserVO> getuserinfo(int deptno) throws Exception;
+	
+	UserVO seluserone(int empno) throws Exception;
+	
+	List<KategorieDTO> getkategorie() throws Exception;
+	
 	int progressapp(String userid) throws Exception;
 	
-	int progressappcoall(String userid) throws Exception;
+	int progressappcoall(Map map) throws Exception;
 	
 	List<AppDTO> appsearchw(Map<String,String> map) throws Exception;
 	
@@ -44,7 +51,7 @@ public interface AppService {
 	
 	int appSearchfco(Map<String,String> map) throws Exception;
 	
-	List<AppDTO> appboardall(String userid) throws Exception;
+	List<AppDTO> appboardall(Map map) throws Exception;
 	//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 	List<AppDTO> appsearchwadmin(Map<String,String> map) throws Exception;
 	
