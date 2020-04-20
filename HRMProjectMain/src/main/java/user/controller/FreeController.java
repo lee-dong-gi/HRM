@@ -26,33 +26,61 @@ public class FreeController {
 		// 총 페이지 갯수
 		int count = service.count();
 		int pageCount;
-		if(count % 10 == 0) {
-			pageCount = count/10;
-		}else {
-			pageCount = count/10 +1;
+		if (count % 10 == 0) {
+			pageCount = count / 10;
+		} else {
+			pageCount = count / 10 + 1;
 		}
 		int offset = (now - 1) * 10;
 		int maxNum = service.count() - (now - 1) * 10;
-		
+
 		List<FreeBoardDto> list = service.all(offset);
 
 		model.addAttribute("all", list);
-		model.addAttribute("maxNum",maxNum);
-		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("maxNum", maxNum);
+		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("now", now);
 
 		return "free/list";
 	}
-	
+
 	// 검색
-		@RequestMapping("free/search")
-		public String search(Model model, String s) throws Exception {
-			List<FreeBoardDto> search = service.search(s);
-			model.addAttribute("ser", search);
-			int scount = service.searchCount(s);
-			model.addAttribute("scount",scount);
-			return "free/search";
+	@RequestMapping("free/search")
+	public String search(Model model, String s, int sNow, int sel) throws Exception {
+
+		int scount;
+		List<FreeBoardDto> search;
+		int pageCount;
+		int maxNum;
+		System.out.println(sel);
+		if (sel == 1) {
+			scount = service.searchCount(s);
+			if (scount % 10 == 0) {
+				pageCount = scount / 10;
+			} else {
+				pageCount = scount / 10 + 1;
 			}
+			int offset = (sNow - 1) * 10;
+			maxNum = service.searchCount(s) - (sNow - 1) * 10;
+			search = service.search(s, offset);
+		} else {
+			scount = service.searchCount2(s);
+			if (scount % 10 == 0) {
+				pageCount = scount / 10;
+			} else {
+				pageCount = scount / 10 + 1;
+			}
+			int offset = (sNow - 1) * 10;
+			maxNum = service.searchCount2(s) - (sNow - 1) * 10;
+			search = service.search2(s, offset);
+		}
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("maxNum", maxNum);
+		model.addAttribute("ser", search);
+		model.addAttribute("sNow", sNow);
+		model.addAttribute("scount", scount);
+		return "free/search";
+	}
 
 	// 글보기
 	@RequestMapping("free/sel")
@@ -101,7 +129,7 @@ public class FreeController {
 	@ResponseBody
 	public String delete(int num) throws Exception {
 		String s = "no";
-		service.commentDel2(num); 
+		service.commentDel2(num);
 		int delete = service.del(num);
 		if (delete != 0) {
 			s = "yes";
@@ -110,7 +138,7 @@ public class FreeController {
 		System.out.println(gson.toJson(s));
 		return gson.toJson(s);
 	}
-	
+
 	// 댓글 추가
 	@RequestMapping("free/add")
 	@ResponseBody
@@ -121,7 +149,7 @@ public class FreeController {
 		System.out.println(gson.toJson(list));
 		return gson.toJson(list);
 	}
-	
+
 	// 댓글 삭제
 	@RequestMapping("free/cDel")
 	@ResponseBody
@@ -132,5 +160,5 @@ public class FreeController {
 		System.out.println(gson.toJson(list));
 		return gson.toJson(list);
 	}
-	
+
 }

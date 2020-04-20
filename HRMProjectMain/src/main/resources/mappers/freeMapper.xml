@@ -31,12 +31,20 @@
 		delete from freeboard where num = #{num}
 	</delete>
 	
-	<select id="search" resultType="user.domain.FreeBoardDto" parameterType="String">
-	select * from freeboard where subject like concat('%',#{s},'%') order by num desc
+	<select id="search" resultType="user.domain.FreeBoardDto" parameterType="map">
+	select *, (select count(*) from comment where comment.num = freeboard.num) as ccount from freeboard where subject like concat('%',#{s},'%') order by num desc limit 10 offset #{offset}
 	</select>
 	
 	<select id="searchCount" resultType="int" parameterType="String">
 	select count(*) from freeboard where subject like concat('%',#{s},'%') order by num desc
+	</select>
+	
+	<select id="search2" resultType="user.domain.FreeBoardDto" parameterType="map">
+	select *, (select count(*) from comment where comment.num = freeboard.num) as ccount from freeboard where writer like concat('%',#{s},'%') order by num desc limit 10 offset #{offset}
+	</select>
+	
+	<select id="searchCount2" resultType="int" parameterType="String">
+	select count(*) from freeboard where writer like concat('%',#{s},'%') order by num desc
 	</select>
 	
 	<select id="all" resultType="user.domain.FreeBoardDto" parameterType="int">

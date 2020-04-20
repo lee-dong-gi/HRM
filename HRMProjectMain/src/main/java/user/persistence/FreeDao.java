@@ -29,11 +29,15 @@ public interface FreeDao {
 
 	int commentDel2(int num) throws Exception;
 	
-	List<FreeBoardDto> search(String s) throws Exception;
-	
 	int searchCount(String s) throws Exception;
 	
 	List<FreeBoardDto> all(int offset) throws Exception;
 	
 	FreeBoardDto commentCount2(int num) throws Exception;
+
+	List<FreeBoardDto> search(String s, int offset) throws Exception;
+
+	List<FreeBoardDto> search2(String s, int offset) throws Exception;
+
+	int searchCount2(String s) throws Exception;
 }

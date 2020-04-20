@@ -28,7 +28,7 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="sb-admin-2.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/sb-admin-2.css" />
 <style>
 .col-mdx-1 {
 	flex: 0 0 14.285714285714285714285714285714%;
@@ -62,14 +62,14 @@ a:hover {
 	text-decoration: none;
 }
 
-tr td:not (:last-child ), tr td:not (:last-child ) a {
+tr td:not(:last-child ), tr td:not (:last-child ) a {
 	color: #858796
 }
 
-tr td:not (:last-child ) .cal_date_content {
+tr td:not(:last-child ) .cal_date_content {
 	background-color: #858796;
 	border-color: #858796;
-}
+}  
 
 tr td:first-child, tr td:first-child a {
 	color: #e74a3b
@@ -95,12 +95,13 @@ tbody td {
 	width: 14.285714285714285714285714285714%;
 }
 
-tbody tr td:not (:last-child ){
+tbody tr td:not(:last-child ) 
+{
 	box-sizing: border-box;
 	border-right: 1px solid #e3e6f0;
 }
 
-tbody tr:not (:last-child ){
+tbody tr:not(:last-child ){
 	border-bottom: 1px solid #e3e6f0;
 }
 
@@ -112,7 +113,8 @@ tbody tr:not (:last-child ){
 }
 
 .cal_date_content {
-	color: #fff;
+/* 	background-color: #858796;
+ */	color: #fff;
 	margin-top: auto;
 	overflow: hidden;
 }
@@ -122,7 +124,13 @@ tbody tr:not (:last-child ){
 <script type="text/javascript">
 <%String username = (String) session.getAttribute("name");
 			String userid = (String) session.getAttribute("id");
-			int userapproval = (int) session.getAttribute("approval");%>
+			int approval = (int)session.getAttribute("approval");
+			boolean flag;
+			if(approval==2){
+			   flag=true;
+			}else{
+			   flag=false;
+			}%>
 $(function(){
 	if(${approval} != 2){
 		$("#add").hide();
@@ -170,46 +178,41 @@ $(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+      <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
+      <%}%>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

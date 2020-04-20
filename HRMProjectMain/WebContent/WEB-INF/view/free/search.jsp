@@ -12,6 +12,10 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
 
 <title>HRM Project Net - 자유게시판</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -29,13 +33,46 @@
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
+	
 <%String userid = (String) session.getAttribute("id");
-			String username = (String) session.getAttribute("name");
-			int userapproval = (int) session.getAttribute("approval");%>
+String username = (String) session.getAttribute("name");
+int approval = (int)session.getAttribute("approval");
+boolean flag;
+if(approval==2){
+   flag=true;
+}else{
+   flag=false;
+}%>
+
+<%
+String ss = "'"+(String)request.getAttribute("s")+"'";
+int startPage = 1;
+int pageCount = (int)request.getAttribute("pageCount");
+int now = (int)request.getAttribute("sNow");
+if (now % 5 != 0) {
+	startPage = (int)(now/5)*5+1;
+}else {
+	startPage = ((int)(now/5)-1)*5+1;
+}
+int pageBlock = 5;
+int endPage = startPage + pageBlock -1;
+if (endPage > pageCount) {
+	endPage = pageCount;
+}
+%>
 $(function(){
-	if(${approval} == 2){
-		$("#ins").prop("type", "button");
+	
+	if(<%=startPage-1%> > 0){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+<%=startPage-1%>+"'>[이전]</a>");
 	}
+	
+	for(i=<%=startPage%>; i<=<%=endPage%>; i++){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+i+"'>["+i+"]</a>");
+		}
+	
+	if(<%=endPage+1%><=<%=pageCount%>){
+		$("#pageCo").append("<a href='search?s="+<%=ss%>+"&sNow="+<%=endPage+1%>+"'>[다음]</a>");
+		}
 });
 </script>
 </head>
@@ -80,46 +117,41 @@ $(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+      <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
+      <%}%>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -212,7 +244,7 @@ $(function(){
 					<!-- Content Row -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">자유게시판 글검색</h6>
+							<h6 class="m-0 font-weight-bold text-primary">자유게시판</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -221,48 +253,44 @@ $(function(){
 									style="padding-top: 50px; margin-left: auto; margin-right: auto;">
 									<thead>
 										<tr>
-											<td style="font-weight: bold;" align="center">번호</td>
-											<td style="font-weight: bold;" align="center">제목</td>
-											<td style="font-weight: bold;" align="center">작성자</td>
-											<td style="font-weight: bold;" align="center">작성일</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">번호</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">제목</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성자</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성일</td>
 										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="search" items="${ser}">
+										<c:forEach var="list" items="${ser}">
 											<tr height="30">
-												<td align="center" width="50">${scount}</td>
-												<c:set var="scount" value="${scount-1}" />
-												<td align="center" width="250"><a
-													href="sel?num=${search.num}">${search.subject}</a></td>
-												<td align="center" width="100">${search.writer}</td>
-												<td align="center" width="100">${search.time}</td>
+												<td align="center" width="50">${maxNum}</td>
+												<c:set var="maxNum" value="${maxNum-1}" />
+												<c:choose>
+												<c:when test="${list.ccount == 0}">
+												<td align="center" width="250"><a href="sel?num=${list.num}">${list.subject}</a></td>
+												</c:when>
+												<c:otherwise>
+												<td align="center" width="250"><a href="sel?num=${list.num}">${list.subject} [${list.ccount}]</a></td>
+												</c:otherwise>
+												</c:choose>
+												<td align="center" width="100">${list.writer}</td>
+												<td align="center" width="100">${list.time}</td>
 											</tr>
 										</c:forEach>
-									</tbody>
 								</table>
-							</div>
-							<div>
-								<a href="list?now=1" class="btn btn-secondary btn-icon-split"
-												type="button">취소</a>
-							</div>
-							
-							<div id="pageCount" style="display: inline">
-								<span id="pageCo" style="display: inline"></span>
-							</div>
-							<div id="pageCount"
-								style="display: inline float:right; margin-left: auto; margin-right: auto; text-align: center;">
-								<span id="pageCo" style="display: inline"></span>
-								<form action="selectArticle" method="post"
-									style="display: inline">
+								<input class="btn btn-secondary btn-icon-split" type="button"
+									onclick="location.href='list?now=1'" value="목록">
+									<div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
+				<span id="pageCo" style="display:inline"></span>
+								<form action="search"
+									style="display: inline; float: right;">
 									<select>
 									<option>제목</option>
 									</select>
-									<input type="hidden" id="subject2" name="subject" value="${selectapp}"> 
-										<input type="text" name="subject" id="subject" placeholder="내용을 입력해주세요.">
-									<button type="submit" class="btn btn-secondary btn-icon-split" value="검색" onclick="">
-										<i class="fa fa-search" aria-hidden="true"></i>
-									</button>
+										<input type="text" name="s" placeholder="내용을 입력해주세요.">
+										<input type="hidden" name="sNow" value="1">
+									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
+							</div>
+								<!-- 여기까지 -->
+
 							</div>
 						</div>
 					</div>

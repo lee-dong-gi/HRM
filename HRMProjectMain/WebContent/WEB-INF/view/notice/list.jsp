@@ -31,7 +31,13 @@
 <script type="text/javascript">
 <%String userid = (String) session.getAttribute("id");
 			String username = (String) session.getAttribute("name");
-			int userapproval = (int) session.getAttribute("approval");%>
+			int approval = (int)session.getAttribute("approval");
+			boolean flag;
+			if(approval==2){
+			   flag=true;
+			}else{
+			   flag=false;
+			}%>
 <%
 	int startPage = 1;
 	int pageCount = (int)request.getAttribute("pageCount");
@@ -60,7 +66,7 @@ $(function(){
 		$("#pageCo").append("<a href='list?now="+i+"'>["+i+"]</a>");
 		}
 	
-	if(<%=endPage+1%><=<%=pageCount%>){
+	if(<%=endPage%><<%=pageCount%>){
 		$("#pageCo").append("<a href='list?now="+<%=endPage+1%>+"'>[다음]</a>");
 		}
 });
@@ -108,46 +114,41 @@ $(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+      <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
+      <%}%>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -276,12 +277,9 @@ $(function(){
 				<span id="pageCo" style="display:inline"></span>
 								<form action="search"
 									style="display: inline; float: right;">
-									<select>
-									<option>제목</option>
-									</select>
-										<input type="text" name="s" placeholder="내용을 입력해주세요.">
+										<input type="text" name="s" placeholder="검색하세요">
 										<input type="hidden" name="sNow" value="1">
-									<button type="submit" class="btn btn-secondary btn-sm" value="검색"><i class="fa fa-search" aria-hidden="true"></i></button>
+									<button type="submit" class="btn btn-secondary btn-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
 								</form>
 							</div>
 						</div>
