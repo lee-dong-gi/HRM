@@ -1,9 +1,12 @@
 package mail.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,35 +21,19 @@ public class EmailController {
 	@Autowired
 	private EmailService emailService;
 	
-	private int authNum;
-	private int authResult=0;//초기값 0은 인증실패 1은 인증성공
-
-	private int getAuthNum() {
-		return authNum;
-	}
-
-	private void setAuthNum(int authNum) {
-		this.authNum = authNum;
-	}
-	
-	public int getAuthResult() {
-		return authResult;
-	}
-
-	public void setAuthResult(int authResult) {
-		this.authResult = authResult;
-	}
+	private Map<String,Integer> authMap = new HashMap<String, Integer>();
 
 	@RequestMapping("/send")
 	@ResponseBody
-	public String sendMail(String inputReceiver) throws Exception {
+	public String sendMail(String inputReceiver, Model m) throws Exception {
 		Random r = new Random();
 		int authNum =  r.nextInt(10000)+1;
 		if(authNum < 1000) {
 			authNum=authNum+1000;
 		}
 		System.out.println(authNum);
-		setAuthNum(authNum);
+		
+		authMap.put(Integer.toString(authNum), authNum);
 		EmailVO email = new EmailVO();
 		boolean result = false;
 
@@ -81,16 +68,15 @@ public class EmailController {
 	@RequestMapping("/checkmail")
 	@ResponseBody
 	public String checkmail(int checkNum) throws Exception {
-		
+
 		String result;
 		System.out.println(checkNum);
-		System.out.println(getAuthNum());
-		if(getAuthNum()==checkNum) {
+		String auth=Integer.toString(checkNum);
+		if(authMap.get(auth)==checkNum) {
 			result = "인증되었습니다!";
-			setAuthResult(1);
+			authMap.remove(auth);
 		}else {
-			result = "인증번호가 다릅니다!";	
-			setAuthResult(0);
+			result = "인증번호가 다릅니다!";
 		}
 		System.out.println(result);
 		Gson json = new Gson();

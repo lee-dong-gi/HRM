@@ -194,7 +194,7 @@ String chattingname = (String)session.getAttribute("chatname");
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script type="text/javascript">
 	var textarea = document.getElementById("messageWindow");
-	var webSocket = new WebSocket('ws://192.168.219.100:8083/HRMProjectMain/broadsocket');
+	var webSocket = new WebSocket('ws://192.168.0.43:8083/HRMProjectMain/broadsocket');
 	
 	var inputMessage = document.getElementById('inputMessage');
 	

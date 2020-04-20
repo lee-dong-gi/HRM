@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HRM Project Net - 결재작성</title>
+  <title>HRM Project Net - 결재내용</title>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,12 @@
 <%
 String username = (String)session.getAttribute("name");
 int approval = (int)request.getAttribute("approval");
+boolean flagg;
+if(approval==2){
+   flagg=true;
+}else{
+   flagg=false;
+}
 %>
 $(function(){
 	if((<%=approval%>==1|<%=approval%>==2)){
@@ -71,7 +77,7 @@ else{appResult="반려";}
       </div>
 	 <hr class="sidebar-divider">
                  <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+     <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
@@ -86,7 +92,7 @@ else{appResult="반려";}
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -99,20 +105,28 @@ else{appResult="반려";}
           <span>근태관리</span>
         </a>
       </li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-			class="fas fa-fw"></i> <span>공지사항</span>
-		</a></li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-			<span>자유게시판</span>
-	</a></li>
-	<li class="nav-item">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
         </a>
       </li>
+      <%if(flagg){ %>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
+      <%}%>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -194,7 +208,7 @@ else{appResult="반려";}
        	<!-- Content Row -->
           <div class="card shadow mb-3">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">내 결재 현황 </h6>
+              <h6 class="m-0 font-weight-bold text-primary">결재내용 </h6>
             </div>
             <div class="card-body" style="display:inline;">
               <div class="table-responsive" style="display:inline">

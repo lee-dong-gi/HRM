@@ -1,6 +1,8 @@
 package user.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,10 @@ public class EmpRegisterController {
 		String y = String.valueOf(cal.get(Calendar.YEAR)).substring(2);
 
 		dto.setEmpno(Integer.parseInt(y + d + su));
-
+		Date today = new Date();
+		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		format.format(today);
+		dto.setHiredate(format.format(today));
 		String hashedPw = BCrypt.hashpw(dto.getPasswd(), BCrypt.gensalt());
 		dto.setPasswd(hashedPw);
 		service.register(dto);

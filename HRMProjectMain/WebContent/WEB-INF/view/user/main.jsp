@@ -24,35 +24,174 @@ HttpSession httpSession = request.getSession();
 
   $(window).resize(function(){resizeYoutube();});
   $(function(){
-	  $('.slider').slider();
 	  resizeYoutube();
   });
   function resizeYoutube(){
 	   $("iframe").each(function(){if(true){$(this).css("display","inline"); $(this).css("width","47%"); $(this).css("height",Math.ceil( parseInt($(this).css("width")) * 480 / 854 ) + "px");} });
-	   $(".slider").each(function(){if(true){$(this).css("display","inline"); $(this).css("width","90%"); $(this).css("height","20%");} });
   }
 
 </script>
-<style type="text/css">
-.slider .indicators .indicator-item {
-  background-color: #666666;
-  border: 3px solid #ffffff;
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+<style type="text/css"> 
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap'); 
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+/*GLOBALS*/
+ *{margin:0; padding:0; list-style:none;}
+a{text-decoration:none; color:#666;}
+a:hover{color:#1bc1a3;}
+body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;}
+
+/*
+#wrapper{
+    width:600px;
+    margin:50px auto;
+    height:400px;
+    position:relative;
+    color:#fff;
+    text-shadow:rgba(0,0,0,0.1) 2px 2px 0px;    
+} */
+
+#slider-wrap{
+    width:100%;
+    height:400px;
+/*     width:600px;
+    height:400px; */
+    position:relative;
+    overflow:hidden;
 }
-.slider .indicators .indicator-item.active {
-  background-color: #ffffff;
+
+#slider-wrap ul#slider{
+    width:100%;
+    height:100%;
+    
+    position:absolute;
+    top:0;
+    left:0;     
 }
-.slider {
-  width: 90%;
-  margin: 0 auto;
+
+#slider-wrap ul#slider li{
+    float:left;
+    position:relative;
+    width:600px;
+    height:400px;   
 }
-.slider .indicators {
-  bottom: 10%; 
-  z-index: 100;
-  /* text-align: left; */
+
+#slider-wrap ul#slider li > div{
+    position:absolute;
+    top:20px;
+    left:35px;  
 }
+
+#slider-wrap ul#slider li > div h3{
+    font-size:36px;
+    text-transform:uppercase;   
+}
+
+#slider-wrap ul#slider li > div span{
+    font-family: Neucha, Arial, sans serif;
+    font-size:21px;
+}
+
+#slider-wrap ul#slider li img{
+    display:block;
+    width:100%;
+  height: 100%;
+}
+
+
+/*btns*/
+.btns{
+    position:absolute;
+    width:50px;
+    height:60px;
+    top:50%;
+    margin-top:-25px;
+    line-height:57px;
+    text-align:center;
+    cursor:pointer; 
+    background:rgba(0,0,0,0.1);
+    z-index:100;
+    
+    
+    -webkit-user-select: none;  
+    -moz-user-select: none; 
+    -khtml-user-select: none; 
+    -ms-user-select: none;
+    
+    -webkit-transition: all 0.1s ease;
+    -moz-transition: all 0.1s ease;
+    -o-transition: all 0.1s ease;
+    -ms-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.btns:hover{
+    background:rgba(0,0,0,0.3); 
+}
+
+#next{right:-50px; border-radius:7px 0px 0px 7px;}
+#previous{left:-50px; border-radius:0px 7px 7px 7px;}
+#counter{
+    top: 30px; 
+    right:35px; 
+    width:auto;
+    position:absolute;
+}
+
+#slider-wrap.active #next{right:0px;}
+#slider-wrap.active #previous{left:0px;}
+
+/*bar*/
+#pagination-wrap{
+    min-width:20px;
+    margin-top:350px;
+    margin-left: auto; 
+    margin-right: auto;
+    height:15px;
+    position:relative;
+    text-align:center;
+}
+
+#pagination-wrap ul {
+    width:100%;
+}
+
+#pagination-wrap ul li{
+    margin: 0 4px;
+    display: inline-block;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#fff;
+    opacity:0.5;
+    position:relative;
+  top:0;
+  
+  
+}
+
+#pagination-wrap ul li.active{
+  width:12px;
+  height:12px;
+  top:3px;
+    opacity:1;
+    box-shadow:rgba(0,0,0,0.1) 1px 1px 0px; 
+}
+
+/*Header*/
+h1, h2{text-shadow:none; text-align:center;}
+h1{ color: #666; text-transform:uppercase;  font-size:36px;}
+h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; margin-bottom:30px;} 
+
+
+/*ANIMATION*/
+#slider-wrap ul, #pagination-wrap ul li{
+    -webkit-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+    -moz-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+    -o-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+    -ms-transition: all 0.3s cubic-bezier(1,.01,.32,1);
+    transition: all 0.3s cubic-bezier(1,.01,.32,1); 
+}
+
 </style>
 </head>
 <script type="text/javascript">
@@ -66,6 +205,14 @@ if(approval==2){
 	flag=false;
 }
 %>
+var pos = 0;
+//number of slides
+var totalSlides = 5;
+/* var totalSlides = $('#slider-wrap ul li').length; */
+//get the slide width
+var sliderWidth = 600;
+/* var sliderWidth = $('#slider-wrap').width(); */
+//set width to be 'x' times the number of slides
 $(function(){
 	 var url = "/HRMProjectMain/jsp/chat/chatlist";
 	$.ajax({
@@ -109,8 +256,88 @@ $(function(){
 			})
 		    .fail(function(e) {
 		    }) 
+
+		    /*****************
+		     BUILD THE SLIDER
+		    *****************/
+		    $('#slider-wrap ul#slider').width(sliderWidth*totalSlides);
+		    
+		    //next slide    
+		    $('#next').click(function(){
+		        slideRight();
+		    });
+		    
+		    //previous slide
+		    $('#previous').click(function(){
+		        slideLeft();
+		    });
+		    
+		    
+		    
+		    /*************************
+		     //*> OPTIONAL SETTINGS
+		    ************************/
+		    //automatic slider
+		    var autoSlider = setInterval(slideRight, 5000);
+		    
+		    //for each slide 
+		    $.each($('#slider-wrap ul li'), function() { 
+
+		       //create a pagination
+		       var li = document.createElement('li');
+		       $('#pagination-wrap ul').append(li);    
+		    });
+		    
+		    //counter
+		    countSlides();
+		    
+		    //pagination
+		    pagination();
+		    
+		    //hide/show controls/btns when hover
+		    //pause automatic slide when hover
+		    $('#slider-wrap').hover(
+		      function(){ $(this).addClass('active'); clearInterval(autoSlider); }, 
+		      function(){ $(this).removeClass('active'); autoSlider = setInterval(slideRight, 5000); }
+		    );
 	    
 });//ready()
+/***********
+SLIDE LEFT
+************/
+function slideLeft(){
+   pos--;
+   if(pos==-1){ pos = totalSlides-1; }
+   $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos));    
+   
+   //*> optional
+   countSlides();
+   pagination();
+}
+
+/************
+SLIDE RIGHT
+*************/
+function slideRight(){
+   pos++;
+   if(pos==totalSlides){ pos = 0; }
+   $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos)); 
+   
+   //*> optional 
+   countSlides();
+   pagination();
+}
+/************************
+//*> OPTIONAL SETTINGS
+************************/
+function countSlides(){
+   $('#counter').html(pos+1 + ' / ' + totalSlides);
+}
+
+function pagination(){
+   $('#pagination-wrap ul li').removeClass('active');
+   $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
+}
 </script>
 <body id="page-top">
 
@@ -263,7 +490,7 @@ $(function(){
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">HRM Corp 현황</h1>
+          <!--   <h1 class="h3 mb-0 text-gray-800" style="color:#FFE08C;font-family: 'Black Han Sans', sans-serif;" >한눈에 보기</h1> -->
           </div>
 
           <!-- Content Row -->
@@ -342,7 +569,7 @@ $(function(){
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
 
@@ -350,23 +577,90 @@ $(function(){
               <!-- Project Card Example -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3" style="display: block; text-align: center; color:black; align-content: center;">
-                  <h6 class="m-0 font-weight-bold">HRM 소개 영상</h6>
+                  <h6 style="color:BLACK;font-family: 'Jua', sans-serif;">HRM 소개 영상</h6>
                 </div> 
                 <div id="card-body" class="card-body" style="display: inline; align-content: center;">
 					<iframe allow="autoplay" style="display: inline; margin-left: 3%;" width="880" height="480" src="https://ak7.picdn.net/shutterstock/videos/1033263017/preview/stock-footage-close-up-business-people-shaking-hands-successful-corporate-partnership-deal-welcoming-opportunity.webm" frameborder="0" allowfullscreen=""></iframe>
 					<iframe allow="autoplay" style="display: inline;" width="880" height="480" src="https://ak1.picdn.net/shutterstock/videos/1039968611/preview/stock-footage-asia-businessmen-and-businesswomen-meeting-brainstorm-ideas-about-new-paperwork-project-colleague.webm" frameborder="0" allowfullscreen=""></iframe>
                 </div> 
               </div> 
-				
-            </div>
+			<div class="card shadow mb-4">
+                <div class="card-header py-3" style="display: block; text-align: center; color:black; align-content: center;">
+                  <h6 style="color:BLACK;font-family: 'Jua', sans-serif;" >HRM 슬라이드</h6>
+                </div> 
+    <div id="card-body" class="card-body" style="display: inline; align-content: center;">
 
-            <div class="col-lg-6 mb-4">
-
-
-            </div>
+      <div id="slider-wrap">
+          <ul id="slider">
+             <li data-color="#1abc9c">
+                <div>
+                    <h3 style="color:#FFE08C;font-family: 'Black Han Sans', sans-serif;">2020년 런던 지사 설립</h3>
+                    <span style="color:white;font-family: 'Black Han Sans', sans-serif;">더 높은 곳으로!</span>
+                </div>                
+<img src="${pageContext.request.contextPath}/resources/img/building.jpg">
+             </li>
+             
+             <li data-color="#3498db">
+                <div>
+                    <h3 style="color:#FFE08C;font-family: 'Black Han Sans', sans-serif;">기숙사 제공</h3>
+                    <span style="color:white;font-family: 'Black Han Sans', sans-serif;">월세 전세 걱정 끝!</span>
+                </div>
+<img src="${pageContext.request.contextPath}/resources/img/dormitory.jpg">
+             </li>
+             
+             <li data-color="#9b59b6">
+                <div>
+                    <h3 style="color:#FFE08C;;font-family: 'Black Han Sans', sans-serif;">편안한 휴게공간</h3>
+                    <span style="color:white;font-family: 'Black Han Sans', sans-serif;">마음편하게 일하자!</span>
+                </div>
+<img src="${pageContext.request.contextPath}/resources/img/park.jpg">
+             </li> 
+             
+             <li data-color="#34495e">
+                <div>
+                    <h3 style="color:#FFE08C;;font-family: 'Black Han Sans', sans-serif;">전국 30개 대학 취업연계</h3>
+                    <span style="color:white;font-family: 'Black Han Sans', sans-serif;">보다 전문성있게!</span>
+                </div>
+<img src="${pageContext.request.contextPath}/resources/img/univ.jpg">
+             </li>
+             
+             <li data-color="#e74c3c">
+                <div>
+                    <h3 style="color:#FFE08C;font-family: 'Black Han Sans', sans-serif;">HRM 사원이라면?</h3>
+                    <span style="color:BLACK;font-family: 'Black Han Sans', sans-serif;"> &nbsp;&nbsp;&nbsp;&nbsp;삼성 테블릿 지원!</span>
+                </div>
+<img src="${pageContext.request.contextPath}/resources/img/undraw_posting_photo.svg">
+             </li>
+             
+			<li data-color="#e74c3c">
+                <div>
+                    <h3 style="color:blue;">Slide #6</h3>
+                    <span style="color:blue;">Sub-title #5</span>
+                </div>
+<img style="display: inline;" src="${pageContext.request.contextPath}/resources/img/undraw_posting_photo.svg">
+             </li>
+          </ul>
+           <!--controls-->
+          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+          <div id="counter"></div>
+          
+          <div id="pagination-wrap">
+            <ul>
+            </ul>
           </div>
-
-        </div>
+          <!--controls-->  
+            </div> 
+   
+           </div>
+          </div>
+           
+          
+                 
+      </div>
+  
+   </div>
+   </div>
         <!-- /.container-fluid -->
 
       </div>
@@ -420,13 +714,12 @@ $(function(){
   <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
- <%--  <script src="${pageContext.request.contextPath}/resources/vendor/chart.js/Chart.min.js"></script> --%>
+ <%--  <script src="${pageContext.request.contextPath}/resources/vendor/chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/demo/chart-area-demo.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/demo/chart-pie-demo.js"></script> --%>
   <!--JavaScript at end of body for optimized loading-->
   <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
