@@ -6,6 +6,13 @@
 <head>
 <%
 String username = (String)session.getAttribute("name");
+int approval = (int)session.getAttribute("approval");
+boolean flagg;
+if(approval==2){
+   flagg=true;
+}else{
+   flagg=false;
+}
 %>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -63,7 +70,7 @@ String username = (String)session.getAttribute("name");
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -76,20 +83,28 @@ String username = (String)session.getAttribute("name");
           <span>근태관리</span>
         </a>
       </li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-			class="fas fa-fw"></i> <span>공지사항</span>
-		</a></li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-			<span>자유게시판</span>
-	</a></li>
-	<li class="nav-item">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
         </a>
       </li>
+      <%if(flagg){ %>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
+      <%}%>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 				
@@ -256,7 +271,7 @@ $("#textMessage").keyup(function(event) {
 //「HRMProjectMain」는 프로젝트 명
 //「broadsocket」는 호스트 명
 //WebSocket 오브젝트 생성 (자동으로 접속 시작한다. - onopen 함수 호출)
-var webSocket = new WebSocket("ws://192.168.219.100:8083/HRMProjectMain/broadsocket");
+var webSocket = new WebSocket("ws://192.168.0.43:8083/HRMProjectMain/broadsocket");
 //콘솔 텍스트 에리어 오브젝트
 //WebSocket 서버와 접속이 되면 호출되는 함수
 webSocket.onopen = function(message) {

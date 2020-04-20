@@ -5,8 +5,8 @@
 
 <mapper namespace="emp">
 	<insert id="emp" parameterType="user.domain.EmpDto">
-		insert into employee(empno,name, id, passwd, birth, email, phonenum, deptno, approval, level)
-		values(#{empno},#{name},#{id},#{passwd},#{birth},#{email},#{phonenum},#{deptno},#{approval},#{level})
+insert into employee(empno,name, id, passwd, birth, email, phonenum, deptno, hiredate, approval, level)
+		values(#{empno},#{name},#{id},#{passwd},#{birth},#{email},#{phonenum},#{deptno},#{hiredate},#{approval},#{level})
 	</insert>
 
 	<select id="idCheck" resultType="String" parameterType="String">

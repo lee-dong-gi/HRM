@@ -23,7 +23,13 @@
 <script type="text/javascript">
 <%
 String username = (String)session.getAttribute("name");
-
+int approval = (int)session.getAttribute("approval");
+boolean flagg;
+if(approval==2){
+   flagg=true;
+}else{
+   flagg=false;
+}
 %>
 $(function(){
 	 var url = "chatlist";
@@ -77,7 +83,7 @@ $(function(){
       </div>
 	 <hr class="sidebar-divider">
     <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+     <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
@@ -92,7 +98,7 @@ $(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -105,20 +111,28 @@ $(function(){
           <span>근태관리</span>
         </a>
       </li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-			class="fas fa-fw"></i> <span>공지사항</span>
-		</a></li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-			<span>자유게시판</span>
-	</a></li>
-	<li class="nav-item">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
         </a>
       </li>
+      <%if(flagg){ %>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
+      <%}%>
       
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
