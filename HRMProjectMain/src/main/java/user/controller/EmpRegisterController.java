@@ -46,13 +46,13 @@ public class EmpRegisterController {
 		} else if (s < 1000) {
 			su = "0" + String.valueOf(s);
 		} else {
-			su = String.valueOf(s);
+			su = String.valueOf(s); 
 		}
 		String d = String.valueOf(dto.getDeptno());
 		Calendar cal = Calendar.getInstance();
 		String y = String.valueOf(cal.get(Calendar.YEAR)).substring(2);
 
-		dto.setEmpno(Integer.parseInt(y + d + su));
+		dto.setEmpno(Integer.parseInt(y + d + su)); 
 		Date today = new Date();
 		SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		format.format(today);
