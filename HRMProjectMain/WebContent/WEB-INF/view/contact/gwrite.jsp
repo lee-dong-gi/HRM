@@ -115,7 +115,7 @@ $(document).ready(function(){
           <span>연락처</span>
         </a>
       </li>
-<%if(flag){ %>
+      <%if(flag){ %>
        <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
@@ -129,7 +129,7 @@ $(document).ready(function(){
         </a>
       </li>
        <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
           <i class="fas fa-fw"></i>
           <span>인사관리</span>
         </a>

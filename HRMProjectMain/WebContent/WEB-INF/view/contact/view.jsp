@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+ 
 
 <title>HRM Project Net - 연락처</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -243,7 +243,7 @@ h3 {
           <span>연락처</span>
         </a>
       </li>
-      <%if(flag){ %>
+            <%if(flag){ %>
        <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
@@ -257,7 +257,7 @@ h3 {
         </a>
       </li>
        <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
           <i class="fas fa-fw"></i>
           <span>인사관리</span>
         </a>
