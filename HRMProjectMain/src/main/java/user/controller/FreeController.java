@@ -85,6 +85,7 @@ public class FreeController {
 	// 글보기
 	@RequestMapping("free/sel")
 	public String one(Model model, int num) throws Exception {
+		service.hit(num);
 		FreeBoardDto dto = service.count(num);
 		model.addAttribute("cma", service.comment(num));
 		model.addAttribute("one", dto);

@@ -55,4 +55,7 @@
 	select count(*) from comment where num = #{num}
 	</select>
 	
+	<update id="hit" parameterType="int">
+    UPDATE freeboard SET HIT = HIT+1 WHERE num = #{num}
+    </update>
 </mapper>

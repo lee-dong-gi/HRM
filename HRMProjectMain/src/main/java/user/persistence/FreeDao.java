@@ -40,4 +40,7 @@ public interface FreeDao {
 	List<FreeBoardDto> search2(String s, int offset) throws Exception;
 
 	int searchCount2(String s) throws Exception;
+	
+	int hit(int num) throws Exception;
+	
 }
