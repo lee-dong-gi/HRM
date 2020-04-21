@@ -105,6 +105,8 @@
     </property>
 	</bean>
 	
+	<!--pdf 빈  -->
+	<bean name="pdf" class="attd.pdf.PDFView"/>
 	
 	<!-- 로그인 세션 관련 인터셉터 -->
 	<mvc:interceptors>

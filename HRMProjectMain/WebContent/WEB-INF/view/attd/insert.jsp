@@ -182,9 +182,16 @@ input[type="submit"] {
 
 					<div class="card-body">
 
-						<form id="excelDown" action="excelDown" method="post">
-							<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf381;" />
-						</form>
+						<div style="display: inline">
+							<form id="excelDown" action="excelDown" method="post" style="display: inline">
+								<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf381;" />
+							</form>
+						</div>
+						<div style="display: inline">
+							<form id="pdf" action="pdf" method="get" style="display: inline">
+								<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf1c1;" />
+							</form>
+						</div>      
 
 						<hr>
 
