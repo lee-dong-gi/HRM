@@ -8,14 +8,23 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import app.domain.AppDTO;
 import mail.domain.EmailVO;
+import mail.persistence.MailDao;
 
 @Service("emailService")
 public class EmailService {
 
 	@Autowired
 	protected JavaMailSender mailSender; 
-
+	
+	@Autowired
+	protected MailDao md; 
+	
+	public void updatemailcheck(int empno) throws Exception {
+		md.updatemailcheck(empno);
+	}
+	
 	public boolean sendMail(EmailVO email) throws Exception {
 
 		try {

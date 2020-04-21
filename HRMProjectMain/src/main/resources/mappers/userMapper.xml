@@ -8,6 +8,10 @@
 		select * from employee where id=#{userid}
 	</select>
 	
+	<update id="updatemailcheck" parameterType="int">
+		update employee set emailcheck=1 where empno=#{empno}
+	</update>
+	
 	<insert id="insertdept" parameterType="user.domain.DeptDTO">
 		insert into dept values(#{deptno},#{dname},#{loc})
 	</insert>
