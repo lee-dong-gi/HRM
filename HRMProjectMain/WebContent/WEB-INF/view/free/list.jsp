@@ -256,6 +256,7 @@ $(function(){
 											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">제목</td>
 											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성자</td>
 											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">작성일</td>
+											<td bgcolor="gray" style="font-weight: bold; color:white;" align="center">조회수</td>
 										</tr>
 										<c:forEach var="list" items="${all}">
 											<tr height="30">
@@ -271,6 +272,7 @@ $(function(){
 												</c:choose>
 												<td align="center" width="100">${list.writer}</td>
 												<td align="center" width="100">${list.time}</td>
+												<td align="center" width="100">${list.hit}</td>
 											</tr>
 										</c:forEach>
 								</table>

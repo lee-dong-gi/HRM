@@ -104,4 +104,10 @@ public class FreeDaoImpl extends SqlSessionDaoSupport implements FreeDao {
 	public FreeBoardDto commentCount2(int num) throws Exception {
 		return getSqlSession().selectOne("free.commentCount", num);
 	}
+	
+	@Override
+	public int hit(int num) throws Exception {
+		return getSqlSession().update("free.hit",num);
+		
+	}
 }

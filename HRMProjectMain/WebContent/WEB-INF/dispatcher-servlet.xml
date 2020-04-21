@@ -80,6 +80,7 @@
 	<!--bean 객체  -->
 	<bean id="loginInterceptor" class="commons.interceptor.LoginInterceptor"/>
 	<bean id="download" class="commons.view.AppDownloadView"/>
+	<bean id="noticedownload" class="commons.view.NoticeDownloadView"/>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"><!-- 파일 업로드 설정 -->
     <property name="maxUploadSize" value="10000000000"/>
 	</bean>
@@ -122,5 +123,6 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+
 
 </beans>
