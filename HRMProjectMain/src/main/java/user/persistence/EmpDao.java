@@ -19,5 +19,9 @@ public interface EmpDao {
 	int signup();
 
 	int signupCount();
+	
+	EmpDto myInfo(String id) throws Exception;
+	
+	int modify(EmpDto dto) throws Exception; 
 
 }

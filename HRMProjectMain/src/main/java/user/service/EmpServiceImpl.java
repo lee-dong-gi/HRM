@@ -1,5 +1,7 @@
 package user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,4 +54,12 @@ public class EmpServiceImpl implements EmpService {
 		return dao.signupCount();
 	}
 	
+	@Override
+	public EmpDto myInfo(String id) throws Exception{
+		return dao.myInfo(id);
+	}
+	
+	@Override public int modify(EmpDto dto) throws Exception { 
+		return dao.modify(dto);
+	}
 }

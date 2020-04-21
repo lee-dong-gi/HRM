@@ -198,6 +198,8 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 <%
 String username = (String)session.getAttribute("name");
 int approval = (int)session.getAttribute("approval");
+String userid = (String)session.getAttribute("id");
+
 boolean flag;
 if(approval==2){
 	flag=true;
