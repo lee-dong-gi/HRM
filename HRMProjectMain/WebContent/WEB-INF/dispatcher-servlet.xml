@@ -64,6 +64,7 @@
 	<bean id="deptDao" class="user.persistence.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />	
 	<bean id="noticeDao" class="user.persistence.NoticeDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	<bean id="freeDao" class="user.persistence.FreeDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory"/>
+	<bean id="manageDao" class="user.persistence.ManageDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	
 	<bean class="contact.persistence.ContactDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
