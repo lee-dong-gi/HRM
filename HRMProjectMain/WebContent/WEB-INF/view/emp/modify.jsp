@@ -32,7 +32,8 @@
 	href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
-<%String username = (String) session.getAttribute("name");%>
+<%String username = (String) session.getAttribute("name");
+String userid = (String) session.getAttribute("id");%>
 
 </script>
 </head>
@@ -186,7 +187,7 @@
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 								</a>
 
@@ -211,70 +212,71 @@
 						class="d-sm-flex align-items-center justify-content-between mb-4">
 					</div>
 					<!-- 여기부터 -->
- <h3 style="padding-top: 30px; padding-bottom:10px; font-weight: bold;" align="center">개인정보 수정</h3>
-<form method="post" onsubmit="return check()" class="form-horizontal">
+ 					<div class="container">
+						<h3
+							style="padding-top: 60px; padding-bottom: 60px; font-weight: bold;"
+							align="center">내 정보</h3>
+							<form method="post">
+						<table class="table" style="width: 100%;">
+							<tbody align="left" style="border-bottom: #ced4da 1px solid;">
+								<tr>
+									<td width="96px">이름</td>
+									<td>${modify.name}</td>
+								</tr>
 
- <div class="form-group form-group-lg" style="padding-top: 50px; font-size: 13pt;" align="center">
- 
-	<div>비밀번호 변경</div>
-	<div style="padding-top: 10px;" class="col-sm-2">
-	<input style="font-size: 10pt;" class="form-control" type="text" id="name" name="name" placeholder="비밀번호 입력"><span id="nch"></span><br>
-	</div>
-  	
- 	이메일
- 	<div style="padding-top: 10px;" class="col-sm-2">
-	<input style="font-size: 10pt;" class="form-control" type="text" id="id" name="id" placeholder="이메일 입력"><br>
-	</div>
-	
- 	휴대전화
- 	<div style="padding-top: 10px;" class="col-sm-2">
-	<input style="font-size: 10pt;" class="form-control" id="pw1" type="password" name="passwd" placeholder="휴대전화 입력" /><br>
-	</div>
-	
-	이메일
- 	<div style="padding-top: 10px;" class="col-sm-2">
-	<input style="font-size: 10pt;" class="form-control" id="email" name="email" type="email" placeholder="ex)abc@naver.com"><br>
-	</div>
+								<tr>
+									<td>아이디</td>
+									<td>${modify.id}</td>
+								</tr>
+								
+								<tr>
+									<td>비밀번호</td>
+									<td><input type="password" name="passwd"></td>
+								</tr>
 
-	전화번호
- 	<div style="padding-top: 10px;" class="col-sm-2">
-	<input style="font-size: 10pt;" class="form-control" id="phonenum" type="text" name="phonenum" pattern="[0-9]{11}" placeholder="숫자만 입력하세요"><br>
-	</div>
-	
-	부서<div style="padding-top: 10px;" class="col-sm-2">
-	<select name="deptno" >
-	<option value="10">개발 1팀</option>
-	<option value="20">개발2팀</option>
-	<option value="30">운영팀</option>
-	</select>
-	</div><br>
-	
-	권한<div style="padding-top: 10px;" class="col-sm-2">
-	<select name="approval" >
-	<option value="">선택</option>
-	<option value="0">관리자</option>
-	<option value="1">사용자</option>
-	</select>
-	</div><br>
+								<tr>
+									<td>생년월일</td>
+									<td><input type="text" name="birth"></td>
+								</tr>
 
-	직급<div style="padding-top: 10px;" class="col-sm-2">
-	<select name="level" >
-	<option value="사원">사원</option>
-	<option value="주임">주임</option>
-	<option value="대리">대리</option>
-	<option value="과장">과장</option>
-	<option value="차장">차장</option>
-	<option value="팀장">팀장</option>
-	</select>
-	</div>
+								<tr>
+									<td>이메일</td>
+									<td><input type="text" name="email"></td>
+								</tr>
+
+								<tr>
+									<td>휴대전화</td>
+									<td><input type="text" name="phonenum"></td>
+								</tr>
+
+								<tr>
+									<td>입사일자</td>
+									<td>${modify.hiredate}</td>
+								</tr>
+
+								<tr>
+									<td>부서</td>
+									<td>${modify.deptno}</td>
+								</tr>
+
+								<tr>
+									<td>직급</td>
+									<td>${modify.level}</td>
+								</tr>
+							</tbody>
+						</table>
+					
+						<div class="row justify-content-between">
+							<div>
+								<input class="btn btn-primary" type="button" value="취소" onclick="location.href='/HRMProjectMain/jsp/emp/myinfo?id=${id}'">
+							</div>
+							<div>
+								<input class="btn btn-secondary" type="submit" value="완료">
+							</div>
+								</form>
+						</div>
+					</div>
 	
-	<br>
-	<br>
-	<input style="width: 80px;" type="submit"  value="취소" class="btn btn-primary btn-sm">
-	<input style="width: 80px;" type="submit"  value="수정완료" class="btn btn-primary btn-sm">
-	
-</div>
-</form>
 
 <!-- 여기까지 -->
 
