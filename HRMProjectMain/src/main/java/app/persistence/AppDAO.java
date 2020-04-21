@@ -32,6 +32,7 @@ public interface AppDAO {
 		int progressApp(String userid) throws Exception;
 		
 		int progressappcoAll(Map map) throws Exception;
+		
 		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		List<AppDTO> appSearchw(Map<String,String> map) throws Exception;
 		
@@ -45,6 +46,22 @@ public interface AppDAO {
 		
 		int appSearchfco(Map<String,String> map) throws Exception;
 		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		List<AppDTO> appSearchwsub(Map<String,Object> map) throws Exception;
+		
+		List<AppDTO> appSearchssub(Map<String,Object> map) throws Exception;
+		
+		List<AppDTO> appSearchfsub(Map<String,Object> map) throws Exception;
+		
+		int appSearchwcosub(Map<String,Object> map) throws Exception;
+		
+		int appSearchscosub(Map<String,Object> map) throws Exception;
+		
+		int appSearchfcosub(Map<String,Object> map) throws Exception;
+		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		List<AppDTO> appBoardAlladmin(Map<String,String> map) throws Exception;
+		
+		int appcountAlladmin(Map<String,String> map) throws Exception;
+		
 		List<AppDTO> appSearchwadmin(Map<String,String> map) throws Exception;
 		
 		List<AppDTO> appSearchsadmin(Map<String,String> map) throws Exception;
@@ -59,7 +76,7 @@ public interface AppDAO {
 		//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 		int appCount(String userid) throws Exception;
 		
-		int appcountAll(String userid) throws Exception;
+		int appcountAll(Map map) throws Exception;
 		
 		AppDTO appContent(Map<String,String> map) throws Exception;
 		

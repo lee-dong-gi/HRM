@@ -39,7 +39,7 @@ public interface AppService {
 	
 	int appCo(String userid) throws Exception;
 	
-	int appcoall(String userid) throws Exception;
+	int appcoall(Map map) throws Exception;
 	
 	AppDTO appcontent(Map<String,String> map) throws Exception;
 	
@@ -53,6 +53,24 @@ public interface AppService {
 	
 	List<AppDTO> appboardall(Map map) throws Exception;
 	//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	List<AppDTO> appsearchwsub(Map<String,Object> map) throws Exception;
+	
+	List<AppDTO> appsearchssub(Map<String,Object> map) throws Exception;
+	
+	List<AppDTO> appsearchfsub(Map<String,Object> map) throws Exception;
+	
+	int appSearchwcosub(Map<String,Object> map) throws Exception;
+	
+	int appSearchscosub(Map<String,Object> map) throws Exception;
+	
+	int appSearchfcosub(Map<String,Object> map) throws Exception;
+	
+	
+	//ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	List<AppDTO> appBoardAlladmin(Map<String,String> map) throws Exception;
+	
+	int appcountAlladmin(Map<String,String> map) throws Exception;
+	
 	List<AppDTO> appsearchwadmin(Map<String,String> map) throws Exception;
 	
 	List<AppDTO> appsearchsadmin(Map<String,String> map) throws Exception;

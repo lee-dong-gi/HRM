@@ -15,6 +15,9 @@ public class DeptService {
 	@Autowired
 	private DeptDao deptDao;
 	
+		public DeptDTO depttop() throws Exception {
+			return deptDao.depttop();
+		}
 		// 부서전체 목록
 		public List<DeptDTO> seldeptAll() throws Exception {
 			return deptDao.seldeptall();

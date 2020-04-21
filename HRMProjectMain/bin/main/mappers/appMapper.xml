@@ -38,8 +38,8 @@
 		select * from approve where userid not in(#{userid}) and approvedBy=#{empno} order by appnum desc
 	</select>
 	
-	<select id="appcountAll" parameterType="String" resultType="int">
-		select count(*) from approve where userid not in(#{userid})
+	<select id="appcountAll" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) and approvedBy=#{empno} order by appnum desc
 	</select>
 	
 	<select id="progressappcoAll" parameterType="Map" resultType="int">
@@ -77,7 +77,15 @@
 	<select id="appSearchfco" parameterType="Map" resultType="int">
 		select count(*) from approve where userid=#{userid} and realfilename like #{realfilename} order by appnum desc
 	</select>
-	<!--결재자 및  관리자ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+	<!--관리자ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+	<select id="appBoardAlladmin" parameterType="Map" resultType="app.domain.AppDTO">
+		select * from approve where userid not in(#{userid}) order by appnum desc
+	</select>
+	
+	<select id="appcountAlladmin" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) order by appnum desc
+	</select>
+	
 	<select id="appSearchwadmin" parameterType="Map" resultType="app.domain.AppDTO">
 		select * from approve where userid not in(#{userid}) and writer like #{writer} order by appnum desc
 	</select>
@@ -100,6 +108,30 @@
 	
 	<select id="appSearchfcoadmin" parameterType="Map" resultType="int">
 		select count(*) from approve where userid not in(#{userid}) and realfilename like #{realfilename} order by appnum desc
+	</select>
+	<!--결재자ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
+	<select id="appSearchwsub" parameterType="Map" resultType="app.domain.AppDTO">
+		select * from approve where userid not in(#{userid}) and approvedBy=#{empno} and writer like #{writer} order by appnum desc
+	</select>
+	
+	<select id="appSearchwcosub" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) and approvedBy=#{empno} and writer like #{writer} order by appnum desc
+	</select>
+	
+	<select id="appSearchssub" parameterType="Map" resultType="app.domain.AppDTO">
+		select * from approve where userid not in(#{userid}) and approvedBy=#{empno} and subject like #{subject} order by appnum desc
+	</select>
+	
+	<select id="appSearchscosub" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) and approvedBy=#{empno} and subject like #{subject} order by appnum desc
+	</select>
+	
+	<select id="appSearchfsub" parameterType="Map" resultType="app.domain.AppDTO">
+		select * from approve where userid not in(#{userid}) and approvedBy=#{empno} and realfilename like #{realfilename} order by appnum desc
+	</select>
+	
+	<select id="appSearchfcosub" parameterType="Map" resultType="int">
+		select count(*) from approve where userid not in(#{userid}) and approvedBy=#{empno} and realfilename like #{realfilename} order by appnum desc
 	</select>
 	<!--ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ  -->
 	<select id="appcontent" parameterType="Map" resultType="app.domain.AppDTO">

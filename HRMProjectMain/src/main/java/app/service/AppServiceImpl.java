@@ -84,8 +84,8 @@ public class AppServiceImpl implements AppService {
 	}
 
 	@Override
-	public int appcoall(String userid) throws Exception {
-		return appDAO.appcountAll(userid);
+	public int appcoall(Map map) throws Exception {
+		return appDAO.appcountAll(map);
 	}
 
 	@Override
@@ -217,6 +217,46 @@ public class AppServiceImpl implements AppService {
 	@Override
 	public UserVO seluserone(int empno) throws Exception {
 		return appDAO.seluserone(empno);
+	}
+
+	@Override
+	public List<AppDTO> appsearchwsub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchwsub(map);
+	}
+
+	@Override
+	public List<AppDTO> appsearchssub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchssub(map);
+	}
+
+	@Override
+	public List<AppDTO> appsearchfsub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchfsub(map);
+	}
+
+	@Override
+	public int appSearchwcosub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchwcosub(map);
+	}
+
+	@Override
+	public int appSearchscosub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchscosub(map);
+	}
+
+	@Override
+	public int appSearchfcosub(Map<String, Object> map) throws Exception {
+		return appDAO.appSearchfcosub(map);
+	}
+
+	@Override
+	public List<AppDTO> appBoardAlladmin(Map<String, String> map) throws Exception {
+		return appDAO.appBoardAlladmin(map);
+	}
+
+	@Override
+	public int appcountAlladmin(Map<String, String> map) throws Exception {
+		return appDAO.appcountAlladmin(map);
 	}
 
 }

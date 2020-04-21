@@ -20,6 +20,10 @@
 		delete from dept where deptno=#{deptno}
 	</insert>
 	
+	<select id="depttop" resultType="user.domain.DeptDTO">
+		select * from dept order by deptno desc limit 1;
+	</select>
+	
 	<select id="seldeptone" parameterType="int" resultType="user.domain.DeptDTO">
 		select * from dept where deptno=#{deptno};
 	</select>

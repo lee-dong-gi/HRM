@@ -95,6 +95,9 @@ public class DeptManagement {
 		UserVO uv = (UserVO)hs.getAttribute("login");
 		if(uv.getApproval()==2) {
 			try {
+				DeptDTO topdd = service.depttop();
+				int deptno = topdd.getDeptno()+10;
+				m.addAttribute("deptno", deptno);
 				return "dept/adddept";			
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -167,8 +170,12 @@ public class DeptManagement {
 	@RequestMapping(value = "/adddept", method = RequestMethod.POST)
 	public String adddeptPOST(HttpSession hs,Model m,DeptDTO dd) {
 		UserVO uv = (UserVO)hs.getAttribute("login");
+		
 		if(uv.getApproval()==2) {
 			try {
+				DeptDTO topdd = service.depttop();
+				int deptno = topdd.getDeptno()+10;
+				dd.setDeptno(deptno);
 				service.insertdept(dd);
 				return "redirect:/jsp/dept/deptlist?pageNum=1";	
 			} catch (Exception e) {
