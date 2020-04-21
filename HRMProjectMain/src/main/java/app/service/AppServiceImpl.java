@@ -10,6 +10,7 @@ import app.persistence.AppDAO;
 import user.domain.UserVO;
 import user.domain.UserVOD;
 import app.domain.AppDTO;
+import app.domain.KategorieDTO;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -78,8 +79,8 @@ public class AppServiceImpl implements AppService {
 	}
 
 	@Override
-	public List<AppDTO> appboardall(String userid) throws Exception {
-		return appDAO.appBoardAll(userid);
+	public List<AppDTO> appboardall(Map map) throws Exception {
+		return appDAO.appBoardAll(map);
 	}
 
 	@Override
@@ -199,8 +200,23 @@ public class AppServiceImpl implements AppService {
 	}
 	
 	@Override
-	public int progressappcoall(String userid) throws Exception {
-		return appDAO.progressappcoAll(userid);
+	public int progressappcoall(Map map) throws Exception {
+		return appDAO.progressappcoAll(map);
+	}
+
+	@Override
+	public List<KategorieDTO> getkategorie() throws Exception {
+		return appDAO.getkategorie();
+	}
+
+	@Override
+	public List<UserVO> getuserinfo(int deptno) throws Exception {
+		return appDAO.getuserinfo(deptno);
+	}
+
+	@Override
+	public UserVO seluserone(int empno) throws Exception {
+		return appDAO.seluserone(empno);
 	}
 
 }

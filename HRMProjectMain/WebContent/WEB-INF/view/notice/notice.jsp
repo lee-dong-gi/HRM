@@ -46,6 +46,7 @@
 		if ("${id}" == "${notice.id}") {
 			$("#del").prop("type", "button");
 		}
+		$("#file").append("<a href='file?num="+${notice.num}+"'>${notice.realfilename}"+"</a>");	
 	});
 	function del() {
 		if(confirm("정말 삭제하시겠습니까?")){
@@ -256,6 +257,10 @@
 									<tr>
 										<td height="400px">내용</td>
 										<td colspan="3">${notice.content}</td>
+									</tr>
+									<tr>
+										<td>파일</td>
+										<td id="file" colspan="3"></td>
 									</tr>
 								</table>
 							</div>
