@@ -46,7 +46,9 @@
 </style>
 <script type="text/javascript">
 	
-<%String username = (String) session.getAttribute("name");%>
+<%String username = (String) session.getAttribute("name");
+	String userid = (String) session.getAttribute("id");
+	int approval = (int)session.getAttribute("approval");%>
 	
 </script>
 </head>
@@ -233,51 +235,51 @@
 							<tbody align="left" style="border-bottom: #ced4da 1px solid;">
 								<tr>
 									<td width="96px">이름</td>
-									<td>${info.name}</td>
+									<td>${myInfo.name}</td>
 								</tr>
 
 								<tr>
 									<td>아이디</td>
-									<td>${info.id}</td>
+									<td>${myInfo.id}</td>
 								</tr>
 
 								<tr>
 									<td>생년월일</td>
-									<td>${info.birth}</td>
+									<td>${myInfo.birth}</td>
 								</tr>
 
 								<tr>
 									<td>이메일</td>
-									<td>${info.email}</td>
+									<td>${myInfo.email}</td>
 								</tr>
 
 								<tr>
 									<td>휴대전화</td>
-									<td>${info.phonenum}</td>
+									<td>${myInfo.phonenum}</td>
 								</tr>
 
 								<tr>
 									<td>입사일자</td>
-									<td>${info.hiredate}</td>
+									<td>${myInfo.hiredate}</td>
 								</tr>
 
 								<tr>
 									<td>부서</td>
-									<td>${info.dname}</td>
+									<td>${myInfo.deptno}</td>
 								</tr>
 
 								<tr>
 									<td>직급</td>
-									<td>${info.level}</td>
+									<td>${myInfo.level}</td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="row justify-content-between">
 							<div>
-								<input class="btn btn-primary" type="button" value="목록">
+								<input class="btn btn-primary" type="button" value="취소" onclick="location.href='/HRMProjectMain/jsp/user/main'">
 							</div>
 							<div>
-								<input class="btn btn-secondary" type="button" value="수정">
+								<input class="btn btn-secondary" type="button" value="수정" onclick="location.href='modify?id=${myInfo.id}'">
 							</div>
 						</div>
 					</div>

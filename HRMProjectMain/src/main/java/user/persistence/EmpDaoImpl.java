@@ -1,6 +1,7 @@
 package user.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -58,4 +59,14 @@ public class EmpDaoImpl extends SqlSessionDaoSupport implements EmpDao {
 		return getSqlSession().selectOne(namespace + ".signupCount");
 	}
 	
+	
+	@Override
+	public EmpDto myInfo(String id) throws Exception{
+		return getSqlSession().selectOne(namespace + ".myInfo",id);
+	}
+	
+	@Override
+	public int modify(EmpDto dto) throws Exception{ 
+		return getSqlSession().update(namespace + ".modify",dto); 
+	}
 }

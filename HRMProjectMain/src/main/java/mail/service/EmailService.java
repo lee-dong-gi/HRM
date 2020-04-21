@@ -35,7 +35,7 @@ public class EmailService {
 
 			// 일반 텍스트만 전송하려는 경우
 //			msg.setText(email.getContent());
-			msg.setFrom(new InternetAddress("oksk327@naver.com"));
+			msg.setFrom(new InternetAddress("ever_lf@naver.com"));
 			/* msg.setFrom(new InternetAddress("발신자 이메일주소")); */
 			// HTML 컨텐츠를 전송하려면.
 //			"<span>인증번호 : </span><span>"+email.getContent()+"</span>"+
