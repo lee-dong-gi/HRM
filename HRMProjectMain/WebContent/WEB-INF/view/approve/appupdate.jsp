@@ -62,6 +62,8 @@ $(function(){
 function checkwrite(){
     var subject = $('#subject').val();
     var content = $('#contenta').val();
+    var approvedBy = $('#approvedBy option:selected').val();
+    var kategories = $('#kategories option:selected').val();
     
     if(!subject){
         alert("제목을 입력해 주세요"); 
@@ -71,7 +73,13 @@ function checkwrite(){
         alert("내용을 입력해 주세요"); 
         $('#contenta').focus(); 
         return false;
-    }
+    }else if(!approvedBy){
+        alert("결재자를 지정해 주세요"); 
+        return false;
+    }else if(!kategories){
+        alert("카테고리를 지정해 주세요"); 
+        return false;
+	}
     return true;
 }
 
@@ -100,7 +108,7 @@ function addselect(){
 		,dataType:"json" }) //resopnse에 담긴 데이터를 json(배열)으로 포멧해서 받아오는타입
 		.done(function(args){	//응답이 성공 상태 코드를 반환하면 호출되는 함수//가져온 데이터를 첫번째 매개변수에 넣어줌
 			$("#approvedBy").remove();
-					$("#approvedby").append("<select id='approvedBy' name='approvedBy'>");
+					$("#approvedby").append("<select id='approvedBy' name='approvedBy' class='form-control-sm'>");
 					$("#approvedBy").append("<option>결재자 선택</option>");
 					for(var i=0; i < args.length; i++) { 
 						if("${writer}"!=args[i].name){
@@ -301,7 +309,7 @@ function addselect(){
 					카테고리
 					</td>
 					<td>
-						<select id="kategories" name="kategorie"></select>
+						<select id="kategories" name="kategorie" class="form-control-sm"></select>
 					</td>
 					</tr>
 					<tr> 
@@ -309,7 +317,7 @@ function addselect(){
 					결재자 선택
 					</td>
 					<td id="approvedby">
-						<select id="deptall" name="deptall" onchange="addselect()"></select>
+						<select id="deptall" name="deptall" onchange="addselect()" class="form-control-sm"></select>
 					</td>
 					</tr>
 					<tr>

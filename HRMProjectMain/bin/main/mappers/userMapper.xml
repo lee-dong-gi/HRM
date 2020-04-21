@@ -8,6 +8,10 @@
 		select * from employee where id=#{userid}
 	</select>
 	
+	<update id="updatemailcheck" parameterType="int">
+		update employee set emailcheck=1 where empno=#{empno}
+	</update>
+	
 	<insert id="insertdept" parameterType="user.domain.DeptDTO">
 		insert into dept values(#{deptno},#{dname},#{loc})
 	</insert>
@@ -19,6 +23,10 @@
 	<insert id="deletedept" parameterType="int">
 		delete from dept where deptno=#{deptno}
 	</insert>
+	
+	<select id="depttop" resultType="user.domain.DeptDTO">
+		select * from dept order by deptno desc limit 1;
+	</select>
 	
 	<select id="seldeptone" parameterType="int" resultType="user.domain.DeptDTO">
 		select * from dept where deptno=#{deptno};

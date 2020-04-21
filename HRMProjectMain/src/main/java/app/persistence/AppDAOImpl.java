@@ -88,8 +88,8 @@ public class AppDAOImpl extends SqlSessionDaoSupport implements AppDAO {
 		}
 
 		@Override
-		public int appcountAll(String userid) throws Exception {
-			return getSqlSession().selectOne(NAMESPACEAPP+".appcountAll", userid);
+		public int appcountAll(Map map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".appcountAll", map);
 		}
 
 		@Override
@@ -221,6 +221,46 @@ public class AppDAOImpl extends SqlSessionDaoSupport implements AppDAO {
 		@Override
 		public UserVO seluserone(int empno) throws Exception {
 			return getSqlSession().selectOne(NAMESPACEAPP+".seluserone",empno);
+		}
+
+		@Override
+		public List<AppDTO> appSearchwsub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".appSearchwsub",map);
+		}
+
+		@Override
+		public List<AppDTO> appSearchssub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".appSearchssub",map);
+		}
+
+		@Override
+		public List<AppDTO> appSearchfsub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".appSearchfsub",map);
+		}
+
+		@Override
+		public int appSearchwcosub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".appSearchwcosub",map);
+		}
+
+		@Override
+		public int appSearchscosub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".appSearchscosub",map);
+		}
+
+		@Override
+		public int appSearchfcosub(Map<String, Object> map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".appSearchfcosub",map);
+		}
+
+		@Override
+		public List<AppDTO> appBoardAlladmin(Map<String, String> map) throws Exception {
+			return getSqlSession().selectList(NAMESPACEAPP+".appBoardAlladmin",map);
+		}
+
+		@Override
+		public int appcountAlladmin(Map<String, String> map) throws Exception {
+			return getSqlSession().selectOne(NAMESPACEAPP+".appcountAlladmin",map);
 		}	
 
 }
