@@ -44,7 +44,7 @@
 				app.domain,app.persistence,app.service,app.controller,
 				chat.controller,web.socket,chat.domain,chat.persistence,chat.service,
 				attd.controller, attd.service, attd.model, 
-				contact.controller, contact.service
+				contact.controller, contact.service, contact.exception, 
 				mail.controller,mail.domain,mail.service"/>
 	
 	<!-- dao sqlSessionFactory 주입 -->
@@ -64,15 +64,19 @@
 	<bean id="deptDao" class="user.persistence.DeptDao" p:sqlSessionFactory-ref="sqlSessionFactory" />	
 	<bean id="noticeDao" class="user.persistence.NoticeDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	<bean id="freeDao" class="user.persistence.FreeDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory"/>
+	<bean id="manageDao" class="user.persistence.ManageDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	
 	<bean class="contact.persistence.ContactDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
-
 	<bean class="contact.persistence.GroupDaoImpl">
 	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	<bean id="excelDao" class="contact.persistence.ExcelDaoImpl">
+	<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
 	
+	<bean id="mailDao" class="mail.persistence.MailDao" p:sqlSessionFactory-ref="sqlSessionFactory"/>
 	
 	
 	<bean id="empDao" class="user.persistence.EmpDaoImpl" p:sqlSessionFactory-ref="sqlSessionFactory" />
@@ -88,8 +92,8 @@
 		class="org.springframework.mail.javamail.JavaMailSenderImpl">
     <property name="host" value="smtp.naver.com" />
     <property name="port" value="587" /><!-- 465 or 25 -->
-    <property name="username" value="oksk327" />
-    <property name="password" value="vmflfostj12!" />
+    <property name="username" value="ever_lf" />
+    <property name="password" value="junhee1998" />
     <property name="defaultEncoding" value="utf-8" />
     <property name="javaMailProperties">
         <props>

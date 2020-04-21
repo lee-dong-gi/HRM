@@ -21,6 +21,14 @@
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
+<% int approval = (int)session.getAttribute("approval");
+boolean flag;
+if(approval==2){
+   flag=true;
+}else{
+   flag=false;
+}
+%>
 
 $(document).ready(function(){
 	$("#gadd").click(function(){
@@ -32,31 +40,31 @@ $(document).ready(function(){
 
 </head>
 <body id="page-top">
-
-  <!-- Page Wrapper -->
+ <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <br/>
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
+        <div class="sidebar-brand-icon rotate-n-15">
+        </div>
+        <div class="sidebar-brand-text mx-3">HRM<sup>Project</sup></div>
       </a>
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
-	<br/>
+	<br>
 
-				<!-- Heading -->
+      <!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
 	 <hr class="sidebar-divider">
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+     <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
@@ -71,51 +79,58 @@ $(document).ready(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+      <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
-      
-      <!-- Divider -->
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
+      <%}%>
+ 
+     <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-				
-	<!-- Sidebar Toggler (Sidebar) -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -206,7 +221,6 @@ $(document).ready(function(){
   </tr>
   <c:forEach var="cgroup" items="${glist}">
   <tr>
-
   <td><a href="contact/gview.do?gnum=${cgroup.gnum}">${cgroup.gname}</a></td>
   </tr>
    </c:forEach>

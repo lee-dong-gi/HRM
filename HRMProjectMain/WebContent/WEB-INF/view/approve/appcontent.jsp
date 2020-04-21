@@ -23,6 +23,8 @@
 <script type="text/javascript">
 <%
 String username = (String)session.getAttribute("name");
+String userid= (String)request.getAttribute("userid");
+String writerid = (String)request.getAttribute("writerid");
 int approval = (int)request.getAttribute("approval");
 boolean flagg;
 if(approval==2){
@@ -247,7 +249,7 @@ else{appResult="반려";}
 				<a href="appboard?pageNum=1&selectapp=0" style="display:inline" class="btn btn-secondary btn-sm">목록</a>&nbsp
 				<div id="appbtn" style="display:inline"></div>                     	                    
 				</div>
-				<%if(appresult==1|appresult==2){}else{%>
+				<%if((appresult==1|appresult==2)|!userid.equals(writerid)){}else{%>  
 				<a href="appupdate?appnum=${appdto.appnum}" class="btn btn-secondary btn-sm" style="display:inline;float: right; margin:0px 10px 0% 0%;">수정</a>&nbsp
                 <a href="#" onclick="window.open('appdel?appnum=${appdto.appnum}','win2','scrollbars=yes width=380, height=150');return false" class="btn btn-secondary btn-sm" style="display:inline; float: right; margin:0px 10px 0% 20%;">삭제 </a>
 				<%}%>

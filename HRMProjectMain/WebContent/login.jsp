@@ -59,9 +59,6 @@
                   <div class="text-center">
                     <a class="small" href="/HRMProjectMain/jsp/emp/findPwForm">비밀번호 찾기</a>
                   </div>
-                  <div class="text-center">
-                    <a class="small" href="/HRMProjectMain/jsp/emp">회원가입</a>
-                  </div>
                 </div>
               </div>
             </div>

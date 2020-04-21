@@ -58,15 +58,23 @@ public class ApproveController implements ApplicationContextAware{
 		UserVO userVO = (UserVO)hs.getAttribute("login");
 		int approval = userVO.getApproval(); 
 		int count;
+		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			m.addAttribute("pageNum",pageNum);
 			m.addAttribute("approval",approval);
 			if(selectapp==0) {
 				m.addAttribute("selectapp", 0);
 				count = appService.appCo(userVO.getId());
+			}else if(selectapp==1&approval==2) {
+				Map<String,String> mapp = new HashMap<String, String>();
+				m.addAttribute("selectapp", 1);
+				mapp.put("userid", userVO.getId());
+				count = appService.appcountAlladmin(mapp);
 			}else{
 				m.addAttribute("selectapp", 1);
-				count = appService.appcoall(userVO.getId());
+				map.put("empno", userVO.getEmpno());
+				map.put("userid", userVO.getId());
+				count = appService.appcoall(map);
 			}
 			m.addAttribute("count",count);
 			System.out.println(count);
@@ -246,9 +254,14 @@ public class ApproveController implements ApplicationContextAware{
 		List<AppDTO> list;
 		map.put("empno", userVO.getEmpno());
 		map.put("userid", userVO.getId());
-		if((int)userVO.getApproval()!=0) {
+		if((int)userVO.getApproval()==1) {
 			list = appService.appboardall(map);
-		}else {
+		}else if((int)userVO.getApproval()==2){
+			Map<String,String> mapp = new HashMap<String, String>();
+			mapp.put("userid", userVO.getId());
+			list = appService.appBoardAlladmin(mapp);
+		}
+		else{
 			list = appService.selapp(userVO.getId());
 		}
 		Calendar cal = Calendar.getInstance();
@@ -273,7 +286,7 @@ public class ApproveController implements ApplicationContextAware{
 		map.put("userid",userVO.getId());
 		System.out.println("selectapp :: "+selectapp);
 		System.out.println("approval :: "+userVO.getApproval());
-		if((userVO.getApproval()==1|userVO.getApproval()==2)&selectapp==1) {
+		if(userVO.getApproval()==2&selectapp==1) {
 			if(selector==0) {
 				map.put("writer", "%"+seltext+"%");
 				list = appService.appsearchwadmin(map);
@@ -284,7 +297,21 @@ public class ApproveController implements ApplicationContextAware{
 				map.put("realfilename", "%"+seltext+"%");
 				list = appService.appsearchfadmin(map);
 			}		
-		}else {
+		}else if(userVO.getApproval()==1&selectapp==1){
+			Map<String,Object> mapp = new HashMap<String, Object>();
+			mapp.put("empno",userVO.getEmpno());
+			mapp.put("userid",userVO.getId());
+			if(selector==0) {
+				mapp.put("writer", "%"+seltext+"%");
+				list = appService.appsearchwsub(mapp);
+			}else if(selector==1) {
+				mapp.put("subject", "%"+seltext+"%");
+				list = appService.appsearchssub(mapp);
+			}else {
+				mapp.put("realfilename", "%"+seltext+"%");
+				list = appService.appsearchfsub(mapp);
+			}		
+		}else{
 			if(selector==0) {
 				map.put("writer", "%"+seltext+"%");
 				list = appService.appsearchw(map);
@@ -319,7 +346,7 @@ public class ApproveController implements ApplicationContextAware{
 		int count;
 		UserVO userVO = (UserVO)hs.getAttribute("login");
 		map.put("userid",userVO.getId());
-		if((userVO.getApproval()==1|userVO.getApproval()==2)&selectapp==1) {
+		if((userVO.getApproval()==2)&selectapp==1) {
 			if(selector==0) {
 				map.put("writer", "%"+seltext+"%");
 				count = appService.appSearchwcoadmin(map);
@@ -330,7 +357,21 @@ public class ApproveController implements ApplicationContextAware{
 				map.put("realfilename", "%"+seltext+"%");
 				count = appService.appSearchfcoadmin(map);
 			}
-		}else {
+		}else if((userVO.getApproval()==1)&selectapp==1){
+			Map<String,Object> mapp = new HashMap<String, Object>();
+			mapp.put("empno", userVO.getEmpno());
+			mapp.put("userid",userVO.getId());
+			if(selector==0) {
+				mapp.put("writer", "%"+seltext+"%");
+				count = appService.appSearchwcosub(mapp);
+			}else if(selector==1) {
+				mapp.put("subject", "%"+seltext+"%"); 
+				count = appService.appSearchscosub(mapp);
+			}else {
+				mapp.put("realfilename", "%"+seltext+"%");
+				count = appService.appSearchfcosub(mapp);
+			}
+		}else{
 			if(selector==0) {
 				map.put("writer", "%"+seltext+"%");
 				count = appService.appSearchwco(map);
@@ -384,6 +425,8 @@ public class ApproveController implements ApplicationContextAware{
 			
 			UserVO uv= appService.seluserone(appdto.getApprovedBy());
 			
+			m.addAttribute("userid", userVO.getId());
+			m.addAttribute("writerid", appdto.getUserid());
 			m.addAttribute("approvedByName", uv.getName());
 			m.addAttribute("appdto",appdto);
 			m.addAttribute("appresult",appdto.getAppresult());

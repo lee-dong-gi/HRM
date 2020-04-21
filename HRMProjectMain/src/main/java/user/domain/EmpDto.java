@@ -12,8 +12,22 @@ public class EmpDto {
 	String hiredate; //입사일자
 	String approval; //0.관리자 1.사용자
 	String level; //직급
-	String dname; 
+	String dname;
+	private int emailcheck;
+	private int salary;
 	
+	public int getEmailcheck() {
+		return emailcheck;
+	}
+	public void setEmailcheck(int emailcheck) {
+		this.emailcheck = emailcheck;
+	}
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
 	public String getDname() {
 		return dname;
 	}

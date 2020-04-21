@@ -38,9 +38,14 @@ public class UserLoginController {
 		UserVO userVO = userService.login(loginDTO);//입력된 로그인정보를 이용하여 DB에 저장된 회원 정보를 가져옴
 		System.out.println("userVO로그인 :: " + userVO);
 		if(userVO == null||!BCrypt.checkpw(loginDTO.getUserpw(), userVO.getPasswd())) {//DB에서 받아온 회원정보가 없거나 페스워드 비교값이 일치하지않으면
-			return "redirect:/jsp/user/login";//다시 로그인페이지로 이동
+			int i = 1;
+			model.addAttribute("check", i);
+			return "user/login";//다시 로그인페이지로 이동
 		}
 		model.addAttribute("user", userVO);//로그인 정보값이 일치하면
+		if (userVO.getEmailcheck() == 0) {
+			return "user/emailcheck";
+		}
 		return "user/main";//로그인 성공페이지로 이동
 	}
 		

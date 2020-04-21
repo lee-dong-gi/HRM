@@ -15,6 +15,21 @@ public class UserVO {
 	private int approval;
 	private String level;
 	private int deptno;
+	private int emailcheck;
+	private int salary;
+	
+	public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public int getEmailcheck() {
+		return emailcheck;
+	}
+	public void setEmailcheck(int emailcheck) {
+		this.emailcheck = emailcheck;
+	}
 	public int getEmpno() {
 		return empno;
 	}

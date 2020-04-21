@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import com.google.gson.Gson;
 
 import mail.domain.EmailVO;
 import mail.service.EmailService;
+import user.domain.UserVO;
 
 @Controller
 public class EmailController {
@@ -26,6 +29,7 @@ public class EmailController {
 	@RequestMapping("/send")
 	@ResponseBody
 	public String sendMail(String inputReceiver, Model m) throws Exception {
+		System.out.println(inputReceiver);
 		Random r = new Random();
 		int authNum =  r.nextInt(10000)+1;
 		if(authNum < 1000) {
@@ -67,21 +71,37 @@ public class EmailController {
 	
 	@RequestMapping("/checkmail")
 	@ResponseBody
-	public String checkmail(int checkNum) throws Exception {
+	public String checkmail(HttpSession hs, int checkNum) throws Exception {
 
-		String result;
+		String result = "인증번호가 다릅니다!";
 		System.out.println(checkNum);
+		UserVO userVO = (UserVO)hs.getAttribute("login");
 		String auth=Integer.toString(checkNum);
-		if(authMap.get(auth)==checkNum) {
-			result = "인증되었습니다!";
-			authMap.remove(auth);
-		}else {
-			result = "인증번호가 다릅니다!";
+		try {
+			if(authMap.get(auth)==checkNum|authMap.get(auth)==null) {
+				authMap.remove(auth);
+				emailService.updatemailcheck(userVO.getEmpno());
+				result = "인증되었습니다!";
+			}else {
+				result = "인증번호가 다릅니다!";
+			}
+			System.out.println(result);
+			Gson json = new Gson();
+			return json.toJson(result);
+		} catch (Exception e) {
+			System.out.println(result);
+			Gson json = new Gson();
+			return json.toJson(result);
 		}
-		System.out.println(result);
-		Gson json = new Gson();
-		return json.toJson(result);
 		
 	}
-
+	
+	@RequestMapping("/getemail")
+	@ResponseBody
+	public String getemail(HttpSession hs) throws Exception {
+		UserVO userVO = (UserVO)hs.getAttribute("login");
+		String email = userVO.getEmail();
+		Gson json = new Gson();
+		return json.toJson(email);
+	}
 }

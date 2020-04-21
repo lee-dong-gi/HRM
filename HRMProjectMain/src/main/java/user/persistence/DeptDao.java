@@ -9,6 +9,10 @@ import user.domain.DeptDTO;
 
 public class DeptDao extends SqlSessionDaoSupport{
 	
+	public DeptDTO depttop() throws Exception {
+		return getSqlSession().selectOne("user.UserMapper.depttop");
+	}
+	
 	public List<DeptDTO> seldeptall() throws Exception {
 		return getSqlSession().selectList("user.UserMapper.seldeptall");
 	}

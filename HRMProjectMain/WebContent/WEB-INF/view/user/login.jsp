@@ -4,6 +4,15 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	if(${check} == 1){
+		alert("등록된 정보가 일치하지 않습니다")
+		}
+});
+
+</script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -58,9 +67,6 @@
                   </div>
                   <div class="text-center">
                     <a class="small" href="/HRMProjectMain/jsp/emp/findPwForm">비밀번호 찾기</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="/HRMProjectMain/jsp/emp">회원가입</a>
                   </div>
                 </div>
               </div>

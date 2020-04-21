@@ -17,7 +17,7 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
-<title>HRM Project Net - 회원가입</title>
+<title>HRM Project Net - 인사등록</title>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <!-- Custom fonts for this template-->
 <link
@@ -261,7 +261,7 @@ function sendmail(){
 
 						<h3
 							style="padding-top: 30px; padding-bottom: 10px; font-weight: bold;"
-							align="center">회원가입</h3>
+							align="center">인사등록</h3>
 						<div class="form-group form-group-lg"
 							style="padding-top: 50px; font-size: 13pt;" align="center">
 							
@@ -310,12 +310,8 @@ function sendmail(){
 							<div style="padding-top: 10px;" class="col-sm-2" id="emailall" style="display:inline;">
 								<input style="font-size: 10pt; display: inline;" class="form-control" id="email"
 									name="email" type="email" placeholder="ex)abc@naver.com"><br>
-								<!-- <button type="button" class='btn btn-secondary' id="eauth" name="eauth" onclick="sendmail()">인증번호 발송</button> -->
 							</div>
 
-							<!-- <div id=fonta style="display: none">이메일 인증</div>
-							<div style="padding-top: 10px;" class="col-sm-2" id="authNum">
-							</div> -->
  
 							<div id=font>전화번호</div>
 							<div style="padding-top: 10px;" class="col-sm-2">

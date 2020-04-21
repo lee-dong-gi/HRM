@@ -33,7 +33,6 @@ if(approval==2){
 function checkwrite(){
     var dname = $('#dname').val();
     var loc = $('#loc').val();
-    var deptno = $('#deptno').val();
     
     if(!dname){
         alert("부서명을 입력해주세요"); 
@@ -43,18 +42,12 @@ function checkwrite(){
         alert("부서지역을 적어주세요"); 
         $('#loc').focus(); 
         return false;
-    }else if(!deptno){
-    	alert("부서지역을 적어주세요"); 
-        $('#loc').focus(); 
-        return false;
-    }
     return true;
 }
 
 function txtMaxlength(){
 	var dname = document.getElementById("dname");
-	var contenta = document.getElementById("loc");
-	var deptno = document.getElementById("deptno");
+	var loc = document.getElementById("loc");
 	if((dname.value.length) >= 30){
 		alert("부서명은 30자 제한입니다.");
 		dname.value = dname.value.substring(0,30);
@@ -65,11 +58,7 @@ function txtMaxlength(){
 		loc.value = loc.value.substring(0,100);
 		$("loc").focus();
 	}
-	if((deptno.value.length) >= 30){
-		alert("부서번호는 30자 제한입니다.");
-		deptno.value = deptno.value.substring(0,30);
-		$("deptno").focus();
-	}
+
 }
 </script>
 <body id="page-top">
@@ -236,21 +225,21 @@ function txtMaxlength(){
             <div class="card-body">
               <div class="table-responsive"> 
                <form action="adddept" method="post" enctype="multipart/form-data" onsubmit='return checkwrite()'>
-                <table class="table" id="writeapp" style="text-align: center;">
+                <table class="table" id="writeapp">
+					<tr>
+					<td bgcolor="gray" style="color:white;width:20%;">
+					부서번호 
+					</td>
+					<td>
+						${deptno}
+					</td>
+					</tr>
 					<tr>
 					<td bgcolor="gray" style="color:white; width:20%;">
 					부서명
 					</td>
 					<td>
 					<input type="text" class="form-control" id="dname" name="dname" onkeypress="txtMaxlength()" style="width:80%;" >
-					</td>
-					</tr>
-					<tr>
-					<td bgcolor="gray" style="color:white;width:20%;">
-					부서번호 
-					</td>
-					<td>
-					<input type="text" class="form-control" name="deptno" id="deptno" onkeypress="txtMaxlength()" style="width:80%;">
 					</td>
 					</tr>
 					<tr>
