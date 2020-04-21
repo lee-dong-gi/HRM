@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD mAPPER 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="man">
+
+	<select id="sel" resultType="user.domain.EmpDto">
+		select *,(select dname from dept where dept.deptno = employee.deptno) as dname from employee order by empno desc
+	</select>
+	
+	<select id="emp" parameterType="String" resultType="user.domain.EmpDto">
+		select *,(select dname from dept where dept.deptno = employee.deptno) as dname from employee where id = #{id}
+	</select>
+	
+	<update id="upd" parameterType="map">
+		update employee set deptno = #{deptno}, level = #{level}, salary = #{salary} where id = #{id}
+	</update>
+	
+	<delete id="del" parameterType="String">
+		delete from employee where id = #{id}
+	</delete>
+</mapper>
