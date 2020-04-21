@@ -1,6 +1,7 @@
 package contact.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import contact.domain.ContactDto;
 
@@ -19,4 +20,6 @@ public interface ContactDao {
 	
 	//연락처 뷰 페이지 
 	public ContactDto read(int num) throws Exception;
+
+	
 }

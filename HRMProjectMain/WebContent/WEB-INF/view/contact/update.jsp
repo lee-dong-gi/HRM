@@ -17,21 +17,40 @@
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
   <!-- Custom styles for this template-->
   <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
-$(function(){
-	$("#save").click(function(){
-		confirm("수정하시겠습니까?")
-		document.update.submit();
-		});
-});
+<% int approval = (int)session.getAttribute("approval");
+boolean flag;
+if(approval==2){
+   flag=true;
+}else{
+   flag=false;
+}
+%>
+$(document).ready(function(){
+	  $("#save").click(function(){
+		  var name = $("#name").val();
+		  if(name == ""){
+			  alert("이름을 입력하세요");
+			  document.update.name.focus();
+			  return false;
+			  }
+		  if($("#group").val() == ""){
+			  alert("그룹을 선택하세요");
+			  return false;
+			  }
+		  if(confirm("등록하시겠습니까?")){
+			  document.insert.submit();
+				  } else {
+					  return false;}
+		  
+		  });
+	  });
+
 $(function selectGroup(){
 	var url="groups.do";
 	$.ajax({
@@ -52,25 +71,25 @@ $(function selectGroup(){
 </script>
 </head>
 <body id="page-top">
-
-  <!-- Page Wrapper -->
+ <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <br/>
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
+        <div class="sidebar-brand-icon rotate-n-15">
+        </div>
+        <div class="sidebar-brand-text mx-3">HRM<sup>Project</sup></div>
       </a>
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
-	<br/>
+	<br>
 
-				<!-- Heading -->
+      <!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
@@ -91,51 +110,58 @@ $(function selectGroup(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+     <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
-      
-      <!-- Divider -->
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
+      <%}%>
+ 
+     <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-				
-	<!-- Sidebar Toggler (Sidebar) -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -216,35 +242,34 @@ $(function selectGroup(){
             </div>
             <div class="card-body">
               <div class="table-responsive">
-<form name="update" method="post">
+<form name="update" method="post" >
 
  <div class="col-sm-6 mb-3 mb-sm-0">
-그룹 : <br>
-   <select id="group" name="gnum">
+그룹 : <br> <select id="group" name="gnum">
      <option value="">::그룹선택::</option>
    </select>
 
 </div>
 
 <div class="col-sm-6 mb-3 mb-sm-0">
-이름 : <input name="name" id="name" size="30" placeholder="이름을 입력하세요"  class="form-control form-control-user">
+이름 :<input value="${dto.name}" name="name" id="name" size="30"  class="form-control form-control-user">
 </div>
 <div class="col-sm-6 mb-3 mb-sm-0">
-직급/부서 : <input name="level" id="level" size="30" placeholder="직급/부서를 입력하세요"  class="form-control form-control-user">
+직급/부서 : <input value="${dto.level}" name="level" id="level" size="30"  class="form-control form-control-user">
 </div>
 <div class="col-sm-6 mb-3 mb-sm-0">
-회사명 : <input name="compname" id="compname" size="30" placeholder="회사명 입력하세요" class="form-control form-control-user">
+회사명 : <input value="${dto.compname}" name="compname" id="compname" size="30" class="form-control form-control-user">
 </div>
 <div class="col-sm-6 mb-3 mb-sm-0">
-이메일 : <input name="email" id="email" size="30" placeholder="이메일을 입력하세요" class="form-control form-control-user">
+이메일 : <input value="${dto.email}" name="email" id="email" size="30" class="form-control form-control-user">
 </div>
 <div class="col-sm-6 mb-3 mb-sm-0">
-전화번호 : <input name="phonenum" id="phonenum" size="30" placeholder="전화번호를 입력하세요" class="form-control form-control-user">
+전화번호 : <input value="${dto.phonenum}" name="phonenum" id="phonenum" size="30" class="form-control form-control-user">
 </div>
 
 
 <div class="col-sm-6 mb-3 mb-sm-0" style="margin-top:20px">
- <button id="svae" class="btn btn-primary btn-icon-split">
+ <button id="save" class="btn btn-primary btn-icon-split">
        <span class="text">수정</span></button></div>
  </form>
 

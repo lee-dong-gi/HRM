@@ -1,6 +1,7 @@
 package contact.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -41,5 +42,6 @@ public class ContactDaoImpl extends SqlSessionDaoSupport  implements ContactDao 
 		// TODO Auto-generated method stub
 		return getSqlSession().selectOne("contact.read", num);
 	}
+
 
 }

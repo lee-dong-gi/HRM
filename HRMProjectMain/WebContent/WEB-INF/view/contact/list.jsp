@@ -20,10 +20,20 @@
   <!-- Custom styles for this template-->
   <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
+<script src="http://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script> 
+<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
 
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script>
 
+
+<script type="text/javascript">
+<% int approval = (int)session.getAttribute("approval");
+boolean flag;
+if(approval==2){
+   flag=true;
+}else{
+   flag=false;
+}
+%>
 $(document).ready(function(){
 	$("#btnadd").click(function(){
 		location.href="contact/insert.do";
@@ -32,28 +42,68 @@ $(document).ready(function(){
 		location.href="contact/glist.do";
 		});
 });
+
+
+function checkFileType(filePath) {
+  var fileFormat = filePath.split(".");
+
+  if (fileFormat.indexOf("xls") > -1 || fileFormat.indexOf("xlsx") > -1) {
+    return true;
+    } else {
+    return false;
+  }
+}
+
+function check() {
+
+  var file = $("#excelFile").val();
+
+  if (file == "" || file == null) {
+  alert("파일을 선택해주세요.");
+
+  return false;
+  } else if (!checkFileType(file)) {
+  alert("엑셀 파일만 업로드 가능합니다.");
+
+  return false;
+  }
+
+  if (confirm("업로드 하시겠습니까?")) {
+
+   var options = {
+      success : function(data) {
+        alert("모든 데이터가 업로드 되었습니다.");
+      },
+      type : "POST",
+      processData: false, 
+      contentType: false, 
+      };
+   $("#excelUploadForm").ajaxSubmit(options);
+   
+  }
+}
 </script>
 </head>
 <body id="page-top">
-
-  <!-- Page Wrapper -->
+ <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <br/>
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
+        <div class="sidebar-brand-icon rotate-n-15">
+        </div>
+        <div class="sidebar-brand-text mx-3">HRM<sup>Project</sup></div>
       </a>
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
-	<br/>
+	<br>
 
-				<!-- Heading -->
+      <!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
@@ -74,51 +124,58 @@ $(document).ready(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+   <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
-      
-      <!-- Divider -->
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
+      <%}%>
+ 
+     <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-				
-	<!-- Sidebar Toggler (Sidebar) -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -223,12 +280,49 @@ $(document).ready(function(){
     </c:forEach>
 </table>
 </div>
-     <div id="pageCount" style="display:inline">
-	<span id="pageCo" style="display:inline"></span>
+    </div>
+          </div>
+   
+  <!-- 연락처 내보내기/ 업로드 -->
+    <!-- Collapsable Card Example -->
+  <div class="card shadow mb-4">
+  <!-- Card Header - Accordion -->
+    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+    <h6 class="m-0 font-weight-bold text-primary">연락처 내보내기</h6> </a>
+   <!-- Card Content - Collapse -->
+      <div class="collapse hide" id="collapseCardExample">
+       <div class="card-body">
+     	<form id="excelForm" name="excelForm" method="post" action="contact/exceldown.do">
+    	 <input type="text" name="fileName" placeholder="파일명을 입력하세요">
+    	 <input type="submit" value="연락처 내보내기" class="btn btn-secondary btn-sm">     
+    	</form>
+      </div>
+    </div>
+  </div>
+  
+   <!-- Collapsable Card Example -->
+  <div class="card shadow mb-4">
+  <!-- Card Header - Accordion -->
+    <a href="#collapseCardExample1" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+    <h6 class="m-0 font-weight-bold text-primary">엑셀 업로드</h6> </a>
+   <!-- Card Content - Collapse -->
+      <div class="collapse hide" id="collapseCardExample1">
+       <div class="card-body">
+     			<form id="excelUploadForm" name="excelUploadForm" enctype="multipart/form-data"
+    				method="post" action= "contact/excelUploadAjax.do">
+   				 <div class="contents">
+   					
+       				 <input id="excelFile" type="file" name="excelFile" />
+      					<button type="button" id="addExcelImpoartBtn" class="btn btn-secondary btn-sm" onclick="check()" ><span>업로드</span></button>
+            			</div>
+   						</form>
+      </div>
+    </div>
+  </div>
+  
 
-	</div>
-          </div>
-          </div>
+     
+          
         <!-- /.container-fluid -->
           <!-- End of Main Content -->
 
@@ -278,6 +372,8 @@ $(document).ready(function(){
 
   <!-- Custom scripts for all pages-->
   <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
-        
+        	
+<script src="http://malsup.github.com/jquery.form.js"></script>
+ 
 </body>
 </html>

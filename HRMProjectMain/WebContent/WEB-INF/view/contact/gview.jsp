@@ -11,6 +11,26 @@
   <meta name="author" content="">
 
 <title>HRM Project Net -그룹 정보</title>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+<% int approval = (int)session.getAttribute("approval");
+boolean flag;
+if(approval==2){
+   flag=true;
+}else{
+   flag=false;
+}
+%>
+
+//그룹에 속한 인원이 있을 시 삭제 못한다는 알림창 띄우기 
+$(document).ready(function(){
+	$("#delete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			} else{ return false; }
+		})
+})
+</script>
 <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -20,25 +40,25 @@
 
 </head>
 <body id="page-top">
-
-  <!-- Page Wrapper -->
+ <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <br/>
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/HRMProjectMain/jsp/user/main">
-        	<div class="sidebar-brand-text mx-3" style="font-size: 20px">HRM<sup>Project</sup></div>
+        <div class="sidebar-brand-icon rotate-n-15">
+        </div>
+        <div class="sidebar-brand-text mx-3">HRM<sup>Project</sup></div>
       </a>
 
       <!-- Divider -->
       <!-- <hr class="sidebar-divider my-0"> -->
 
-	<br/>
+	<br>
 
-				<!-- Heading -->
+      <!-- Heading -->
       <div class="sidebar-heading">
        	 메뉴
       </div>
@@ -59,51 +79,58 @@
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="fas fa-fw"></i>
-          <span>투표</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
           <i class="fas fa-fw"></i>
           <span>근태관리</span>
         </a>
       </li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-					class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed"
-				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-					<span>자유게시판</span>
-			</a></li>
-			<li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+         class="fas fa-fw"></i> <span>공지사항</span>
+      </a></li>
+   <li class="nav-item"><a class="nav-link collapsed"
+      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+         <span>자유게시판</span>
+   </a></li>
+   <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
-          <span>조직도</span>
+          <span>연락처</span>
         </a>
       </li>
-      <li class="nav-item">
+     <%if(flag){ %>
+       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
         </a>
       </li>
-      
-      <!-- Divider -->
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
+      <%}%>
+ 
+     <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
-				
-	<!-- Sidebar Toggler (Sidebar) -->
+
+      <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
       </div>
@@ -190,7 +217,7 @@
  <tr>
    <td colspan="4"> 
    <b> 그룹이름 : ${gdto.gname}</b><br>
-    <b> 번호 : ${gdto.gnum}</b><br>
+   
 </td>
  </tr>
  </thead>
@@ -204,7 +231,7 @@
 
 
 <a href="contact/gupdate.do?gnum=${gdto.gnum }" class="btn btn-secondary btn-sm">수정</a>
-<a href="contact/gdelete.do?gnum=${gdto.gnum }" class="btn btn-secondary btn-sm">삭제 </a>
+<a href="contact/gdelete.do?gnum=${gdto.gnum }" id="delete" class="btn btn-secondary btn-sm">삭제 </a>
  </div>
           </div>
           </div>

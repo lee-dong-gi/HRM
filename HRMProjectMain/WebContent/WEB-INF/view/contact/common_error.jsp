@@ -2,29 +2,8 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-<meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-
-<title>HRM Project Net - 그룹 추가</title>
-
- <!-- Custom fonts for this template-->
-  <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <!-- Custom styles for this template-->
-  <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
-
-
-
-<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script>
-<% int approval = (int)session.getAttribute("approval");
+<% 
+int approval = (int)session.getAttribute("approval");
 boolean flag;
 if(approval==2){
    flag=true;
@@ -32,20 +11,31 @@ if(approval==2){
    flag=false;
 }
 %>
+<head>
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+<title>HRM Project Net -그룹 정보</title>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script>
+//그룹에 속한 인원이 있을 시 삭제 못한다는 알림창 띄우기 
 $(document).ready(function(){
-	$("#btnSave").click(function(){
-		var gname=$("#gname").val();
-		if(gname==""){
-			alert("그룹이름을 입력하세요");
-			document.form1.gname.focus();
-			return false;
-			}
-		if(confirm("등록하시겠습니까?")){
-		document.form1.submit();
-		} else { return false; }
-		});
-});
+	$("#delete").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			} else{ return false; }
+		})
+})
 </script>
+<!-- Custom fonts for this template-->
+  <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 <body id="page-top">
@@ -72,15 +62,13 @@ $(document).ready(function(){
        	 메뉴
       </div>
 	 <hr class="sidebar-divider">
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
         </a>
       </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
           <i class="fas fa-fw"></i>
@@ -115,7 +103,7 @@ $(document).ready(function(){
           <span>연락처</span>
         </a>
       </li>
-<%if(flag){ %>
+     <%if(flag){ %>
        <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
@@ -209,25 +197,35 @@ $(document).ready(function(){
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">그룹</h1>
+            <h1 class="h3 mb-0 text-gray-800">ERROR</h1>
           </div>
 		<hr class="sidebar-divider">
-<!-- Content Row -->
+       	<!-- Content Row -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">그룹추가</h6>
+              <h6 class="m-0 font-weight-bold text-primary">
+              <a href="/HRMProjectMain/jsp/contact/contact/glist.do" class="btn btn-secondary btn-sm">목록으로</a>
+              </h6>
             </div>
             <div class="card-body">
-<form name="form1" method="post" action='<c:url value='contact/gwrite.do'/>'>
-<div>
-그룹이름 : <input name="gname" id="gname" size="30" placeholder="그룹이름을 입력하세요">
+              <div class="table-responsive">
+              <div class="card mb-4 py-3 border-bottom-danger">
+                <div class="card-body">
+                <h6>error : 그룹에 속한 연락처가 있어 삭제할 수 없습니다.</h6>
+                </div>
+              </div>
+
 </div>
-<button id="btnSave" class="btn btn-secondary btn-sm">등록</button> 
+     <div id="pageCount" style="display:inline">
+	<span id="pageCo" style="display:inline"></span>
 
+</div>
+          </div>
+          </div>
+        <!-- /.container-fluid -->
+          <!-- End of Main Content -->
 </form>
-  <!-- End of Main Content -->
-
-      <!-- Footer -->
+ <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">

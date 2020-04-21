@@ -27,16 +27,17 @@ where num = #{num}
 
 <!-- 연락처 자세히보기  -->
 <select id="read"  resultType="contact.domain.ContactDto">
-select name, gname, phonenum, level, email,compname, num, contact.gnum 
-from contact,cgroup 
-where contact.gnum = cgroup.gnum and num = #{num};
+select *
+from contact LEFT OUTER JOIN cgroup on contact.gnum = cgroup.gnum 
+where num = #{num}
 </select>
 
 
 <!-- 연락처 목록 -->
 <select id="list" resultType="contact.domain.ContactDto">
-select num, gnum, gname,name,level,compname,email,phonenum  
-from contact natural join cgroup
+<!-- select num, gnum, gname,name,level,compname,email,phonenum  
+from contact natural join cgroup -->
+select * from contact LEFT OUTER JOIN cgroup on contact.gnum = cgroup.gnum;
 </select>
 
 <!-- 그룹 목록 -->
@@ -68,5 +69,41 @@ select gname, gnum
 from cgroup 
 where gnum = #{gnum}
 </select>
+
+
+<!-- 엑셀 파일 insert -->
+<!-- <insert id="insertExcel">
+insert into contact(name, level, compname, email, phonenum)
+values<foreach collection="excelContent" item="item" separator=",">
+(#{item.A}, #{item.B}, #{item.C}, #{item.D}, #{item.E})</foreach>
+ -->
+ <insert id="insertExcel">
+    insert into contact(
+            name,
+            level,
+            compname,
+            email, 
+            phonenum
+        )
+<!--         values
+      	 ( 
+            #{name},
+            #{level},
+            #{compname},
+            #{email},
+            #{phonenum}            
+        )
+ -->
+values  
+<foreach collection="excelContent" item="item" separator=",">
+        (
+            #{item.A},
+            #{item.B},
+            #{item.C},
+            #{item.D},
+            #{item.E}        
+        )
+    </foreach>
+  </insert>
 
 </mapper>
