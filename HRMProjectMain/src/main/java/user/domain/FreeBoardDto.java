@@ -12,8 +12,14 @@ public class FreeBoardDto {
 	private String content;
 	private Date time;
 	private int ccount;
+	private int hit;
 	
-	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	public int getCcount() {
 		return ccount;
 	}

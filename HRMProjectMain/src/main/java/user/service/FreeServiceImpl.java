@@ -98,4 +98,11 @@ public class FreeServiceImpl implements FreeService {
 	public FreeBoardDto commentCount2(int num) throws Exception {
 		return dao.commentCount2(num);
 	}
+	
+	@Override
+	public int hit(int num) throws Exception {
+		return dao.hit(num);
+		
+	}
 }
+

@@ -15,6 +15,14 @@ public class UserVO {
 	private int approval;
 	private String level;
 	private int deptno;
+	private int emailcheck;
+	
+	public int getEmailcheck() {
+		return emailcheck;
+	}
+	public void setEmailcheck(int emailcheck) {
+		this.emailcheck = emailcheck;
+	}
 	public int getEmpno() {
 		return empno;
 	}
