@@ -49,4 +49,17 @@
 		<url-pattern>/jsp/*</url-pattern><!-- jsp로 시작하는 경로-->
   </servlet-mapping> 
   
+<error-page>
+    <exception-type>java.lang.Throwable</exception-type>
+    <location>/WEB-INF/view/errorpage/error.jsp</location>
+</error-page>
+<error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/view/errorpage/404.jsp</location>
+</error-page>
+<error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/view/errorpage/500.jsp</location>
+</error-page>
+
 </web-app>

@@ -220,8 +220,8 @@ input[type="submit"] {
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
-				<div class="card shadow mb-4">
-					<div class="card-header py-3">
+				<div class="card shadow mb-5">
+					<div class="card-header py-4">
 						<h3>
 							<a class="d-flex" href="/HRMProjectMain/jsp/attd/attd.do"> <strong>조 회 AttendanceManagement</strong>
 							</a>
@@ -234,12 +234,18 @@ input[type="submit"] {
 							<input id="startDate" name="startDate" type="date" class="btn btn-outline-secondary btn-sm" /> ~ <span><input id="endDate" name="endDate" type="date" class="btn btn-outline-secondary btn-sm" /></span>
 						</div>
 						<div style="display: inline">
-							<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf002;" onclick="searchDate()"/>
+							<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf002;" onclick="searchDate()" />
 						</div>
 
 						<div style="display: inline">
 							<form id="excelDown" action="excelDown" method="post" style="display: inline">
 								<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf381;" />
+							</form>
+						</div>
+					
+						<div style="display: inline">
+							<form id="pdf" action="pdf" method="get" style="display: inline">
+								<input type="submit" class="btn btn-outline-secondary btn-sm" value="&#xf1c1;" />
 							</form>
 						</div>
 

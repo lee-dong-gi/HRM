@@ -349,6 +349,14 @@ public class AttdController implements ApplicationContextAware {
 		wb.write(response.getOutputStream());
 		wb.close();
 	}
+	
+	// pdf 다운
+	@RequestMapping("/pdf")
+	public ModelAndView downloadPdf(HttpSession hs) throws Exception {		
+		List<AttdDto> list = excelList;
+		ModelAndView mav = new ModelAndView("pdf", "fileName", list);		
+		return mav;
+	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
