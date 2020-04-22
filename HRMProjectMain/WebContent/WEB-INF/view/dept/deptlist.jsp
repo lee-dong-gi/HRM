@@ -23,6 +23,7 @@
 <script type="text/javascript">
 <%String username = (String)session.getAttribute("name");
 int approval = (int)session.getAttribute("approval");
+String userid = (String)session.getAttribute("id");
 boolean flagg;
 if(approval==2){
    flagg=true;
@@ -204,6 +205,18 @@ function touppage(){
           <span>부서관리</span>
         </a>
       </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
       <%}%>
       
       <!-- Divider -->
@@ -257,7 +270,7 @@ function touppage(){
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	프로필
                 </a>

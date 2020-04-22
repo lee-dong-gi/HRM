@@ -351,7 +351,7 @@ function sendmail(){
 							
 							<br> <br> <input style="width: 80px;" type="button"
 								value="취소" class="btn btn-primary btn-sm"
-								onclick="location.href='/HRMProjectMain/jsp/user/login'">
+								onclick="location.href='javascript:history.go(-1)'">
 							<input style="width: 80px;" type="submit" value="가입"
 								class="btn btn-primary btn-sm">
 

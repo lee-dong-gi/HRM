@@ -10,7 +10,7 @@ public class CommonException {
 	public ModelAndView commonException(Exception e) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exception", e);
-		mav.setViewName("contact/common_error");
+//		mav.setViewName("contact/common_error");
 		return mav;
 	}
 }
