@@ -244,7 +244,7 @@ String userid = (String)session.getAttribute("id");
 						<div class="card-body">
 							<form name="update" method="post">
 								<b> 그룹이름 : <input name="gname" id="gname"
-									value="${gdto.gname}">${gdto.gname}</b>
+									value="${gdto.gname}"></b>
 								</td>
 								<button id="gupdate" class="btn btn-secondary btn-sm">수정완료</button>
 							</form>
