@@ -258,7 +258,18 @@ $(function(){
 			})
 		    .fail(function(e) {
 		    }) 
-
+		   
+		   //공지사항
+		 var url = "/HRMProjectMain/jsp/notice/mainPost";
+		$.ajax({
+			type:"post"		
+			,url:url		
+			,dataType:"json" }) 
+			.done(function(args){
+				$("#noticename").append(args.subject);
+				$("#noticeArticle").append("<a href='/HRMProjectMain/jsp/notice/notice?num="+args.num+"' style='color:gray;'><i class='fa fa-eye fa-2x text-gray-300'></i></a>");			})
+		    .fail(function(e) {
+		    })
 		    /*****************
 		     BUILD THE SLIDER
 		    *****************/
@@ -273,7 +284,8 @@ $(function(){
 		    $('#previous').click(function(){
 		        slideLeft();
 		    });
-		    
+
+		
 		    
 		    
 		    /*************************
@@ -533,11 +545,10 @@ function pagination(){
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">대표 공지사항</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">코로나19 조심</div><!--게시판에서 공지사항 받아오기 -->
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">공지사항</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id="noticename"></div><!--게시판에서 공지사항 받아오기 -->
                     </div>
-                    <div class="col-auto">
-                      <i class="fa fa-eye fa-2x text-gray-300"></i>
+                    <div class="col-auto"  id="noticeArticle">
                     </div>
                   </div>
                 </div>

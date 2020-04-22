@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -154,6 +155,15 @@ public class NoticeController {
 		}
 		Gson gson = new Gson();
 		return gson.toJson(s);
+	}
+	
+	// 메인페이지
+	@RequestMapping("notice/mainPost")
+	@ResponseBody
+	public String mainPost() throws Exception {
+		NoticeDto nd = service.mainPost();
+		Gson gson = new Gson();
+		return gson.toJson(nd);
 	}
 
 }

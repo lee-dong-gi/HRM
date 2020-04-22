@@ -53,4 +53,9 @@ public class NoticeService {
 	public int searchCount(String s) throws Exception {
 		return dao.searchCount(s);
 	}
+	
+	// 검색한 공지사항 카운트
+	public NoticeDto mainPost() throws Exception {
+		return dao.mainPost();
+	}
 }
