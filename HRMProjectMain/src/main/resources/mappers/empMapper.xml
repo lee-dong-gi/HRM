@@ -5,7 +5,7 @@
 
 <mapper namespace="emp">
 	<insert id="emp" parameterType="user.domain.EmpDto">
-insert into employee(empno,name, id, passwd, birth, email, phonenum, deptno, hiredate, approval, level)
+	insert into employee(empno,name, id, passwd, birth, email, phonenum, deptno, hiredate, approval, level)
 		values(#{empno},#{name},#{id},#{passwd},#{birth},#{email},#{phonenum},#{deptno},#{hiredate},#{approval},#{level})
 	</insert>
 
@@ -36,4 +36,14 @@ insert into employee(empno,name, id, passwd, birth, email, phonenum, deptno, hir
 	<select id="signupCount" resultType="int">
 		select count(*) from signup
 	</select>
+	
+	<select id="myInfo" resultType="user.domain.EmpDto" parameterType="String">
+		select name,id,birth,email,phonenum,hiredate,deptno,level from employee where id=#{id}
+	</select>
+	
+	<update id="modify" parameterType="user.domain.EmpDto">
+		update employee set passwd=#{passwd}, birth=#{birth}, email=#{email}, phonenum=#{phonenum} WHERE id=#{id}
+	</update>
+	
+	
 </mapper>

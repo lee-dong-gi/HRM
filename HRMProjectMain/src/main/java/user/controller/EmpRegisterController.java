@@ -3,6 +3,9 @@ package user.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.jws.WebParam.Mode;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,5 +138,31 @@ public class EmpRegisterController {
 		}
 		Gson gson = new Gson();
 		return gson.toJson(s);
+	}
+	
+	@RequestMapping("emp/myinfo")
+	public String myInfo(Model model, String id) throws Exception {
+		EmpDto myId = service.myInfo(id);
+		model.addAttribute("myInfo", myId);
+		return "emp/myinfo";
+		
+	}
+
+	@RequestMapping(value = "emp/modify", method = RequestMethod.GET)
+	public String modifyForm(Model model,EmpDto dto) throws Exception {
+		System.out.println(dto.getId());
+		EmpDto myId = service.myInfo(dto.getId());
+		model.addAttribute("modify", myId);
+		return "emp/modify";
+	}
+	
+	@RequestMapping(value = "emp/modify", method = RequestMethod.POST)
+	public String modify(Model model,EmpDto dto) throws Exception {
+		String hashedPw = BCrypt.hashpw(dto.getPasswd(), BCrypt.gensalt());
+		dto.setPasswd(hashedPw);
+		service.modify(dto);
+		System.out.println(dto.getId());
+		model.addAttribute("myInfo", service.myInfo(dto.getId()));
+		return "emp/myinfo";
 	}
 }
