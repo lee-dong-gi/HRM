@@ -333,7 +333,7 @@ function chageSelect(){
                 	<a href="appadmin?pageNum=1" class="btn btn-secondary btn-sm">결재자지정</a>
                 <%}%>
                <div id="pageCount" style="display:inline; align-content: center; margin:10% 10% 10% 30%;">
-				<span id="pageCo" style="display:inline"></span>
+				<span id="pageCo" style="display:inline; margin-left: 50px"></span> 
 			<form action="selectArticle" method="post" style="display:inline; float: right;">
 			<input type="hidden" name="pageNum" value="1">
 			<select id="selector" name="selector" class="form-control-sm">
