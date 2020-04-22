@@ -239,12 +239,11 @@ String userid = (String)session.getAttribute("id");
 					<!-- Content Row -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary"></h6>
+							<h6 class="m-0 font-weight-bold text-primary">그룹수정</h6>
 						</div>
 						<div class="card-body">
 							<form name="update" method="post">
-								<b> 그룹이름 : <input name="gname" id="gname"
-									value="${gdto.gname}"></b>
+								<b> 그룹이름 : <input name="gname" id="gname" value="${gdto.gname}"></b>
 								</td>
 								<button id="gupdate" class="btn btn-secondary btn-sm">수정완료</button>
 							</form>
