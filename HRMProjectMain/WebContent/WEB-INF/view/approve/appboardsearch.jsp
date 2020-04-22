@@ -312,7 +312,7 @@ String userid = (String)session.getAttribute("id");%>
                 	결재상신
                 </a>
             <div id="pageCount" style="display:inline; align-content: center; margin:10px 10px 10% 20%;">
-				<span id="pageCo" style="display:inline"></span>
+				<span id="pageCo" style="display:inline; margin-left: 130px"></span> 
 			<form action="selectArticle" method="post" style="display:inline;float: right;">
 			<input type="hidden" name="pageNum" value="1">
 			<select id="selector" name="selector" class="form-control-sm">
