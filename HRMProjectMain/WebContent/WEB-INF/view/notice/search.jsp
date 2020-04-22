@@ -112,7 +112,7 @@ $(function(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+		<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -125,15 +125,15 @@ $(function(){
           <span>근태관리</span>
         </a>
       </li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-         class="fas fa-fw"></i> <span>공지사항</span>
-      </a></li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-         <span>자유게시판</span>
-   </a></li>
-   <li class="nav-item">
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
@@ -144,6 +144,18 @@ $(function(){
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
           <span>부서관리</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
         </a>
       </li>
       <%}%>
@@ -210,7 +222,7 @@ $(function(){
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> <i
+								<a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 								</a>
 

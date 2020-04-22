@@ -22,6 +22,7 @@
 <script type="text/javascript">
 <%String username = (String)session.getAttribute("name");
 int approval = (int)session.getAttribute("approval");
+String userid = (String)session.getAttribute("id");
 boolean flagg;
 if(approval==2){
    flagg=true;
@@ -265,7 +266,7 @@ function todelpage(){
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	프로필
                 </a>

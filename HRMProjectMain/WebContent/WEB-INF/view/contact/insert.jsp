@@ -24,6 +24,8 @@
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 <script>
 <% int approval = (int)session.getAttribute("approval");
+String username = (String)session.getAttribute("name");
+String userid = (String)session.getAttribute("id");
 boolean flag;
 if(approval==2){
    flag=true;
@@ -109,7 +111,7 @@ if(approval==2){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+		<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -122,21 +124,21 @@ if(approval==2){
           <span>근태관리</span>
         </a>
       </li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-         class="fas fa-fw"></i> <span>공지사항</span>
-      </a></li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-         <span>자유게시판</span>
-   </a></li>
-   <li class="nav-item">
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
         </a>
       </li>
-           <%if(flag){ %>
+      <%if(flag){ %>
        <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
           <i class="fas fa-fw"></i>
@@ -156,7 +158,6 @@ if(approval==2){
         </a>
       </li>
       <%}%>
- 
      <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -208,7 +209,7 @@ if(approval==2){
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	프로필
                 </a>
