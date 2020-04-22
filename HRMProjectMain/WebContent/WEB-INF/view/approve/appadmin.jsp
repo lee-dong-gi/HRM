@@ -20,7 +20,9 @@
   <!-- Custom styles for this template-->
   <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 <script type="text/javascript">
-<%String username = (String)session.getAttribute("name");%>
+<%String username = (String)session.getAttribute("name");
+
+String userid = (String)session.getAttribute("id");%>
 $(function(){
 	 <%
 	 int count = (int)request.getAttribute("count");
@@ -200,8 +202,8 @@ function appointbtn(){
        	 메뉴
       </div>
 	 <hr class="sidebar-divider">
-            <!-- Nav Item - Pages Collapse Menu -->
-     <li class="nav-item">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
           <i class="fas fa-fw"></i>
           <span>결재</span>
@@ -216,7 +218,7 @@ function appointbtn(){
         </a>
       </li>
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+		<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
           <i class="fas fa-fw"></i>
           <span>캘린더</span>
@@ -229,15 +231,15 @@ function appointbtn(){
           <span>근태관리</span>
         </a>
       </li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-         class="fas fa-fw"></i> <span>공지사항</span>
-      </a></li>
-   <li class="nav-item"><a class="nav-link collapsed"
-      href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-         <span>자유게시판</span>
-   </a></li>
-   <li class="nav-item">
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
         <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
           <i class="fas fa-fw"></i>
           <span>연락처</span>
@@ -315,7 +317,7 @@ function appointbtn(){
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	프로필
                 </a>

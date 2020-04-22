@@ -23,7 +23,7 @@
 <script type="text/javascript">
 <%
 String username = (String)session.getAttribute("name");
-String userid= (String)request.getAttribute("userid");
+String userid = (String)session.getAttribute("id");
 String writerid = (String)request.getAttribute("writerid");
 int approval = (int)request.getAttribute("approval");
 boolean flagg;
@@ -193,7 +193,7 @@ else{appResult="반려";}
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   	프로필
                 </a>
