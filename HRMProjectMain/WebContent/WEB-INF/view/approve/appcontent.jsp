@@ -222,7 +222,7 @@ else{appResult="반려";}
        	<!-- Content Row -->
           <div class="card shadow mb-3">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">결재내용 </h6>
+              <h6 class="m-0 font-weight-bold text-secondary"><img style='height:30px; float:left;' class='img-profile rounded-circle' src="${pageContext.request.contextPath}/resources/img/approve.jpg">결재내용 </h6>
             </div>
             <div class="card-body" style="display:inline;">
               <div class="table-responsive" style="display:inline">
