@@ -44,7 +44,7 @@
 				app.domain,app.persistence,app.service,app.controller,
 				chat.controller,web.socket,chat.domain,chat.persistence,chat.service,
 				attd.controller, attd.service, attd.model, 
-				contact.controller, contact.service, contact.exception, 
+				contact.controller, contact.service,
 				mail.controller,mail.domain,mail.service"/>
 	
 	<!-- dao sqlSessionFactory 주입 -->

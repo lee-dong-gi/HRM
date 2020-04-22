@@ -52,7 +52,7 @@ public class ExcelRead {
 					cell = row.getCell(cellIndex);
 					//cell의 이름을 가지고 옴(A,B,c,D,E)
 					cellName = ExcelCellRef.getName(cell, cellIndex);
-					
+					//추출 컬림 대상이 아니면 for문 반복 
 					if(!excelReadOption.getOutputColumns().contains(cellName)) {
 						continue;
 					}

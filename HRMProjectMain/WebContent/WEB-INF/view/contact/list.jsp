@@ -53,7 +53,6 @@
 
 	function checkFileType(filePath) {
 		var fileFormat = filePath.split(".");
-
 		if (fileFormat.indexOf("xls") > -1 || fileFormat.indexOf("xlsx") > -1) {
 			return true;
 		} else {
@@ -62,6 +61,7 @@
 	}
 
 	function check() {
+		//엑셀 파일 업로드 
 
 		var file = $("#excelFile").val();
 

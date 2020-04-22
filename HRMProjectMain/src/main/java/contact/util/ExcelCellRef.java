@@ -3,7 +3,7 @@ package contact.util;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellReference;
-
+//셀의 이름과 값을 가져옴 
 public class ExcelCellRef {
 
 	public static String getName(Cell cell, int cellIndex) {
@@ -12,6 +12,7 @@ public class ExcelCellRef {
             cellNum = cell.getColumnIndex();
         }
         else {
+        	//셀이 num일 경우 index값을 가져옴 
             cellNum = cellIndex;
         }
         
