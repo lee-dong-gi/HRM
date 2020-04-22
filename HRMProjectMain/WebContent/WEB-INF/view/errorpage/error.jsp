@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HRM Project Net - 404</title>
+  <title>HRM Project Net - error</title>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,7 +34,7 @@
       <div id="content">
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" style="height:850px;">
 
           <!-- 404 Error Text -->
           <div class="text-center">

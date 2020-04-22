@@ -11,7 +11,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>HRM Project Net - 404</title>
+  <title>HRM Project Net - 500</title>
   <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@
         <div class="container-fluid">
 
           <!-- 404 Error Text -->
-          <div class="text-center">
+          <div class="text-center" style="height:850px;">
             <div class="error mx-auto" data-text="500">500</div>
             <p class="lead text-gray-800 mb-5">현재 처리중인 페이지 입니다ㅠㅠ</p>
             <p class="text-gray-500 mb-0">뒤로가기를 눌러주세요!</p>
