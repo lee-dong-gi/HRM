@@ -37,7 +37,7 @@
         <div class="container-fluid">
 
           <!-- 404 Error Text -->
-          <div class="text-center">
+          <div class="text-center" style="height:850px;">
             <div class="error mx-auto" data-text="404">404</div>
             <p class="lead text-gray-800 mb-5">요청하신 페이지를 찾을수 없습니다 ㅠㅠ</p>
             <p class="text-gray-500 mb-0">뒤로가기를 눌러주세요!</p>
