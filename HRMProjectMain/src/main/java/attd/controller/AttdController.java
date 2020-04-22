@@ -1,7 +1,6 @@
 package attd.controller;
 
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -161,15 +160,11 @@ public class AttdController implements ApplicationContextAware {
 					attdDto.setAttd_time(new Date());
 					attdDto.setOff_time(new Date());
 
-					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-					long time1 = attdDto.getAttd_time().getTime();
-					long time2 = 0;
-					String str = "09:00:00";
-					try {
-						time2 = dateFormat.parse(str).getTime();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					SimpleDateFormat dateFormat = new SimpleDateFormat("HHmmss");
+					String strtime = dateFormat.format(attdDto.getAttd_time());
+					int time1 = Integer.parseInt(strtime);
+					int time2 = 110000;				
+					
 					String rs = "";
 					if (time1 > time2) {
 						rs = "지각";

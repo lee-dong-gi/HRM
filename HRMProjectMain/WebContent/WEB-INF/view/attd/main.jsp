@@ -17,7 +17,20 @@
 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <!-- Custom styles for this template-->
 <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
+<script type="text/javascript">
+<%
+String username = (String)session.getAttribute("name");
+int approval = (int)session.getAttribute("approval");
+String userid = (String)session.getAttribute("id");
 
+boolean flag;
+if(approval==2){
+	flag=true;
+}else{
+	flag=false;
+}
+%>
+</script>
 </head>
 <body id="page-top">
 
@@ -41,32 +54,73 @@
 			<br />
 
 			<!-- Heading -->
-			<div class="sidebar-heading">메뉴</div>
-			<hr class="sidebar-divider">
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0"> <i class="fas fa-fw"></i> <span>결재</span>
-			</a></li>
+			<div class="sidebar-heading">
+       	 메뉴
+      </div>
+	 <hr class="sidebar-divider">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
+          <i class="fas fa-fw"></i>
+          <span>결재</span>
+        </a>
+      </li>
 
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom"> <i class="fas fa-fw"></i> <span>채팅</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>캘린더</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>투표</span>
-			</a></li>
-			<!-- Nav Item - Utilities Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>근태관리</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/notice/list?now=1"> <i class="fas fa-fw"></i> <span>공지사항</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i> <span>자유게시판</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="#"> <i class="fas fa-fw"></i> <span>조직도</span>
-			</a></li>
-			<li class="nav-item"><a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1"> <i class="fas fa-fw"></i> <span>부서관리</span>
-			</a></li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
+          <i class="fas fa-fw"></i>
+          <span>채팅</span>
+        </a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+		<li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
+          <i class="fas fa-fw"></i>
+          <span>캘린더</span>
+        </a>
+      </li>
+      <!-- Nav Item - Utilities Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
+          <i class="fas fa-fw"></i>
+          <span>근태관리</span>
+        </a>
+      </li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+			class="fas fa-fw"></i> <span>공지사항</span>
+		</a></li>
+	<li class="nav-item"><a class="nav-link collapsed"
+		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+			<span>자유게시판</span>
+	</a></li>
+	<li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
+          <i class="fas fa-fw"></i>
+          <span>연락처</span>
+        </a>
+      </li>
+      <%if(flag){ %>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
+          <i class="fas fa-fw"></i>
+          <span>부서관리</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
+          <i class="fas fa-fw"></i>
+          <span>인사등록</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
+          <i class="fas fa-fw"></i>
+          <span>인사관리</span>
+        </a>
+      </li>
+      <%}%>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
@@ -115,7 +169,7 @@
 						<li class="nav-item dropdown no-arrow"><a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="mr-2 d-none d-lg-inline text-gray-600 small">${name}</span> <img class="img-profile rounded-circle" src="${pageContext.request.contextPath}/resources/img/profile.png">
 						</a> <!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
+								<a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}"> <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 								</a>
 
 								<div class="dropdown-divider"></div>
