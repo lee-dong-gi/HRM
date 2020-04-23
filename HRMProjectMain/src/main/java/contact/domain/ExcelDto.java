@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 public class ExcelDto {
+	
 	String name;
 	String level;
 	String compname;
 	String email;
 	String phonenum;
 	List<Map<String, String>>excelContent;
+
 
 	public List<Map<String, String>> getExcelContent() {
 		return excelContent;

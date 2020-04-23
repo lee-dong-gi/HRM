@@ -77,6 +77,7 @@ insert into contact(name, level, compname, email, phonenum)
 values<foreach collection="excelContent" item="item" separator=",">
 (#{item.A}, #{item.B}, #{item.C}, #{item.D}, #{item.E})</foreach>
  -->
+ <!-- 
  <insert id="insertExcel">
     insert into contact(
             name,
@@ -85,16 +86,7 @@ values<foreach collection="excelContent" item="item" separator=",">
             email, 
             phonenum
         )
-<!--         values
-      	 ( 
-            #{name},
-            #{level},
-            #{compname},
-            #{email},
-            #{phonenum}            
-        )
- -->
-values  
+        values  
 <foreach collection="excelContent" item="item" separator=",">
         (
             #{item.A},
@@ -103,7 +95,27 @@ values
             #{item.D},
             #{item.E}        
         )
-    </foreach>
+    </foreach> 
+    -->
+    <!-- 그룹번호 추가 -->
+    <insert id="insertExcel">
+    insert into contact(
+            name,
+            level,
+            compname,
+            email, 
+            phonenum
+        )
+        values  
+<foreach collection="excelContent" item="item" separator=",">
+        (
+            #{item.B},
+            #{item.C},
+            #{item.D},
+            #{item.E},
+            #{item.F}        
+        )
+    </foreach> 
   </insert>
 
 </mapper>

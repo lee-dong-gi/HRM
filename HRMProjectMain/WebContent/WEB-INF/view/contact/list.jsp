@@ -82,6 +82,7 @@ String userid = (String)session.getAttribute("id");
 			var options = {
 				success : function(data) {
 					alert("모든 데이터가 업로드 되었습니다.");
+					location.reload();
 				},
 				type : "POST",
 				processData : false,
@@ -103,8 +104,7 @@ String userid = (String)session.getAttribute("id");
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a
-				class="sidebar-brand d-flex align-items-center justify-content-center"
+			<a class="sidebar-brand d-flex align-items-center justify-content-center"
 				href="/HRMProjectMain/jsp/user/main">
 				<div class="sidebar-brand-icon rotate-n-15"></div>
 				<div class="sidebar-brand-text mx-3">
@@ -280,8 +280,9 @@ String userid = (String)session.getAttribute("id");
 										class="btn btn-secondary btn-sm">그룹관리</button></span>
 							</h6>
 						</div>
-						<div class="card-body">
+						<div class="card-body" id="contactlist">
 							<div class="table-responsive">
+							
 								<table class="table table-bordered" id="contact" width="20%"
 									cellspacing="0">
 									<thead>
@@ -304,10 +305,11 @@ String userid = (String)session.getAttribute("id");
 											<td>${contact.phonenum}</td>
 									</c:forEach>
 								</table>
-							</div>
+							
+							
 						</div>
 					</div>
-
+					</div>
 					<!-- 연락처 내보내기/ 업로드 -->
 					<!-- Collapsable Card Example -->
 					<div class="card shadow mb-4">

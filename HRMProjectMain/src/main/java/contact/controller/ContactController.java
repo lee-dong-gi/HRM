@@ -292,9 +292,9 @@ public class ContactController {
 			objCell.setCellStyle(styleBD);
 			index++;
 			// 셀 너비 설정
-			for (int i = 0; i <= 12; i++) {
+			for (int i = 0; i <= 100; i++) {
 				objSheet.autoSizeColumn(i);
-				objSheet.setColumnWidth(i, (objSheet.getColumnWidth(i)) + (short) 0124);
+				objSheet.setColumnWidth(i, (objSheet.getColumnWidth(i)) + (short)0124);
 			}
 
 		}
