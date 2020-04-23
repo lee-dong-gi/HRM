@@ -159,7 +159,7 @@ String chattingname = (String)session.getAttribute("chatname");
        	<!-- Content Row -->
           <div class="card shadow mb-3">
             <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold" style="color:gray;"><%=chattingname%></h6>
+          <h6 class="m-0 font-weight-bold" style="color:gray;"><img style='height:30px; float:left;' class='img-profile rounded-circle' src="${pageContext.request.contextPath}/resources/img/chaticon.jpg"><%=chattingname%></h6>
             </div>
             	<div class="card-body">
               		<div class="table-responsive">    
@@ -171,7 +171,7 @@ String chattingname = (String)session.getAttribute("chatname");
 							</div>
 						<div id="bottom-container">
 							<input id="user" type="hidden" value="<%=username%>">
-							<input id="inputMessage" type="text" class="form-control" style="display: inline">
+							<input id="inputMessage" type="text" class="form-control" style="display: inline;">
 							<input id="btn-submit" type="submit" value="전송" >
 						</div>
 						</div>
@@ -229,10 +229,9 @@ String chattingname = (String)session.getAttribute("chatname");
 			for ( var i in msggSplit ) {
 				if(i==msggSplit.length-1){
 				}else{
-					$('#user-container').append("<span class='chat usernotice'>"+msggSplit[i]+"</span>");
+					$('#user-container').append("<span class='chat usernotice'><img style='height:30px; float:left;' class='img-profile rounded-circle' src='${pageContext.request.contextPath}/resources/img/Contact.PNG'>"+msggSplit[i]+"</span>");
 				}
-		      }
-			/* $('#user-container').append("<span class='chat notice'>"+chatMsg.substring(8,chatMsg.length)+"</span>"); */
+		      } 
 		}else{
 			var $chat = $("<div class='chat-box'><div class='chat'>" + chatMsg + "</div><div class='chat-info chat-box'>"+ dateInfo +"</div></div>");
 			$('#chat-container').append($chat);

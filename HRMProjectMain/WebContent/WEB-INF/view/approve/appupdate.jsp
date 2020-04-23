@@ -295,7 +295,7 @@ function addselect(){
        <div class="row">
           <div class="card shadow mb-4" style="width:100%;">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">결재수정</h6>
+              <h6 class="m-0 font-weight-bold text-secondary"><img style='height:30px; float:left;' class='img-profile rounded-circle' src="${pageContext.request.contextPath}/resources/img/approve.jpg">결재수정</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
