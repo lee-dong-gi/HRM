@@ -109,11 +109,11 @@ values<foreach collection="excelContent" item="item" separator=",">
         values  
 <foreach collection="excelContent" item="item" separator=",">
         (
+            #{item.A},
             #{item.B},
             #{item.C},
             #{item.D},
-            #{item.E},
-            #{item.F}        
+            #{item.E}        
         )
     </foreach> 
   </insert>

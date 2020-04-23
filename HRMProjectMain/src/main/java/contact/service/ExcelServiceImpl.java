@@ -41,7 +41,6 @@ public class ExcelServiceImpl implements ExcelService {
 	    	//	  System.out.println(article.get("D"));
 	    	//	  System.out.println(article.get("E"));     
 	    		  //DTO로 만들어줘서 insert로 삽입 
-	    		  
 	    		  ed.setName(article.get("A"));
 	    		  ed.setLevel(article.get("B"));
 	    		  ed.setCompname(article.get("C"));
