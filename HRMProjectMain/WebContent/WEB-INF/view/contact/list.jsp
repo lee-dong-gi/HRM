@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
- 
+
 <title>HRM Project Net - 연락처</title>
 
 <!-- Custom fonts for this template-->
@@ -36,8 +36,8 @@
 <script type="text/javascript">
 	
 <%int approval = (int) session.getAttribute("approval");
-String username = (String)session.getAttribute("name");
-String userid = (String)session.getAttribute("id");
+			String username = (String) session.getAttribute("name");
+			String userid = (String) session.getAttribute("id");
 			boolean flag;
 			if (approval == 2) {
 				flag = true;
@@ -104,7 +104,8 @@ String userid = (String)session.getAttribute("id");
 			id="accordionSidebar">
 
 			<!-- Sidebar - Brand -->
-			<a class="sidebar-brand d-flex align-items-center justify-content-center"
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
 				href="/HRMProjectMain/jsp/user/main">
 				<div class="sidebar-brand-icon rotate-n-15"></div>
 				<div class="sidebar-brand-text mx-3">
@@ -118,73 +119,57 @@ String userid = (String)session.getAttribute("id");
 			<br>
 
 			<!-- Heading -->
-			<div class="sidebar-heading">
-       	 메뉴
-      </div>
-	 <hr class="sidebar-divider">
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
-          <i class="fas fa-fw"></i>
-          <span>결재</span>
-        </a>
-      </li>
+			<div class="sidebar-heading">메뉴</div>
+			<hr class="sidebar-divider">
+			<!-- Nav Item - Pages Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/approve/appboard?pageNum=1&selectapp=0">
+					<i class="fas fa-fw"></i> <span>결재</span>
+			</a></li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/chat/chatroom">
-          <i class="fas fa-fw"></i>
-          <span>채팅</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-		<li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/cal/calendar">
-          <i class="fas fa-fw"></i>
-          <span>캘린더</span>
-        </a>
-      </li>
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/attd/attd.do">
-          <i class="fas fa-fw"></i>
-          <span>근태관리</span>
-        </a>
-      </li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/notice/list?now=1"> <i
-			class="fas fa-fw"></i> <span>공지사항</span>
-		</a></li>
-	<li class="nav-item"><a class="nav-link collapsed"
-		href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
-			<span>자유게시판</span>
-	</a></li>
-	<li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/contact/list.do">
-          <i class="fas fa-fw"></i>
-          <span>연락처</span>
-        </a>
-      </li>
-      <%if(flag){ %>
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1">
-          <i class="fas fa-fw"></i>
-          <span>부서관리</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/emp">
-          <i class="fas fa-fw"></i>
-          <span>인사등록</span>
-        </a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link collapsed" href="/HRMProjectMain/jsp/manage">
-          <i class="fas fa-fw"></i>
-          <span>인사관리</span>
-        </a>
-      </li>
-      <%}%>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/chat/chatroom"> <i class="fas fa-fw"></i>
+					<span>채팅</span>
+			</a></li>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/cal/calendar"> <i class="fas fa-fw"></i>
+					<span>캘린더</span>
+			</a></li>
+			<!-- Nav Item - Utilities Collapse Menu -->
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/attd/attd.do"> <i class="fas fa-fw"></i>
+					<span>근태관리</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/notice/list?now=1"> <i
+					class="fas fa-fw"></i> <span>공지사항</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/free/list?now=1"> <i class="fas fa-fw"></i>
+					<span>자유게시판</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/contact/list.do"> <i class="fas fa-fw"></i>
+					<span>연락처</span>
+			</a></li>
+			<%
+				if (flag) {
+			%>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/dept/deptlist?pageNum=1"> <i
+					class="fas fa-fw"></i> <span>부서관리</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/emp"> <i class="fas fa-fw"></i> <span>인사등록</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed"
+				href="/HRMProjectMain/jsp/manage"> <i class="fas fa-fw"></i> <span>인사관리</span>
+			</a></li>
+			<%
+				}
+			%>
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">
 
@@ -246,7 +231,8 @@ String userid = (String)session.getAttribute("id");
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="/HRMProjectMain/jsp/emp/myinfo?id=${id}"> <i
+								<a class="dropdown-item"
+									href="/HRMProjectMain/jsp/emp/myinfo?id=${id}"> <i
 									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> 프로필
 								</a>
 
@@ -282,7 +268,7 @@ String userid = (String)session.getAttribute("id");
 						</div>
 						<div class="card-body" id="contactlist">
 							<div class="table-responsive">
-							
+
 								<table class="table table-bordered" id="contact" width="20%"
 									cellspacing="0">
 									<thead>
@@ -305,10 +291,10 @@ String userid = (String)session.getAttribute("id");
 											<td>${contact.phonenum}</td>
 									</c:forEach>
 								</table>
-							
-							
+
+
+							</div>
 						</div>
-					</div>
 					</div>
 					<!-- 연락처 내보내기/ 업로드 -->
 					<!-- Collapsable Card Example -->
