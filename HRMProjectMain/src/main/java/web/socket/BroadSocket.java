@@ -141,9 +141,6 @@ private void userOut() {
 private synchronized void endUser(Session userSession) {
 	StringTokenizer st;
 	String [] array;
-//	sessionUsers.remove(userSession);
-//	HttpsessionUsers.remove(hs);
-//	ChatRoom.remove(UserChatRoom+"/"+userSession.getId());
 	String chatname = (String)hs.getAttribute("chatname");
 	UserVO userVO = (UserVO)hs.getAttribute("login");
 	for(int i = 0; i < sessionUsers.size(); i++) {

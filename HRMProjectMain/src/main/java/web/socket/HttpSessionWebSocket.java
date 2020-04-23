@@ -13,7 +13,6 @@ import chat.controller.ChatController;
 @Component
 public class HttpSessionWebSocket extends ServerEndpointConfig.Configurator{
 	public static final String Session = "Session";
-
 	// EndPointConfig에 HttpSession과 HttpContext를 넣는다. Request와 Response는 웹 요청, 응답시에만 필요한 데이터이기 때문에 필요없다.
 	@Override
 	public void modifyHandshake(ServerEndpointConfig config, HandshakeRequest request, HandshakeResponse response) {

@@ -76,7 +76,7 @@ if(approval==2){
 		$("#approval").append(
 				"<select id='selectapp' name='selectapp' onchange='chageSelect()'class='form-control-sm'>"+
 				 	"<option value='0' selected='selected'>내 결재</option>"+
-				 	"<option value='1'>타 결재<option>"+
+				 	"<option value='1'>타 결재</option>"+
 				 "</select>"
 		);
 		$('#selectappform').val(0);
@@ -84,7 +84,7 @@ if(approval==2){
 		$("#approval").append(
 				"<select id='selectapp' name='selectapp' onchange='chageSelect()' class='form-control-sm'>"+
 				 	"<option value='0'>내 결재</option>"+
-				 	"<option value='1' selected='selected'>타 결재<option>"+
+				 	"<option value='1' selected='selected'>타 결재</option>"+
 				 "</select>"
 		);
 		$('#selectappform').val(1);
